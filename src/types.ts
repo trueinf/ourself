@@ -108,6 +108,18 @@ export interface SuggestedQuestion {
   tag: string;
 }
 
+/**
+ * An alternative objective function the persona can switch to. The objective
+ * is a weighting over the same governed facts (§8.1a), so applying a preset
+ * re-ranks and re-emphasises the office's KPIs and insights by relevance —
+ * it never authors a new number. `keywords` drive that relevance scoring.
+ */
+export interface GoalPreset {
+  label: string;
+  objective: string;
+  keywords: string[];
+}
+
 export interface Persona {
   id: string;
   initials: string;
@@ -127,6 +139,10 @@ export interface Persona {
   scenarioModel: ScenarioModelId;
   pins: Pin[];
   closedDecisions: ClosedDecision[];
+  /** alternative objective functions this office can switch to (2–3) */
+  goalPresets: GoalPreset[];
+  /** one-sentence "read" of the quarter — the verdict shown before the KPIs */
+  synthesis: string;
 }
 
 /* ---- scenario engine contract (§9) ---- */

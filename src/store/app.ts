@@ -25,6 +25,9 @@ export interface AppState {
   askedQuestion: string | null;
   pins: Record<string, Pin[]>;
   scenarioInputs: Record<string, LeverValues>;
+  /** per-persona objective override + its scoring keywords (goal editing) */
+  goals: Record<string, { objective: string; keywords: string[] }>;
+  goalEditorOpen: boolean;
   personaMenuOpen: boolean;
   /** monotonic counter bumped on every navigation, so the shell can scroll to top */
   navSeq: number;
@@ -41,6 +44,10 @@ export interface AppState {
   resetScenario: (modelId: ScenarioModelId) => void;
   togglePersonaMenu: () => void;
   closePersonaMenu: () => void;
+  toggleGoalEditor: () => void;
+  closeGoalEditor: () => void;
+  applyGoal: (objective: string, keywords: string[]) => void;
+  resetGoal: () => void;
 }
 
 function initialPins(): Record<string, Pin[]> {
@@ -66,22 +73,25 @@ export const useApp = create<AppState>((set, get) => ({
   askedQuestion: null,
   pins: initialPins(),
   scenarioInputs: initialScenarioInputs(),
+  goals: {},
+  goalEditorOpen: false,
   personaMenuOpen: false,
   navSeq: 0,
 
-  // §11: switching persona clears detail and askedQuestion; pins and scenario
-  // inputs persist per persona/model.
+  // §11: switching persona clears detail and askedQuestion; pins, scenario
+  // inputs and goal overrides persist per persona.
   setPersona: (index) =>
     set((s) => ({
       personaIndex: index,
       detail: null,
       askedQuestion: null,
       personaMenuOpen: false,
+      goalEditorOpen: false,
       navSeq: s.navSeq + 1,
     })),
 
   // §11: switching tab clears detail.
-  setTab: (tab) => set((s) => ({ tab, detail: null, navSeq: s.navSeq + 1 })),
+  setTab: (tab) => set((s) => ({ tab, detail: null, goalEditorOpen: false, navSeq: s.navSeq + 1 })),
 
   openDetail: (kind, id) => set((s) => ({ detail: { kind, id }, navSeq: s.navSeq + 1 })),
 
@@ -140,4 +150,29 @@ export const useApp = create<AppState>((set, get) => ({
 
   togglePersonaMenu: () => set((s) => ({ personaMenuOpen: !s.personaMenuOpen })),
   closePersonaMenu: () => set({ personaMenuOpen: false }),
+
+  toggleGoalEditor: () => set((s) => ({ goalEditorOpen: !s.goalEditorOpen })),
+  closeGoalEditor: () => set({ goalEditorOpen: false }),
+
+  // Applying a goal re-ranks the same governed facts — it never authors a
+  // number (§2.1). The override persists per persona.
+  applyGoal: (objective, keywords) => {
+    const trimmed = objective.trim();
+    if (!trimmed) return;
+    const { personaIndex, goals } = get();
+    const persona = currentPersona(personaIndex);
+    set((s) => ({
+      goals: { ...goals, [persona.id]: { objective: trimmed, keywords } },
+      goalEditorOpen: false,
+      navSeq: s.navSeq + 1,
+    }));
+  },
+
+  resetGoal: () => {
+    const { personaIndex, goals } = get();
+    const persona = currentPersona(personaIndex);
+    const next = { ...goals };
+    delete next[persona.id];
+    set((s) => ({ goals: next, goalEditorOpen: false, navSeq: s.navSeq + 1 }));
+  },
 }));

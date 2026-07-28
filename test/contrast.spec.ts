@@ -150,6 +150,29 @@ test('contrast AA · detail pages and answered Ask', async ({ page }) => {
   expect(await contrastViolations(page)).toEqual([]);
 });
 
+// Goal editing introduces the editor panel (pink-soft chips, note), the
+// re-prioritised goal note, "Goal focus" pills and the aligned-KPI accent.
+test('contrast AA · Insights with an edited goal', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  await page.waitForFunction(() => '__setView' in window);
+  await page.evaluate(() =>
+    (window as unknown as { __setView: (p: number, t: string) => void }).__setView(0, 'insights'),
+  );
+  await page.waitForTimeout(40);
+
+  // Editor open state.
+  await page.locator('#main .editgoal').click();
+  await page.waitForSelector('#main .goaled');
+  expect(await contrastViolations(page)).toEqual([]);
+
+  // Apply a preset → goal note, aligned KPIs, "Goal focus" pills.
+  await page.locator('#main .goalchip').first().click();
+  await page.waitForSelector('#main .goalnote');
+  const violations = await contrastViolations(page);
+  expect(violations, JSON.stringify(violations, null, 2)).toEqual([]);
+});
+
 // The answered Ask state introduces the composed dashboard (metric tiles +
 // chart) and the "Pin to PinBoard" pill. Reduced motion makes the staged
 // reasoning resolve instantly, so the assertion is deterministic.

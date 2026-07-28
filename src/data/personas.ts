@@ -1,6 +1,8 @@
 import type { Persona } from '@/types';
 import { SYS } from './sources';
 import { DECISIONS } from './decisions';
+import { GOAL_PRESETS } from './goals';
+import { SYNTHESIS } from './synthesis';
 
 /* =============================================================
    §8.1 The eight personas — EXTRACTED from the prototype, not
@@ -24,7 +26,7 @@ import { DECISIONS } from './decisions';
      before any live demo.
    ============================================================= */
 
-const PERSONA_SEED: Omit<Persona, 'closedDecisions'>[] = [
+const PERSONA_SEED: Omit<Persona, 'closedDecisions' | 'goalPresets' | 'synthesis'>[] = [
   {
     id: 'fields',
     initials: 'MF',
@@ -793,4 +795,6 @@ const PERSONA_SEED: Omit<Persona, 'closedDecisions'>[] = [
 export const PERSONAS: Persona[] = PERSONA_SEED.map((p) => ({
   ...p,
   closedDecisions: DECISIONS[p.id] ?? [],
+  goalPresets: GOAL_PRESETS[p.id] ?? [],
+  synthesis: SYNTHESIS[p.id] ?? '',
 }));

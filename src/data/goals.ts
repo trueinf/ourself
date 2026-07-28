@@ -1,0 +1,131 @@
+import type { GoalPreset } from '@/types';
+
+/**
+ * Alternative objective functions per persona. Each stays within that office's
+ * remit (its governed facts), and its keywords are chosen to match the office's
+ * own KPIs and insights so applying it visibly re-ranks the surface. Changing
+ * the goal changes what leads — never the numbers themselves.
+ */
+export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
+  fields: [
+    {
+      label: 'Protect the guide',
+      objective: 'Hold the FY2027 guide and the marketing envelope, whatever the tariff does.',
+      keywords: ['guide', 'envelope', 'marketing', 'tariff', 'ebitda', 'assumption', 'restatement'],
+    },
+    {
+      label: 'Recover the top line',
+      objective: 'Get back to growth — defend velocity and extend the price reversal.',
+      keywords: ['units', 'price', 'reversal', 'organic', 'growth', 'net sales', 'elasticity', 'rhode'],
+    },
+  ],
+  franks: [
+    {
+      label: 'Cut landed cost',
+      objective: 'Bring landed cost down — recover tariff and freight exposure.',
+      keywords: ['landed', 'cost', 'tariff', 'freight', 'china', 'concession', 'offset'],
+    },
+    {
+      label: 'Protect service',
+      objective: 'Hold fill rate and shelf service through the origin transition.',
+      keywords: ['fill', 'rate', 'service', 'supply', 'capacity', 'lip', 'weeks'],
+    },
+  ],
+  savur: [
+    {
+      label: 'Defend the spend',
+      objective: 'Protect the marketing envelope until the awareness gain converts.',
+      keywords: ['marketing', 'envelope', 'awareness', 'spend', 'convert', 'budget'],
+    },
+    {
+      label: 'Win discovery',
+      objective: 'Lead AI-answer discovery while it is still cheap to own.',
+      keywords: ['geo', 'ai answer', 'visibility', 'discovery', 'engines', 'compounding'],
+    },
+    {
+      label: 'Lower CAC',
+      objective: 'Buy attention more efficiently — take the cost of acquisition down.',
+      keywords: ['cac', 'prospecting', 'social', 'roas', 'retail media'],
+    },
+  ],
+  chopra: [
+    {
+      label: 'Prove the return',
+      objective: 'Fund only the pilots that clear their cost of capital.',
+      keywords: ['value', 'attributed', 'cost', 'workflow', 'budget', 'return', 'pilots'],
+    },
+    {
+      label: 'Build the substrate',
+      objective: 'Ship the shared semantic layer and compound every pilot on top of it.',
+      keywords: ['semantic', 'layer', 'entity', 'coverage', 'definition', 'launch', 'market', 'data model'],
+    },
+    {
+      label: 'Scale adoption',
+      objective: 'Get the whole company using the AI hub every day.',
+      keywords: ['adoption', 'employee', 'hub', 'production', 'pilots'],
+    },
+  ],
+  amin: [
+    {
+      label: 'Protect the streak',
+      objective: 'Keep the growth streak alive through the base transition.',
+      keywords: ['growth', 'streak', 'organic', 'net sales', 'comp', 'rhode', 'quarters'],
+    },
+    {
+      label: 'Compound the moat',
+      objective: 'Widen the operational moat — international reach and multi-country supply.',
+      keywords: ['international', 'capacity', 'china', 'operational', 'awareness'],
+    },
+    {
+      label: 'Make the call',
+      objective: 'Resolve the cross-office trades only I can settle.',
+      keywords: ['offices', 'reserve', 'lip', 'tariff', 'refund', 'price', 'reversal'],
+    },
+  ],
+  laar: [
+    {
+      label: 'Win the shelf',
+      objective: 'Take more shelf where our share of sales already leads.',
+      keywords: ['share', 'shelf', 'target', 'lip', 'units', 'foot', 'productivity'],
+    },
+    {
+      label: 'Plug the leakage',
+      objective: 'Stop the gross-to-net leakage at the top accounts.',
+      keywords: ['deduction', 'leakage', 'account', 'gross', 'claim'],
+    },
+    {
+      label: 'Protect supply',
+      objective: 'Only sell in what operations can actually ship.',
+      keywords: ['fill', 'supply', 'lip', 'capacity', 'ship', 'august'],
+    },
+  ],
+  marchisotto: [
+    {
+      label: 'Fix the funnel',
+      objective: 'Restore the innovation hit rate across the slate.',
+      keywords: ['innovation', 'hit rate', 'slate', 'launches', 'spring', 'sku'],
+    },
+    {
+      label: 'Grow the second core',
+      objective: 'Scale skincare into a full second core category.',
+      keywords: ['skincare', 'category', 'naturium', 'consumption', 'core'],
+    },
+  ],
+  milsten: [
+    {
+      label: 'Keep speed legal',
+      objective: 'Clear every launch on time as the mix gets heavier.',
+      keywords: ['clearance', 'launches', 'cleared', 'substantiation', 'skincare', 'claims'],
+    },
+    {
+      label: 'Govern the agents',
+      objective: 'Classify the deployed AI agents before the enforcement date.',
+      keywords: ['ai act', 'agents', 'classification', 'review', 'enforcement'],
+    },
+    {
+      label: 'Keep the people',
+      objective: 'Protect engagement while the pace stays high.',
+      keywords: ['engagement', 'people', 'benchmark', 'participation'],
+    },
+  ],
+};

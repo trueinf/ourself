@@ -17,7 +17,15 @@ const DOT_CLASS: Record<Severity, string> = {
   neutral: 'n',
 };
 
-export function InsightCard({ insight, onOpen }: { insight: Insight; onOpen: () => void }) {
+export function InsightCard({
+  insight,
+  onOpen,
+  aligned = false,
+}: {
+  insight: Insight;
+  onOpen: () => void;
+  aligned?: boolean;
+}) {
   return (
     <button type="button" className="card tap" onClick={onOpen}>
       <div className="ins">
@@ -26,6 +34,7 @@ export function InsightCard({ insight, onOpen }: { insight: Insight; onOpen: () 
           <h3>{insight.headline}</h3>
           <div className="why">{insight.why}</div>
           <div className="meta">
+            {aligned ? <Pill variant="pink">Goal focus</Pill> : null}
             {insight.pills.map((p, i) => (
               <Pill key={`p${i}`} variant={p.variant}>
                 {p.text}

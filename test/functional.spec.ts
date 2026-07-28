@@ -5,6 +5,7 @@ import App from '@/App';
 import { useApp, TABS, type TabId, type DetailRef } from '@/store/app';
 import { PERSONAS } from '@/data/personas';
 import { SCENARIO_MODELS } from '@/scenarios';
+import { rankByGoal, tokenizeGoal, scoreText, kpiText, insightText } from '@/lib/goals';
 import type { ScenarioModel, LeverValues, ScenarioModelId } from '@/types';
 
 /* =============================================================
@@ -168,6 +169,58 @@ describe('interaction rules (§11)', () => {
   });
 });
 
+describe('goal editing re-ranks the same governed facts (§8.1a)', () => {
+  it('rankByGoal is stable and orders by relevance descending, no keywords → original order', () => {
+    const items = ['alpha tariff', 'beta margin', 'gamma tariff margin'];
+    const ranked = rankByGoal(items, ['tariff'], (t) => t).map((r) => r.item);
+    expect(ranked[0]).toBe('alpha tariff'); // first tariff hit keeps its lead on a tie
+    expect(ranked[2]).toBe('beta margin'); // no hit sinks to the bottom
+    const untouched = rankByGoal(items, [], (t) => t).map((r) => r.item);
+    expect(untouched).toEqual(items);
+  });
+
+  it('tokenizeGoal drops stopwords and short words', () => {
+    expect(tokenizeGoal('Protect the marketing envelope and units')).toEqual(['protect', 'marketing', 'envelope', 'units']);
+  });
+
+  it('every persona has ≥2 goal presets, and each preset re-ranks at least one KPI or insight', () => {
+    for (const p of PERSONAS) {
+      expect(p.goalPresets.length).toBeGreaterThanOrEqual(2);
+      for (const preset of p.goalPresets) {
+        const hitsKpi = p.kpis.some((k) => scoreText(kpiText(k), preset.keywords) > 0);
+        const hitsInsight = p.insights.some((i) => scoreText(insightText(i), preset.keywords) > 0);
+        expect(hitsKpi || hitsInsight, `${p.id} preset "${preset.label}" matches nothing`).toBe(true);
+      }
+    }
+  });
+
+  it('applying a goal persists per persona and re-orders insights; reset restores', () => {
+    useApp.setState({ personaIndex: 0, goals: {} });
+    const preset = PERSONAS[0]!.goalPresets[0]!;
+    const before = [...PERSONAS[0]!.insights]; // baseline order untouched (data is immutable)
+    useApp.getState().applyGoal(preset.objective, preset.keywords);
+    expect(useApp.getState().goals['fields']!.objective).toBe(preset.objective);
+
+    const ranked = rankByGoal(PERSONAS[0]!.insights, preset.keywords, insightText);
+    expect(ranked[0]!.score).toBeGreaterThan(0); // the top item is goal-relevant
+    expect(PERSONAS[0]!.insights).toEqual(before); // ranking never mutates the source data
+
+    useApp.getState().resetGoal();
+    expect(useApp.getState().goals['fields']).toBeUndefined();
+  });
+
+  it('renders Insights cleanly with a goal applied', () => {
+    useApp.setState({
+      personaIndex: 0,
+      goals: { fields: { objective: 'Recover the top line', keywords: ['units', 'price', 'reversal'] } },
+    });
+    const main = renderAt({ personaIndex: 0, tab: 'insights' });
+    expect(main.textContent).toContain('Re-prioritised for your goal');
+    expect(main.innerHTML).not.toMatch(BAD);
+    useApp.setState({ goals: {} });
+  });
+});
+
 describe('data-model invariants (§8)', () => {
   it('there are exactly eight personas, none of the forbidden roles (§8.1)', () => {
     expect(PERSONAS.length).toBe(8);
@@ -187,12 +240,19 @@ describe('data-model invariants (§8)', () => {
     expect(chopra.closedDecisions.some((d) => d.result === 'backfired')).toBe(true);
   });
 
-  it('every KPI carries a source and exactly 7 sparkline values (§2.2)', () => {
+  it('every KPI carries a source, a benchmark note, and exactly 7 sparkline values (§2.2)', () => {
     for (const p of PERSONAS) {
       for (const k of p.kpis) {
         expect(k.source.length).toBeGreaterThan(0);
+        expect(k.note.length).toBeGreaterThan(0);
         expect(k.spark.length).toBe(7);
       }
+    }
+  });
+
+  it('every persona carries a one-line synthesis "read"', () => {
+    for (const p of PERSONAS) {
+      expect(p.synthesis.length).toBeGreaterThan(20);
     }
   });
 });
