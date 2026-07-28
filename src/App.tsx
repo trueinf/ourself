@@ -5,6 +5,7 @@ import { Rail } from '@/shell/Rail';
 import { MobileTopBar } from '@/shell/MobileTopBar';
 import { Insights } from '@/surfaces/Insights';
 import { Focus } from '@/surfaces/Focus';
+import { Discussions } from '@/surfaces/Discussions';
 import { Ask } from '@/surfaces/Ask';
 import { Scenarios } from '@/surfaces/Scenarios';
 import { PinBoard } from '@/surfaces/PinBoard';
@@ -105,6 +106,8 @@ function Surface({
       return <Insights persona={persona} />;
     case 'focus':
       return <Focus persona={persona} />;
+    case 'discussions':
+      return <Discussions persona={persona} />;
     case 'ask':
       return <Ask persona={persona} />;
     case 'scenarios':

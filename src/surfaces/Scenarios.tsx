@@ -3,7 +3,9 @@ import { useApp } from '@/store/app';
 import { SCENARIO_MODELS, defaultLeverValues } from '@/scenarios';
 import { AGENTS } from '@/data/agents';
 import { SCENARIO_BACKS } from '@/data/scenarioBacks';
+import { discussionFromScenario } from '@/data/discussions';
 import { ContextRow } from '@/components/ContextRow';
+import { AddToDiscussion } from '@/components/AddToDiscussion';
 import { LeverGroup } from '@/components/LeverGroup';
 import { OutputTile } from '@/components/OutputTile';
 import { CalcPanel } from '@/components/CalcPanel';
@@ -75,6 +77,7 @@ export function Scenarios({ persona }: { persona: Persona }) {
             <button type="button" className="btn ghost" onClick={() => resetScenario(modelId)}>
               Reset to current
             </button>
+            <AddToDiscussion item={discussionFromScenario(model, backedDecisions[0])} />
           </div>
         </div>
 

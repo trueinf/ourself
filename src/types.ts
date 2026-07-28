@@ -138,6 +138,30 @@ export interface Pin {
   trendLabel: string;
 }
 
+/**
+ * A Discussions agenda item — something the persona has queued to talk through,
+ * with whom and when. The one place work from every surface (a finding, a
+ * decision, a what-if, a question) comes together to be discussed and actioned.
+ * Nothing acts (§2.8): scheduling is proposed, not sent.
+ */
+export type DiscussionStatus = 'queued' | 'scheduled';
+
+export interface DiscussionItem {
+  id: string;
+  title: string;
+  /** the specific tension to resolve — what to discuss */
+  agenda: string;
+  /** executive initials — with whom */
+  participants: string[];
+  /** proposed time label — when */
+  when: string;
+  whenUrgency: 'now' | 'soon' | 'ok';
+  status: DiscussionStatus;
+  /** where it came from, for the link home */
+  source?: { kind: 'insight' | 'focus'; id: string };
+  sourceLabel: string;
+}
+
 export interface SuggestedQuestion {
   question: string;
   tag: string;

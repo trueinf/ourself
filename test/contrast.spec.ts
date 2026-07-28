@@ -10,7 +10,7 @@ import { test, expect, type Page } from '@playwright/test';
    three pink tokens, and why they must not be "corrected" (§18.6).
    ============================================================= */
 
-const TABS = ['insights', 'focus', 'ask', 'scenarios', 'pinboard'];
+const TABS = ['insights', 'focus', 'discussions', 'ask', 'scenarios', 'pinboard'];
 const PERSONA_COUNT = 8;
 
 interface Violation {

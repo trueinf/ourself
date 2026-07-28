@@ -8,6 +8,7 @@ import { SCENARIO_MODELS } from '@/scenarios';
 import { rankByGoal, tokenizeGoal, scoreText, kpiText, insightText } from '@/lib/goals';
 import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
 import { SCENARIO_BACKS } from '@/data/scenarioBacks';
+import { SEEDED_DISCUSSIONS, discussionFromFocus, discussionFromInsight } from '@/data/discussions';
 import type { ScenarioModel, LeverValues, ScenarioModelId } from '@/types';
 
 /* =============================================================
@@ -297,6 +298,49 @@ describe('Ask resolves each question to a governed finding (§7.3)', () => {
     expect(isScenarioQuestion('If we extend the price reversal to lip, what happens?')).toBe(true);
     expect(isScenarioQuestion('What would it cost to pull qualification forward?')).toBe(true);
     expect(isScenarioQuestion('Why is the realised tariff rate above our 35% assumption?')).toBe(false);
+  });
+});
+
+describe('Discussions — the per-persona agenda', () => {
+  it('every persona is seeded with discussion items, each source resolving to a real decision/finding', () => {
+    for (const p of PERSONAS) {
+      const items = SEEDED_DISCUSSIONS[p.id] ?? [];
+      expect(items.length, `${p.id} has no seeded discussions`).toBeGreaterThan(0);
+      for (const d of items) {
+        expect(d.title.length).toBeGreaterThan(5);
+        if (d.source) {
+          const found =
+            d.source.kind === 'focus'
+              ? p.focus.some((f) => f.id === d.source!.id)
+              : p.insights.some((i) => i.id === d.source!.id);
+          expect(found, `${p.id} discussion ${d.id} → ${d.source.kind}:${d.source.id}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it('builders derive a valid item from a focus decision and an insight', () => {
+    const fields = PERSONAS.find((p) => p.id === 'fields')!;
+    const fromFocus = discussionFromFocus(fields.focus[0]!);
+    expect(fromFocus.id).toBe(`disc-focus-${fields.focus[0]!.id}`);
+    expect(fromFocus.participants).toEqual(fields.focus[0]!.waitingOn);
+
+    const fromInsight = discussionFromInsight(fields.insights[0]!);
+    expect(fromInsight.id).toBe(`disc-insight-${fields.insights[0]!.id}`);
+    // f1's cross-office positions include Savur and Laar → derived participants
+    expect(fromInsight.participants.length).toBeGreaterThan(0);
+  });
+
+  it('queueDiscussion is idempotent per id; removeDiscussion removes it', () => {
+    useApp.setState({ personaIndex: 0 });
+    const id = PERSONAS[0]!.id;
+    const before = useApp.getState().discussions[id]!.length;
+    const item = discussionFromInsight(PERSONAS[0]!.insights[0]!);
+    useApp.getState().queueDiscussion(item);
+    useApp.getState().queueDiscussion(item);
+    expect(useApp.getState().discussions[id]!.length).toBe(before + 1);
+    useApp.getState().removeDiscussion(item.id);
+    expect(useApp.getState().discussions[id]!.length).toBe(before);
   });
 });
 

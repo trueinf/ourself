@@ -9,7 +9,7 @@ import { test, expect, type Page } from '@playwright/test';
    ============================================================= */
 
 const VIEWPORTS = [1440, 1180, 1040, 834, 390, 360];
-const TABS = ['insights', 'focus', 'ask', 'scenarios', 'pinboard'];
+const TABS = ['insights', 'focus', 'discussions', 'ask', 'scenarios', 'pinboard'];
 const PERSONA_COUNT = 8;
 
 async function setView(page: Page, personaIndex: number, tab: string) {

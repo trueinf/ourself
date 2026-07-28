@@ -4,6 +4,8 @@ import { nameOf } from '@/data/agents';
 import { BackLink } from '@/components/BackLink';
 import { Pill } from '@/components/Pill';
 import { SideCard } from '@/components/SideCard';
+import { AddToDiscussion } from '@/components/AddToDiscussion';
+import { discussionFromFocus } from '@/data/discussions';
 import { ChevronRight } from '@/components/Icons';
 
 /**
@@ -84,6 +86,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
                 <button type="button" className="btn ghost" onClick={modelThis}>
                   Model an alternative
                 </button>
+                <AddToDiscussion item={discussionFromFocus(item)} />
                 <button type="button" className="btn ghost">
                   Send back for detail
                 </button>
@@ -100,6 +103,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
                 <button type="button" className="btn" onClick={modelThis}>
                   Model this in Scenarios
                 </button>
+                <AddToDiscussion item={discussionFromFocus(item)} />
                 <button type="button" className="btn ghost">
                   Request specialist analysis
                 </button>

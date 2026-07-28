@@ -4,7 +4,9 @@ import { useApp } from '@/store/app';
 import { AGENTS } from '@/data/agents';
 import { DEFAULT_FRESHNESS } from '@/data/sources';
 import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
+import { discussionFromQuestion } from '@/data/discussions';
 import { ContextRow } from '@/components/ContextRow';
+import { AddToDiscussion } from '@/components/AddToDiscussion';
 import { SourceChip } from '@/components/SourceChip';
 import { InsightProofChart } from '@/components/InsightProofChart';
 import { CrossOfficeCards } from '@/components/CrossOfficeStrip';
@@ -235,6 +237,7 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
             {insight ? (
               <Answer
                 insight={insight}
+                question={question}
                 scenario={scenario}
                 onScenario={() => modelInScenarios({ kind: 'insight', id: insight.id, headline: insight.headline })}
                 onOpenInsight={() => openDetail('insight', insight.id)}
@@ -269,12 +272,14 @@ function FindingRow({ finding }: { finding: AgentFinding }) {
 
 function Answer({
   insight,
+  question,
   scenario,
   onScenario,
   onOpenInsight,
   elapsed,
 }: {
   insight: Insight;
+  question: string;
   scenario: boolean;
   onScenario: () => void;
   onOpenInsight: () => void;
@@ -341,6 +346,10 @@ function Answer({
         {insight.sources.map((s) => (
           <SourceChip key={s} source={s} freshness={DEFAULT_FRESHNESS[s]} />
         ))}
+      </div>
+
+      <div className="btnrow">
+        <AddToDiscussion item={discussionFromQuestion(question, insight)} />
       </div>
 
       <div className="pagefoot" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>

@@ -8,6 +8,8 @@ import { SideCard } from '@/components/SideCard';
 import { SourceChip } from '@/components/SourceChip';
 import { CrossOfficeCards } from '@/components/CrossOfficeStrip';
 import { InsightProofChart } from '@/components/InsightProofChart';
+import { AddToDiscussion } from '@/components/AddToDiscussion';
+import { discussionFromInsight } from '@/data/discussions';
 import { ChevronRight } from '@/components/Icons';
 
 /**
@@ -138,6 +140,7 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
             >
               Model this in Scenarios
             </button>
+            <AddToDiscussion item={discussionFromInsight(insight)} />
             <button type="button" className="btn ghost" onClick={() => pinQuestion(insight.headline)}>
               Pin to PinBoard
             </button>

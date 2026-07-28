@@ -1,13 +1,15 @@
 import { create } from 'zustand';
-import type { Pin, LeverValue, LeverValues, ScenarioModelId } from '@/types';
+import type { Pin, DiscussionItem, LeverValue, LeverValues, ScenarioModelId } from '@/types';
 import { PERSONAS } from '@/data/personas';
+import { SEEDED_DISCUSSIONS } from '@/data/discussions';
 import { SCENARIO_MODELS, defaultLeverValues } from '@/scenarios';
 
-export type TabId = 'insights' | 'focus' | 'ask' | 'scenarios' | 'pinboard';
+export type TabId = 'insights' | 'focus' | 'discussions' | 'ask' | 'scenarios' | 'pinboard';
 
 export const TABS: Array<[TabId, string]> = [
   ['insights', 'Insights'],
   ['focus', 'Focus'],
+  ['discussions', 'Discussions'],
   ['ask', 'Ask'],
   ['scenarios', 'Scenarios'],
   ['pinboard', 'PinBoard'],
@@ -32,6 +34,7 @@ export interface AppState {
   detail: DetailRef | null;
   askedQuestion: string | null;
   pins: Record<string, Pin[]>;
+  discussions: Record<string, DiscussionItem[]>;
   scenarioInputs: Record<string, LeverValues>;
   /** per-persona objective override + its scoring keywords (goal editing) */
   goals: Record<string, { objective: string; keywords: string[] }>;
@@ -50,6 +53,8 @@ export interface AppState {
   clearAsk: () => void;
   pinQuestion: (question: string) => void;
   unpin: (index: number) => void;
+  queueDiscussion: (item: DiscussionItem) => void;
+  removeDiscussion: (id: string) => void;
   setLever: (modelId: ScenarioModelId, leverId: string, value: LeverValue) => void;
   resetScenario: (modelId: ScenarioModelId) => void;
   modelInScenarios: (context: ScenarioContext) => void;
@@ -65,6 +70,20 @@ function initialPins(): Record<string, Pin[]> {
   const pins: Record<string, Pin[]> = {};
   for (const p of PERSONAS) pins[p.id] = p.pins.map((x) => ({ ...x }));
   return pins;
+}
+
+function initialDiscussions(): Record<string, DiscussionItem[]> {
+  const discussions: Record<string, DiscussionItem[]> = {};
+  for (const p of PERSONAS) {
+    // Normalise seeded ids to the same source-derived scheme the builders use,
+    // so "Add to discussion" on a source already on the agenda reads as queued
+    // rather than duplicating it.
+    discussions[p.id] = (SEEDED_DISCUSSIONS[p.id] ?? []).map((x) => ({
+      ...x,
+      id: x.source ? `disc-${x.source.kind}-${x.source.id}` : x.id,
+    }));
+  }
+  return discussions;
 }
 
 function initialScenarioInputs(): Record<string, LeverValues> {
@@ -83,6 +102,7 @@ export const useApp = create<AppState>((set, get) => ({
   detail: null,
   askedQuestion: null,
   pins: initialPins(),
+  discussions: initialDiscussions(),
   scenarioInputs: initialScenarioInputs(),
   goals: {},
   goalEditorOpen: false,
@@ -161,6 +181,23 @@ export const useApp = create<AppState>((set, get) => ({
     const list = pins[persona.id] ?? [];
     const next = list.filter((_, i) => i !== index);
     set({ pins: { ...pins, [persona.id]: next } });
+  },
+
+  // Queueing a discussion is idempotent by id — adding the same source twice
+  // does not duplicate it (mirrors pinning, §11).
+  queueDiscussion: (item) => {
+    const { personaIndex, discussions } = get();
+    const persona = currentPersona(personaIndex);
+    const list = discussions[persona.id] ?? [];
+    if (list.some((d) => d.id === item.id)) return;
+    set({ discussions: { ...discussions, [persona.id]: [item, ...list] } });
+  },
+
+  removeDiscussion: (id) => {
+    const { personaIndex, discussions } = get();
+    const persona = currentPersona(personaIndex);
+    const list = discussions[persona.id] ?? [];
+    set({ discussions: { ...discussions, [persona.id]: list.filter((d) => d.id !== id) } });
   },
 
   setLever: (modelId, leverId, value) =>

@@ -14,10 +14,12 @@ export function Rail() {
   const personaIndex = useApp((s) => s.personaIndex);
   const setTab = useApp((s) => s.setTab);
   const pins = useApp((s) => s.pins);
+  const discussions = useApp((s) => s.discussions);
   const persona = PERSONAS[personaIndex]!;
 
   const counts: Partial<Record<TabId, number>> = {
     focus: persona.focus.filter((f) => f.severity === 'high').length,
+    discussions: (discussions[persona.id] ?? []).length,
     pinboard: (pins[persona.id] ?? []).length,
   };
 
@@ -49,7 +51,9 @@ export function Rail() {
             >
               <NavIcon tab={key} />
               <span>{label}</span>
-              {count ? <span className={`cnt${key === 'pinboard' ? ' q' : ''}`}>{count}</span> : null}
+              {count ? (
+                <span className={`cnt${key === 'pinboard' || key === 'discussions' ? ' q' : ''}`}>{count}</span>
+              ) : null}
             </button>
           );
         })}
