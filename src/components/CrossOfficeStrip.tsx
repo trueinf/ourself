@@ -30,27 +30,34 @@ const monogramFor = (office: string): string => {
   return OFFICE_MONO[first] ?? first.slice(0, 3).toUpperCase();
 };
 
+/** The dressed position cards, shared by the inline strip and the detail page. */
+export function CrossOfficeCards({ views }: { views: CrossOfficeView[] }) {
+  return (
+    <div className="xo-row">
+      {views.map((v, i) => {
+        const isSelf = v.label.toLowerCase() === 'your position';
+        const cls = isSelf ? 'you' : STANCE_CLASS[v.stance];
+        return (
+          <div className={`xo-c ${cls}`} key={`${v.office}-${i}`}>
+            <div className="xo-c-head">
+              <span className="xo-mono">{monogramFor(v.office)}</span>
+              <b>{v.office}</b>
+            </div>
+            <div className={`st ${cls}`}>{v.label}</div>
+            <p>{v.position}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function CrossOfficeStrip({ views }: { views: CrossOfficeView[] }) {
   if (!views.length) return null;
   return (
     <div className="xo">
       <div className="xo-h">How other offices read this</div>
-      <div className="xo-row">
-        {views.map((v, i) => {
-          const isSelf = v.label.toLowerCase() === 'your position';
-          const cls = isSelf ? 'you' : STANCE_CLASS[v.stance];
-          return (
-            <div className={`xo-c ${cls}`} key={`${v.office}-${i}`}>
-              <div className="xo-c-head">
-                <span className="xo-mono">{monogramFor(v.office)}</span>
-                <b>{v.office}</b>
-              </div>
-              <div className={`st ${cls}`}>{v.label}</div>
-              <p>{v.position}</p>
-            </div>
-          );
-        })}
-      </div>
+      <CrossOfficeCards views={views} />
     </div>
   );
 }

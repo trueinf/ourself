@@ -3,6 +3,7 @@ import { SYS } from './sources';
 import { DECISIONS } from './decisions';
 import { GOAL_PRESETS } from './goals';
 import { SYNTHESIS } from './synthesis';
+import { FINDINGS, FEEDS_DECISION, PROOFS } from './insightDetail';
 
 /* =============================================================
    §8.1 The eight personas — EXTRACTED from the prototype, not
@@ -797,4 +798,10 @@ export const PERSONAS: Persona[] = PERSONA_SEED.map((p) => ({
   closedDecisions: DECISIONS[p.id] ?? [],
   goalPresets: GOAL_PRESETS[p.id] ?? [],
   synthesis: SYNTHESIS[p.id] ?? '',
+  insights: p.insights.map((i) => ({
+    ...i,
+    findings: FINDINGS[i.id] ?? i.agents.map((agent) => ({ agent, text: '' })),
+    feedsDecision: FEEDS_DECISION[i.id],
+    proof: PROOFS[i.id],
+  })),
 }));

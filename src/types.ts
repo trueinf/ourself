@@ -54,6 +54,33 @@ export interface InsightPill {
   text: string;
 }
 
+/** A specific fact returned by one specialist — the deterministic side of the
+ *  contract (§2.1). Grounded in the insight's own figures, with its source. */
+export interface AgentFinding {
+  agent: AgentKey;
+  text: string;
+  source?: SourceSystem;
+}
+
+/** Optional evidence chart substantiating a quantitative insight. */
+export interface InsightProof {
+  metricLabel: string;
+  source: SourceSystem;
+  freshness: Freshness;
+  /** 7 weekly points, oldest → now */
+  series: number[];
+  domain: [number, number];
+  unit: string;
+  /** acceptable range, shaded */
+  band?: [number, number];
+  bandLabel?: string;
+  /** single reference line */
+  threshold?: number;
+  thresholdLabel?: string;
+  tone: 'warn' | 'good' | 'neutral';
+  caption: string;
+}
+
 export interface Insight {
   id: string;
   severity: Severity;
@@ -64,6 +91,12 @@ export interface Insight {
   sources: SourceSystem[];
   /** may be empty */
   crossOffice: CrossOfficeView[];
+  /** specific specialist findings (facts) — attached from data/insightDetail */
+  findings?: AgentFinding[];
+  /** id of the Focus item this insight feeds, if any */
+  feedsDecision?: string;
+  /** optional evidence chart */
+  proof?: InsightProof;
 }
 
 export interface DecisionOption {

@@ -255,4 +255,44 @@ describe('data-model invariants (§8)', () => {
       expect(p.synthesis.length).toBeGreaterThan(20);
     }
   });
+
+  it('every insight has a specific finding for each of its agents (no boilerplate)', () => {
+    const seen = new Set<string>();
+    for (const p of PERSONAS) {
+      for (const i of p.insights) {
+        const findings = i.findings ?? [];
+        // one finding per contributing agent
+        expect(findings.map((f) => f.agent).sort()).toEqual([...i.agents].sort());
+        for (const f of findings) {
+          expect(f.text.length).toBeGreaterThan(20);
+          seen.add(f.text);
+        }
+      }
+    }
+    // findings are distinct — not the same templated sentence repeated
+    const total = PERSONAS.flatMap((p) => p.insights).flatMap((i) => i.findings ?? []).length;
+    expect(seen.size).toBe(total);
+  });
+
+  it('every feedsDecision points to a real Focus item in the same persona', () => {
+    for (const p of PERSONAS) {
+      for (const i of p.insights) {
+        if (i.feedsDecision) {
+          expect(p.focus.some((f) => f.id === i.feedsDecision), `${i.id} → ${i.feedsDecision}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it('every proof chart has 7 points inside its domain', () => {
+    for (const p of PERSONAS) {
+      for (const i of p.insights) {
+        if (i.proof) {
+          expect(i.proof.series.length).toBe(7);
+          const [lo, hi] = i.proof.domain;
+          for (const v of i.proof.series) expect(v >= lo && v <= hi).toBe(true);
+        }
+      }
+    }
+  });
 });

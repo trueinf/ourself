@@ -46,6 +46,13 @@ async function measure(page: Page) {
   });
 }
 
+// Insight-detail ids that exercise the heaviest detail layout (proof chart,
+// feeds-a-decision banner, dressed positions, richer provenance sidebar).
+const DETAIL_INSIGHTS: Array<[persona: number, id: string]> = [
+  [0, 'f1'], // Fields — full: proof + feeds + 3 positions
+  [3, 't1'], // Chopra — feeds + 2 positions, no proof
+];
+
 for (const width of VIEWPORTS) {
   test.describe(`viewport ${width}px`, () => {
     test.use({ viewport: { width, height: 900 } });
@@ -63,6 +70,28 @@ for (const width of VIEWPORTS) {
           expect(r.offscreen, 'off-screen elements').toEqual([]);
         });
       }
+    }
+
+    for (const [pi, id] of DETAIL_INSIGHTS) {
+      test(`insight detail ${id}`, async ({ page }) => {
+        await page.goto('/');
+        await page.waitForFunction(() => '__setView' in window);
+        await page.evaluate(
+          ([p, i]) =>
+            (window as unknown as { __setView: (p: number, t: string, d: unknown) => void }).__setView(
+              p as number,
+              'insights',
+              { kind: 'insight', id: i },
+            ),
+          [pi, id] as const,
+        );
+        await page.waitForTimeout(40);
+        const r = await measure(page);
+        expect(r.hscroll, `horizontal scroll at ${width}px`).toBeLessThanOrEqual(1);
+        expect(r.clipped, 'clipped text').toEqual([]);
+        expect(r.overflowsParent, 'elements overflowing parent').toEqual([]);
+        expect(r.offscreen, 'off-screen elements').toEqual([]);
+      });
     }
   });
 }
