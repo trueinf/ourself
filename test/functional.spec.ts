@@ -7,6 +7,7 @@ import { PERSONAS } from '@/data/personas';
 import { SCENARIO_MODELS } from '@/scenarios';
 import { rankByGoal, tokenizeGoal, scoreText, kpiText, insightText } from '@/lib/goals';
 import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
+import { SCENARIO_BACKS } from '@/data/scenarioBacks';
 import type { ScenarioModel, LeverValues, ScenarioModelId } from '@/types';
 
 /* =============================================================
@@ -100,6 +101,23 @@ describe('scenario engines sweep exhaustively (189 combinations)', () => {
       totalCombos += combos.length;
     });
   }
+  it('every model names its baseline and carries a grounding read line', () => {
+    for (const id of Object.keys(SCENARIO_MODELS) as ScenarioModelId[]) {
+      const m = SCENARIO_MODELS[id];
+      expect(m.read.length).toBeGreaterThan(20);
+      expect(m.baselineLabel.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('every "what this model backs" id resolves to a real decision/insight in that persona', () => {
+    for (const p of PERSONAS) {
+      const backs = SCENARIO_BACKS[p.id];
+      expect(backs, `${p.id} has no scenario backs`).toBeTruthy();
+      for (const fid of backs!.focus) expect(p.focus.some((f) => f.id === fid), `${p.id} focus ${fid}`).toBe(true);
+      for (const iid of backs!.insights) expect(p.insights.some((i) => i.id === iid), `${p.id} insight ${iid}`).toBe(true);
+    }
+  });
+
   it('the four models sweep exactly 189 combinations in total', () => {
     const n = (Object.keys(SCENARIO_MODELS) as ScenarioModelId[]).reduce(
       (sum, id) => sum + allLeverCombinations(SCENARIO_MODELS[id]).length,
@@ -167,6 +185,15 @@ describe('interaction rules (§11)', () => {
     useApp.getState().setTab('focus');
     expect(useApp.getState().detail).toBeNull();
     expect(useApp.getState().tab).toBe('focus');
+  });
+
+  it('modelInScenarios carries context to Scenarios; manual tab nav clears it', () => {
+    useApp.setState({ personaIndex: 0, scenarioContext: null });
+    useApp.getState().modelInScenarios({ kind: 'insight', id: 'f1', headline: 'the marketing envelope' });
+    expect(useApp.getState().tab).toBe('scenarios');
+    expect(useApp.getState().scenarioContext?.id).toBe('f1');
+    useApp.getState().setTab('insights');
+    expect(useApp.getState().scenarioContext).toBeNull();
   });
 });
 

@@ -81,6 +81,8 @@ function compute(values: LeverValues): ScenarioResult {
 export const cfoModel: ScenarioModel = {
   id: 'cfo',
   title: 'Margin, price and the tariff assumption',
+  read: 'You’re modelling margin, price and the tariff assumption against the FY2027 guide — every move is a deviation from where the company sits today.',
+  baselineLabel: 'FY27 guide',
   lede: 'Levers compute over FY2027 guidance and Q1 actuals. Specialists reason about feasibility separately — no agent produces a number it did not get from a tool.',
   levers: [
     {

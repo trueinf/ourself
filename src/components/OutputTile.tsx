@@ -6,8 +6,8 @@ import { formatOutputDelta } from '@/lib/format';
  * baseline. Every number here comes from the deterministic engine (§9); the
  * delta colour reflects good/bad given the output's direction (invert).
  */
-export function OutputTile({ output }: { output: ScenarioOutput }) {
-  const delta = formatOutputDelta(output);
+export function OutputTile({ output, baselineLabel }: { output: ScenarioOutput; baselineLabel?: string }) {
+  const delta = formatOutputDelta(output, baselineLabel);
   return (
     <div className="out">
       <div className="l">{output.label}</div>

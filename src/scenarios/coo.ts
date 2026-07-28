@@ -61,6 +61,8 @@ function compute(values: LeverValues): ScenarioResult {
 export const cooModel: ScenarioModel = {
   id: 'coo',
   title: 'Origin transition, landed cost and service',
+  read: 'You’re modelling origin transition, landed cost and service against today’s plan — every move trades cost against capacity and fill.',
+  baselineLabel: 'today’s plan',
   lede: 'Computes landed cost and fill rate against qualification pace and freight mode. Supply and Finance reason about the trade separately.',
   levers: [
     {

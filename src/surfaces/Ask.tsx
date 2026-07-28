@@ -124,6 +124,7 @@ function buildSteps(insight: Insight | null): Array<{ title: string; detail: str
 function AskAnswer({ persona, question }: { persona: Persona; question: string }) {
   const clearAsk = useApp((s) => s.clearAsk);
   const setTab = useApp((s) => s.setTab);
+  const modelInScenarios = useApp((s) => s.modelInScenarios);
   const openDetail = useApp((s) => s.openDetail);
   const pinQuestion = useApp((s) => s.pinQuestion);
   const pins = useApp((s) => s.pins);
@@ -232,7 +233,13 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
           </div>
           <div className="ans-b">
             {insight ? (
-              <Answer insight={insight} scenario={scenario} onScenario={() => setTab('scenarios')} onOpenInsight={() => openDetail('insight', insight.id)} elapsed={seconds} />
+              <Answer
+                insight={insight}
+                scenario={scenario}
+                onScenario={() => modelInScenarios({ kind: 'insight', id: insight.id, headline: insight.headline })}
+                onOpenInsight={() => openDetail('insight', insight.id)}
+                elapsed={seconds}
+              />
             ) : (
               <NoMatch onScenario={() => setTab('scenarios')} />
             )}

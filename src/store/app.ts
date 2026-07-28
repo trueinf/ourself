@@ -18,6 +18,14 @@ export interface DetailRef {
   id: string;
 }
 
+/** What the Scenarios surface is modelling for, when arrived at via a
+ *  "Model this in Scenarios" link — grounds the levers in a real question. */
+export interface ScenarioContext {
+  kind: 'insight' | 'focus';
+  id: string;
+  headline: string;
+}
+
 export interface AppState {
   personaIndex: number;
   tab: TabId;
@@ -28,6 +36,7 @@ export interface AppState {
   /** per-persona objective override + its scoring keywords (goal editing) */
   goals: Record<string, { objective: string; keywords: string[] }>;
   goalEditorOpen: boolean;
+  scenarioContext: ScenarioContext | null;
   personaMenuOpen: boolean;
   /** monotonic counter bumped on every navigation, so the shell can scroll to top */
   navSeq: number;
@@ -42,6 +51,7 @@ export interface AppState {
   unpin: (index: number) => void;
   setLever: (modelId: ScenarioModelId, leverId: string, value: LeverValue) => void;
   resetScenario: (modelId: ScenarioModelId) => void;
+  modelInScenarios: (context: ScenarioContext) => void;
   togglePersonaMenu: () => void;
   closePersonaMenu: () => void;
   toggleGoalEditor: () => void;
@@ -75,6 +85,7 @@ export const useApp = create<AppState>((set, get) => ({
   scenarioInputs: initialScenarioInputs(),
   goals: {},
   goalEditorOpen: false,
+  scenarioContext: null,
   personaMenuOpen: false,
   navSeq: 0,
 
@@ -87,11 +98,14 @@ export const useApp = create<AppState>((set, get) => ({
       askedQuestion: null,
       personaMenuOpen: false,
       goalEditorOpen: false,
+      scenarioContext: null,
       navSeq: s.navSeq + 1,
     })),
 
-  // §11: switching tab clears detail.
-  setTab: (tab) => set((s) => ({ tab, detail: null, goalEditorOpen: false, navSeq: s.navSeq + 1 })),
+  // §11: switching tab clears detail. Manual tab nav also drops any carried
+  // scenario context (it only survives a "Model this in Scenarios" jump).
+  setTab: (tab) =>
+    set((s) => ({ tab, detail: null, goalEditorOpen: false, scenarioContext: null, navSeq: s.navSeq + 1 })),
 
   openDetail: (kind, id) => set((s) => ({ detail: { kind, id }, navSeq: s.navSeq + 1 })),
 
@@ -147,6 +161,11 @@ export const useApp = create<AppState>((set, get) => ({
         [modelId]: defaultLeverValues(SCENARIO_MODELS[modelId]),
       },
     })),
+
+  // Jump to Scenarios carrying the question being modelled, so the levers land
+  // grounded in a real insight or decision rather than at a bare default.
+  modelInScenarios: (context) =>
+    set((s) => ({ tab: 'scenarios', detail: null, scenarioContext: context, navSeq: s.navSeq + 1 })),
 
   togglePersonaMenu: () => set((s) => ({ personaMenuOpen: !s.personaMenuOpen })),
   closePersonaMenu: () => set({ personaMenuOpen: false }),

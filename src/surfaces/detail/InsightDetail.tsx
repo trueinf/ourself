@@ -21,7 +21,7 @@ const FRESHNESS_LABEL = { live: 'Live', lagging: 'Lagging', periodic: 'Periodic'
 
 export function InsightDetail({ persona, insight }: { persona: Persona; insight: Insight }) {
   const closeDetail = useApp((s) => s.closeDetail);
-  const setTab = useApp((s) => s.setTab);
+  const modelInScenarios = useApp((s) => s.modelInScenarios);
   const openDetail = useApp((s) => s.openDetail);
   const pinQuestion = useApp((s) => s.pinQuestion);
 
@@ -131,7 +131,11 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
                 Go to the decision
               </button>
             ) : null}
-            <button type="button" className="btn ghost" onClick={() => setTab('scenarios')}>
+            <button
+              type="button"
+              className="btn ghost"
+              onClick={() => modelInScenarios({ kind: 'insight', id: insight.id, headline: insight.headline })}
+            >
               Model this in Scenarios
             </button>
             <button type="button" className="btn ghost" onClick={() => pinQuestion(insight.headline)}>

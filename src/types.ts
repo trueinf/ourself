@@ -238,6 +238,10 @@ export interface ScenarioModel {
   id: ScenarioModelId;
   title: string;
   lede: string;
+  /** one-line framing: what you're modelling and against what baseline */
+  read: string;
+  /** short name of the baseline the deltas are measured against */
+  baselineLabel: string;
   levers: Lever[];
   compute: (values: LeverValues) => ScenarioResult;
 }

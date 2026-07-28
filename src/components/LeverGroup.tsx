@@ -18,10 +18,12 @@ export function LeverGroup({
 }) {
   if (lever.kind === 'segments') {
     const current = asString(value, lever.default);
+    const nowLabel = lever.options.find(([k]) => k === lever.default)?.[1];
     return (
       <div className="lev">
         <div className="lev-h">
           <label>{lever.label}</label>
+          {nowLabel ? <span className="lev-now">now · {nowLabel}</span> : null}
         </div>
         <div className="seg">
           {lever.options.map(([key, label]) => (
@@ -40,6 +42,7 @@ export function LeverGroup({
   }
 
   const current = asNumber(value, lever.default);
+  const nowValue = formatLeverValue(lever.default, lever.step, lever.unit);
   return (
     <div className="lev">
       <div className="lev-h">
@@ -59,6 +62,7 @@ export function LeverGroup({
       />
       <div className="rlab">
         <span>{lever.loCaption}</span>
+        <span className="lev-now">now · {nowValue}</span>
         <span>{lever.hiCaption}</span>
       </div>
     </div>

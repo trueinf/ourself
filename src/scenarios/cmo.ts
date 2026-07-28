@@ -61,6 +61,8 @@ function compute(values: LeverValues): ScenarioResult {
 export const cmoModel: ScenarioModel = {
   id: 'cmo',
   title: 'Media mix, awareness and discovery',
+  read: 'You’re modelling media mix, awareness and discovery against the committed plan — every move trades spend against reach and CAC.',
+  baselineLabel: 'the plan',
   lede: 'Computes awareness, CAC and conversion against spend and mix. Finance and Technology reason about the constraints separately.',
   levers: [
     { id: 'pct', kind: 'range', label: 'Marketing % of net sales', min: 22, max: 31, default: 26, step: 0.1, unit: '%', loCaption: '22%', hiCaption: '31%' },

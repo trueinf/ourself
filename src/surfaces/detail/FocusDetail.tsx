@@ -16,9 +16,10 @@ const DUE_PILL: Record<FocusItem['dueUrgency'], string> = { now: 'pink', soon: '
 
 export function FocusDetail({ persona, item }: { persona: Persona; item: FocusItem }) {
   const closeDetail = useApp((s) => s.closeDetail);
-  const setTab = useApp((s) => s.setTab);
+  const modelInScenarios = useApp((s) => s.modelInScenarios);
   const openDetail = useApp((s) => s.openDetail);
   const hasOptions = item.options.length > 0;
+  const modelThis = () => modelInScenarios({ kind: 'focus', id: item.id, headline: item.headline });
   const raisedBy = persona.insights.find((i) => i.feedsDecision === item.id);
 
   const blockedSentence = item.waitingOn.length
@@ -80,7 +81,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
                 <button type="button" className="btn">
                   Approve recommended
                 </button>
-                <button type="button" className="btn ghost" onClick={() => setTab('scenarios')}>
+                <button type="button" className="btn ghost" onClick={modelThis}>
                   Model an alternative
                 </button>
                 <button type="button" className="btn ghost">
@@ -96,7 +97,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
                 Scenarios and model it directly.
               </p>
               <div className="btnrow">
-                <button type="button" className="btn" onClick={() => setTab('scenarios')}>
+                <button type="button" className="btn" onClick={modelThis}>
                   Model this in Scenarios
                 </button>
                 <button type="button" className="btn ghost">

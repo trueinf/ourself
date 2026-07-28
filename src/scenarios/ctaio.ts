@@ -67,6 +67,8 @@ function compute(values: LeverValues): ScenarioResult {
 export const ctaioModel: ScenarioModel = {
   id: 'ctaio',
   title: 'Semantic layer, pilot throughput and cost',
+  read: 'You’re modelling the semantic layer, throughput and cost against today’s 38% coverage — every move trades build time against pilot velocity.',
+  baselineLabel: 'today',
   lede: 'Computes pilot build time and production throughput against semantic coverage. Finance reasons about the return separately.',
   levers: [
     { id: 'entityCoverage', kind: 'range', label: 'Shared entity coverage', min: 0, max: 100, default: 38, step: 1, unit: '%', loCaption: '0%', hiCaption: '100%' },

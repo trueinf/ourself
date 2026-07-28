@@ -1244,7 +1244,7 @@ button.pill {
 /* scenarios */
 .scn {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 340px minmax(0, 1fr);
   gap: 16px;
   align-items: start;
 }
@@ -1305,6 +1305,74 @@ input[type='range'] {
   font-size: 10.5px;
   color: var(--faint);
   margin-top: -2px;
+}
+.lev-now {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.rlab .lev-now {
+  color: var(--muted);
+}
+/* what this model backs */
+.backs {
+  display: grid;
+  gap: 8px;
+}
+.back-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 13px;
+  transition: border-color 0.14s, background 0.14s;
+}
+.back-item:hover {
+  border-color: #d2d2d9;
+  background: var(--mist);
+}
+.back-kind {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  padding: 2px 8px;
+  flex: none;
+  border: 1px solid var(--line);
+}
+.back-kind.decision {
+  background: var(--pink-soft);
+  border-color: var(--pink-line);
+  color: var(--pink-text);
+}
+.back-kind.finding {
+  background: var(--mist);
+  color: var(--muted);
+}
+.back-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.back-chev {
+  stroke: var(--faint);
+  stroke-width: 2;
+  fill: none;
+  flex: none;
+}
+.back-item:hover .back-chev {
+  stroke: var(--ink);
 }
 .outs {
   display: grid;
@@ -1847,7 +1915,7 @@ input[type='range'] {
 }
 @media (max-width: 900px) {
   .scn {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .outs {
     grid-template-columns: repeat(2, 1fr);
