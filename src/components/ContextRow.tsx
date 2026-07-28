@@ -30,6 +30,10 @@ export function ContextRow({ persona, tab }: { persona: Persona; tab: TabId }) {
   const objective = override?.objective ?? persona.objective;
   const tabLabel = TABS.find((t) => t[0] === tab)?.[1] ?? tab;
 
+  // The objective function is a persona-level setting, edited on Insights only.
+  // Other surfaces keep just the title.
+  const showObjective = tab === 'insights';
+
   return (
     <>
       <div className="ctx">
@@ -40,21 +44,23 @@ export function ContextRow({ persona, tab }: { persona: Persona; tab: TabId }) {
             · {persona.name}, {persona.role}
           </span>
         </h1>
-        <span className="obj">
-          <b>Optimising for</b> · {objective}
-          {override ? <span className="obj-edited" title="Custom goal — data re-ranked" /> : null}
-        </span>
-        <button type="button" className="editgoal" aria-expanded={editorOpen} onClick={toggleGoalEditor}>
-          <EditIcon /> Edit goal
-        </button>
-        {tab === 'insights' ? (
-          <span className="asof" title="Illustrative freshness — demo data">
-            <span className="asof-dot" />
-            Live · as of {asOf}
-          </span>
+        {showObjective ? (
+          <>
+            <span className="obj">
+              <b>Optimising for</b> · {objective}
+              {override ? <span className="obj-edited" title="Custom goal — data re-ranked" /> : null}
+            </span>
+            <button type="button" className="editgoal" aria-expanded={editorOpen} onClick={toggleGoalEditor}>
+              <EditIcon /> Edit goal
+            </button>
+            <span className="asof" title="Illustrative freshness — demo data">
+              <span className="asof-dot" />
+              Live · as of {asOf}
+            </span>
+          </>
         ) : null}
       </div>
-      {editorOpen ? <GoalEditor persona={persona} /> : null}
+      {showObjective && editorOpen ? <GoalEditor persona={persona} /> : null}
     </>
   );
 }
