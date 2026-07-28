@@ -180,6 +180,23 @@ describe('interaction rules (§11)', () => {
     expect(useApp.getState().personaIndex).toBe(3);
   });
 
+  it('openAsk jumps to the Ask surface already answering the question (PinBoard → Ask)', () => {
+    useApp.setState({ personaIndex: 0, tab: 'pinboard', askedQuestion: null });
+    useApp.getState().openAsk('Will the 35% tariff assumption hold to the Q2 print?');
+    expect(useApp.getState().tab).toBe('ask');
+    expect(useApp.getState().askedQuestion).toBe('Will the 35% tariff assumption hold to the Q2 print?');
+  });
+
+  it('every seeded pin resolves to a governed finding, so its movement carries a source', () => {
+    for (const p of PERSONAS) {
+      for (const pin of p.pins) {
+        const insight = resolveQuestion(pin.question);
+        expect(insight, `pin "${pin.question}" resolved to null`).toBeTruthy();
+        expect(insight!.sources.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
   it('switching tab clears detail', () => {
     useApp.setState({ personaIndex: 0, tab: 'insights', detail: { kind: 'insight', id: 'f1' } });
     useApp.getState().setTab('focus');

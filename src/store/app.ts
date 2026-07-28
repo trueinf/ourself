@@ -46,6 +46,7 @@ export interface AppState {
   openDetail: (kind: DetailRef['kind'], id: string) => void;
   closeDetail: () => void;
   ask: (question: string) => void;
+  openAsk: (question: string) => void;
   clearAsk: () => void;
   pinQuestion: (question: string) => void;
   unpin: (index: number) => void;
@@ -115,6 +116,22 @@ export const useApp = create<AppState>((set, get) => ({
     const q = question.trim();
     if (!q) return;
     set((s) => ({ askedQuestion: q, navSeq: s.navSeq + 1 }));
+  },
+
+  // Open the Ask surface already answering a question — used from PinBoard so a
+  // tracked question can be re-answered in one click ("re-answered as the data
+  // moves").
+  openAsk: (question) => {
+    const q = question.trim();
+    if (!q) return;
+    set((s) => ({
+      tab: 'ask',
+      askedQuestion: q,
+      detail: null,
+      goalEditorOpen: false,
+      scenarioContext: null,
+      navSeq: s.navSeq + 1,
+    }));
   },
 
   clearAsk: () => set((s) => ({ askedQuestion: null, navSeq: s.navSeq + 1 })),
