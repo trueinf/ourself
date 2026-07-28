@@ -1,21 +1,25 @@
-import type { FocusItem } from '@/types';
+import type { Persona, FocusItem } from '@/types';
 import { useApp } from '@/store/app';
 import { nameOf } from '@/data/agents';
 import { BackLink } from '@/components/BackLink';
 import { Pill } from '@/components/Pill';
 import { SideCard } from '@/components/SideCard';
+import { ChevronRight } from '@/components/Icons';
 
 /**
  * §7.7 Focus detail — a full page. Effect buttons (Approve recommended,
  * Request specialist analysis) are inert by design (§2.8, non-negotiable 8):
- * this build is the decision surface, it never acts.
+ * this build is the decision surface, it never acts. A "Raised by" backlink
+ * closes the loop with the insight that fed this decision (§7.6).
  */
 const DUE_PILL: Record<FocusItem['dueUrgency'], string> = { now: 'pink', soon: 'amber', ok: 'neutral' };
 
-export function FocusDetail({ item }: { item: FocusItem }) {
+export function FocusDetail({ persona, item }: { persona: Persona; item: FocusItem }) {
   const closeDetail = useApp((s) => s.closeDetail);
   const setTab = useApp((s) => s.setTab);
+  const openDetail = useApp((s) => s.openDetail);
   const hasOptions = item.options.length > 0;
+  const raisedBy = persona.insights.find((i) => i.feedsDecision === item.id);
 
   const blockedSentence = item.waitingOn.length
     ? `${item.waitingOn.map(nameOf).join(' and ')} ${item.waitingOn.length > 1 ? 'are' : 'is'} blocked pending the call.`
@@ -33,11 +37,23 @@ export function FocusDetail({ item }: { item: FocusItem }) {
         <p className="lede">{item.summary}</p>
         <div className="meta">
           <Pill variant={DUE_PILL[item.dueUrgency]}>Due {item.due}</Pill>
+          {item.waitingOn.length >= 2 ? <Pill variant="pink">Cross-office · {item.waitingOn.length + 1} offices</Pill> : null}
           {item.waitingOn.map((w) => (
             <Pill key={w}>{nameOf(w)} waiting</Pill>
           ))}
         </div>
       </div>
+
+      {raisedBy ? (
+        <button type="button" className="feeds" onClick={() => openDetail('insight', raisedBy.id)}>
+          <span className="feeds-eyebrow">Raised by</span>
+          <span className="feeds-body">{raisedBy.headline}</span>
+          <span className="feeds-due">
+            View insight
+            <ChevronRight size={14} className="feeds-chev" />
+          </span>
+        </button>
+      ) : null}
 
       <div className="two">
         <div>

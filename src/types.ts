@@ -119,6 +119,8 @@ export interface FocusItem {
   due: string;
   dueUrgency: 'now' | 'soon' | 'ok';
   options: DecisionOption[];
+  /** short "what is at risk" phrase for triage */
+  stakes?: string;
 }
 
 export interface ClosedDecision {
@@ -176,6 +178,8 @@ export interface Persona {
   goalPresets: GoalPreset[];
   /** one-sentence "read" of the quarter — the verdict shown before the KPIs */
   synthesis: string;
+  /** one-sentence triage "read" of the decision queue (Focus) */
+  focusRead: string;
 }
 
 /* ---- scenario engine contract (§9) ---- */

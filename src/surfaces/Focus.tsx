@@ -13,6 +13,13 @@ export function Focus({ persona }: { persona: Persona }) {
     <>
       <ContextRow persona={persona} tab="focus" />
 
+      {persona.focusRead ? (
+        <div className="synth">
+          <div className="synth-eyebrow">The queue</div>
+          <p>{persona.focusRead}</p>
+        </div>
+      ) : null}
+
       <div className="sec-h">
         <h2>Needs a decision from you</h2>
         <span className="sub">Ordered by what closes soonest</span>

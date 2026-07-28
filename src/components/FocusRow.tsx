@@ -12,6 +12,9 @@ const SEV_MARK: Record<FocusItem['severity'], string> = { high: '!', medium: '~'
 const lastName = (initials: string): string => nameOf(initials).split(' ')[1] ?? nameOf(initials);
 
 export function FocusRow({ item, onOpen }: { item: FocusItem; onOpen: () => void }) {
+  // A decision "crosses offices" when two or more executives are waiting on it —
+  // the multi-party arbitrations only the CxO can settle (the product's premise).
+  const crossOffice = item.waitingOn.length >= 2;
   return (
     <button type="button" className="card tap" onClick={onOpen}>
       <div className="fitem">
@@ -22,6 +25,12 @@ export function FocusRow({ item, onOpen }: { item: FocusItem; onOpen: () => void
           </div>
           <h3>{item.headline}</h3>
           <div className="sl">{item.summary}</div>
+          {item.stakes ? (
+            <div className="stake">
+              <span>At stake</span>
+              {item.stakes}
+            </div>
+          ) : null}
           <div className="wait">
             {item.waitingOn.length ? (
               <>
@@ -37,7 +46,10 @@ export function FocusRow({ item, onOpen }: { item: FocusItem; onOpen: () => void
             ) : (
               <span>No one blocked</span>
             )}
-            {item.options.length ? <span className="pill p">{item.options.length} options modelled</span> : null}
+            {crossOffice ? <span className="pill p">Cross-office · {item.waitingOn.length + 1} offices</span> : null}
+            <span className="pill">
+              {item.options.length ? `${item.options.length} options modelled` : 'Not yet modelled'}
+            </span>
           </div>
         </div>
         <div className={`due ${item.dueUrgency}`}>{item.due}</div>

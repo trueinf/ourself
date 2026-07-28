@@ -4,6 +4,7 @@ import { DECISIONS } from './decisions';
 import { GOAL_PRESETS } from './goals';
 import { SYNTHESIS } from './synthesis';
 import { FINDINGS, FEEDS_DECISION, PROOFS } from './insightDetail';
+import { FOCUS_READ, STAKES } from './focus';
 
 /* =============================================================
    §8.1 The eight personas — EXTRACTED from the prototype, not
@@ -27,7 +28,7 @@ import { FINDINGS, FEEDS_DECISION, PROOFS } from './insightDetail';
      before any live demo.
    ============================================================= */
 
-const PERSONA_SEED: Omit<Persona, 'closedDecisions' | 'goalPresets' | 'synthesis'>[] = [
+const PERSONA_SEED: Omit<Persona, 'closedDecisions' | 'goalPresets' | 'synthesis' | 'focusRead'>[] = [
   {
     id: 'fields',
     initials: 'MF',
@@ -798,10 +799,12 @@ export const PERSONAS: Persona[] = PERSONA_SEED.map((p) => ({
   closedDecisions: DECISIONS[p.id] ?? [],
   goalPresets: GOAL_PRESETS[p.id] ?? [],
   synthesis: SYNTHESIS[p.id] ?? '',
+  focusRead: FOCUS_READ[p.id] ?? '',
   insights: p.insights.map((i) => ({
     ...i,
     findings: FINDINGS[i.id] ?? i.agents.map((agent) => ({ agent, text: '' })),
     feedsDecision: FEEDS_DECISION[i.id],
     proof: PROOFS[i.id],
   })),
+  focus: p.focus.map((f) => ({ ...f, stakes: STAKES[f.id] })),
 }));

@@ -295,4 +295,28 @@ describe('data-model invariants (§8)', () => {
       }
     }
   });
+
+  it('every persona has a triage read and every focus item an at-stake phrase', () => {
+    for (const p of PERSONAS) {
+      expect(p.focusRead.length).toBeGreaterThan(20);
+      for (const f of p.focus) {
+        expect(f.stakes && f.stakes.length).toBeGreaterThan(8);
+      }
+    }
+  });
+
+  it('at least one cross-office decision exists, and each maps back to its raising insight where linked', () => {
+    // Fields' $22.4M refund crosses three waiting offices.
+    const fields = PERSONAS.find((p) => p.id === 'fields')!;
+    expect(fields.focus.some((f) => f.waitingOn.length >= 2)).toBe(true);
+    // Every insight.feedsDecision resolves to a focus item in the same persona (reverse loop).
+    for (const p of PERSONAS) {
+      for (const i of p.insights) {
+        if (i.feedsDecision) {
+          const target = p.focus.find((f) => f.id === i.feedsDecision);
+          expect(target, `${i.id} → ${i.feedsDecision}`).toBeTruthy();
+        }
+      }
+    }
+  });
 });

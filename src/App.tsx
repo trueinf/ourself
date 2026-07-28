@@ -96,7 +96,7 @@ function Surface({
       if (insight) return <InsightDetail persona={persona} insight={insight} />;
     } else {
       const item = persona.focus.find((f) => f.id === detail.id);
-      if (item) return <FocusDetail item={item} />;
+      if (item) return <FocusDetail persona={persona} item={item} />;
     }
   }
 
