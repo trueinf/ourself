@@ -6,6 +6,7 @@ import { useApp, TABS, type TabId, type DetailRef } from '@/store/app';
 import { PERSONAS } from '@/data/personas';
 import { SCENARIO_MODELS } from '@/scenarios';
 import { rankByGoal, tokenizeGoal, scoreText, kpiText, insightText } from '@/lib/goals';
+import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
 import type { ScenarioModel, LeverValues, ScenarioModelId } from '@/types';
 
 /* =============================================================
@@ -218,6 +219,40 @@ describe('goal editing re-ranks the same governed facts (§8.1a)', () => {
     expect(main.textContent).toContain('Re-prioritised for your goal');
     expect(main.innerHTML).not.toMatch(BAD);
     useApp.setState({ goals: {} });
+  });
+});
+
+describe('Ask resolves each question to a governed finding (§7.3)', () => {
+  it('every suggested question resolves to an insight, and they are not all the same', () => {
+    const resolved = new Set<string>();
+    for (const p of PERSONAS) {
+      for (const sq of p.suggestedQuestions) {
+        const insight = resolveQuestion(sq.question);
+        expect(insight, `"${sq.question}" resolved to null`).toBeTruthy();
+        resolved.add(insight!.id);
+      }
+    }
+    // the 32 suggested questions hit a spread of distinct findings, not one canned answer
+    expect(resolved.size).toBeGreaterThan(10);
+  });
+
+  it('the tariff question resolves to the tariff finding, the pilots question to the pilots finding', () => {
+    expect(resolveQuestion('Why is the realised tariff rate above our 35% assumption?')?.id).toBe('f2');
+    expect(resolveQuestion('Which of the 85 AI pilots are in production, and what did they return?')?.id).toBe('t2');
+  });
+
+  it('a free-typed question keyword-matches a relevant finding', () => {
+    expect(resolveQuestion('what is happening with our deductions at the top accounts?')?.id).toBe('l2');
+  });
+
+  it('gibberish resolves to no finding (graceful no-match)', () => {
+    expect(resolveQuestion('zzzz qqqq wxyz')).toBeNull();
+  });
+
+  it('what-if phrasing is detected for routing to Scenarios', () => {
+    expect(isScenarioQuestion('If we extend the price reversal to lip, what happens?')).toBe(true);
+    expect(isScenarioQuestion('What would it cost to pull qualification forward?')).toBe(true);
+    expect(isScenarioQuestion('Why is the realised tariff rate above our 35% assumption?')).toBe(false);
   });
 });
 

@@ -1,43 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import type { Persona } from '@/types';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { Persona, Insight, AgentFinding } from '@/types';
 import { useApp } from '@/store/app';
-import { SYS } from '@/data/sources';
+import { AGENTS } from '@/data/agents';
+import { DEFAULT_FRESHNESS } from '@/data/sources';
+import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
 import { ContextRow } from '@/components/ContextRow';
-import { AgentRow } from '@/components/AgentRow';
-import { DissentPanel } from '@/components/DissentPanel';
 import { SourceChip } from '@/components/SourceChip';
-import { AnswerDashboard } from '@/components/AnswerDashboard';
-import { pillClass } from '@/components/Pill';
-import { ChevronLeft, SendIcon } from '@/components/Icons';
+import { InsightProofChart } from '@/components/InsightProofChart';
+import { CrossOfficeCards } from '@/components/CrossOfficeStrip';
+import { Pill, pillClass } from '@/components/Pill';
+import { ChevronLeft, ChevronRight, SendIcon } from '@/components/Icons';
 
-/**
- * The answer is assembled step by step, not returned instantly: the
- * orchestrator plans, dispatches three specialists in parallel, each reads its
- * source systems, and a judgement node reconciles — matching the trace the
- * product claims (§7.3 footer). Under prefers-reduced-motion the steps resolve
- * immediately (§12.3).
- */
-const STEP_MS = 850;
-const STEPS: Array<{ title: string; detail: string }> = [
-  { title: 'Planning the question', detail: 'Decomposing it into sub-questions across Finance, Supply and Regulatory.' },
-  {
-    title: 'Dispatched 3 specialists in parallel',
-    detail: 'Deterministic dispatch — the same specialists are consulted for this class of finding every time.',
-  },
-  { title: 'Supply · read Customs & broker', detail: 'entity: sku, origin — qualification status on two contract manufacturers.' },
-  { title: 'Finance · read SAP and the FP&A model', detail: 'entity: margin, tariff — realised rate against the published 35% assumption.' },
-  { title: 'Regulatory · read the compliance tracker', detail: 'entity: site — registration status at both sites.' },
-  {
-    title: 'Judgement node reconciled the findings',
-    detail: 'One recommendation produced; the Supply-vs-Finance dissent preserved, not averaged.',
-  },
-];
-const DONE_MS = STEP_MS * STEPS.length + 700;
-
-/** §7.3 Ask — natural language, cross-domain. Empty state and answered state. */
+/** §7.3 Ask — natural language over the same governed facts as the rest of the
+ *  app. A question resolves to an insight and the answer is assembled from it. */
 export function Ask({ persona }: { persona: Persona }) {
   const askedQuestion = useApp((s) => s.askedQuestion);
-  if (askedQuestion) return <AskAnswer persona={persona} question={askedQuestion} />;
+  if (askedQuestion) return <AskAnswer key={askedQuestion} persona={persona} question={askedQuestion} />;
   return <AskEmpty persona={persona} />;
 }
 
@@ -53,7 +31,6 @@ function AskEmpty({ persona }: { persona: Persona }) {
     ta.style.height = 'auto';
     ta.style.height = Math.min(ta.scrollHeight, 150) + 'px';
   };
-
   const submit = () => {
     if (trimmed) ask(trimmed);
   };
@@ -106,22 +83,66 @@ function AskEmpty({ persona }: { persona: Persona }) {
   );
 }
 
+/* ---- staged reasoning derived from the resolved finding ---- */
+const STEP_MS = 820;
+const truncate = (s: string, n = 104) => (s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s);
+
+function officeList(insight: Insight): string {
+  const labels = insight.agents.map((a) => AGENTS[a].label);
+  if (labels.length <= 1) return labels[0] ?? 'the specialists';
+  return labels.slice(0, -1).join(', ') + ' and ' + labels[labels.length - 1];
+}
+
+function buildSteps(insight: Insight | null): Array<{ title: string; detail: string }> {
+  if (!insight) {
+    return [
+      { title: 'Planning the question', detail: 'Decomposing it into sub-questions across the offices.' },
+      { title: 'Searching the governed findings', detail: 'Matching the question against what the specialists currently hold.' },
+    ];
+  }
+  const findings = insight.findings ?? [];
+  const dissent = insight.crossOffice.length;
+  return [
+    { title: 'Planning the question', detail: `Decomposing it into sub-questions across ${officeList(insight)}.` },
+    {
+      title: `Dispatched ${insight.agents.length} specialists in parallel`,
+      detail: 'Deterministic dispatch — the same specialists are consulted for this class of finding every time.',
+    },
+    ...findings.map((f) => ({
+      title: `${AGENTS[f.agent].label} · read ${f.source ?? 'the source systems'}`,
+      detail: truncate(f.text),
+    })),
+    {
+      title: 'Judgement node reconciled the findings',
+      detail: dissent
+        ? `One finding returned; ${dissent} dissenting position${dissent === 1 ? '' : 's'} preserved, not averaged.`
+        : 'The specialists aligned; one finding returned with its sources.',
+    },
+  ];
+}
+
 function AskAnswer({ persona, question }: { persona: Persona; question: string }) {
   const clearAsk = useApp((s) => s.clearAsk);
+  const setTab = useApp((s) => s.setTab);
+  const openDetail = useApp((s) => s.openDetail);
   const pinQuestion = useApp((s) => s.pinQuestion);
   const pins = useApp((s) => s.pins);
   const pinned = (pins[persona.id] ?? []).some((x) => x.question === question);
 
+  const insight = useMemo(() => resolveQuestion(question), [question]);
+  const scenario = isScenarioQuestion(question);
+  const steps = useMemo(() => buildSteps(insight), [insight]);
+
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const doneMs = STEP_MS * steps.length + 600;
 
   useEffect(() => {
-    const reduced =
-      typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
-      setStep(STEPS.length);
-      setElapsed(6200);
+      setStep(steps.length);
+      setElapsed(doneMs);
       setDone(true);
       return;
     }
@@ -129,19 +150,19 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
     setDone(false);
     setElapsed(0);
     const start = Date.now();
-    const stepTimers = STEPS.map((_, i) => window.setTimeout(() => setStep(i + 1), STEP_MS * (i + 1)));
+    const stepTimers = steps.map((_, i) => window.setTimeout(() => setStep(i + 1), STEP_MS * (i + 1)));
     const ticker = window.setInterval(() => setElapsed(Date.now() - start), 100);
     const doneTimer = window.setTimeout(() => {
       window.clearInterval(ticker);
       setElapsed(Date.now() - start);
       setDone(true);
-    }, DONE_MS);
+    }, doneMs);
     return () => {
       stepTimers.forEach((t) => window.clearTimeout(t));
       window.clearInterval(ticker);
       window.clearTimeout(doneTimer);
     };
-  }, [question]);
+  }, [question, steps, doneMs]);
 
   const seconds = (elapsed / 1000).toFixed(1);
 
@@ -170,7 +191,7 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
                 Assembling the answer from the specialists that hold the data
               </div>
               <div className="trace">
-                {STEPS.map((s, i) => {
+                {steps.map((s, i) => {
                   const cls = i < step ? 'done' : i === step ? 'active' : 'pending';
                   return (
                     <div className={`tr ${cls}`} key={i}>
@@ -210,52 +231,135 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
             </button>
           </div>
           <div className="ans-b">
-            <p>
-              <b>Short answer.</b> Three specialists agree on the mechanism and disagree on the response. The finding
-              below reconciles them; the dissent is preserved rather than averaged out.
-            </p>
-
-            <AnswerDashboard />
-
-            <p style={{ marginTop: 16 }}>
-              The driver is the origin transition running about six weeks behind on two contract manufacturers, which
-              leaves more volume than modelled landing at the higher China rate. At roughly 18 basis points of gross
-              margin per 100 basis points of tariff, the 350 basis point gap is worth about 63 basis points of margin
-              this quarter.
-            </p>
-            <div style={{ marginTop: 16 }}>
-              <div className="eyebrow" style={{ marginBottom: 8 }}>
-                Specialists consulted
-              </div>
-              <AgentRow monogram="SUP" heading="Supply">
-                Both plants are in qualification, not production. Line trials cleared at one site this week; the second
-                slipped five days on documentation. Air freight would recover about four weeks.
-              </AgentRow>
-              <AgentRow monogram="FIN" heading="Finance">
-                The published FY2027 guide assumes 35%. Realised is 38.5%. If the gap has not closed by the Q2 print, the
-                assumption is restated publicly.
-              </AgentRow>
-              <AgentRow monogram="REG" heading="Regulatory">
-                No registration barrier at either site. The delay is qualification throughput, not compliance — so it is
-                a resourcing decision, not a legal one.
-              </AgentRow>
-            </div>
-            <DissentPanel heading="Preserved dissent — Supply against Finance">
-              Supply holds that the gap closes naturally in Q2 and air freight is an avoidable cost. Finance holds that
-              the public assumption cannot depend on a qualification schedule that has already slipped twice. Both
-              readings are consistent with the same data; the disagreement is about risk tolerance, not fact.
-            </DissentPanel>
-            <div className="srcs" style={{ marginTop: 16 }}>
-              <SourceChip source={SYS.cust} freshness="lagging" />
-              <SourceChip source={SYS.sap} freshness="live" />
-              <SourceChip source={SYS.fpa} freshness="periodic" />
-              <SourceChip source={SYS.reg} freshness="periodic" />
-            </div>
+            {insight ? (
+              <Answer insight={insight} scenario={scenario} onScenario={() => setTab('scenarios')} onOpenInsight={() => openDetail('insight', insight.id)} elapsed={seconds} />
+            ) : (
+              <NoMatch onScenario={() => setTab('scenarios')} />
+            )}
           </div>
         </div>
-        <div className="pagefoot">
-          Answered in {seconds}s · 3 specialists dispatched in parallel · 11 tool calls · full trace available
+      </div>
+    </>
+  );
+}
+
+function FindingRow({ finding }: { finding: AgentFinding }) {
+  return (
+    <div className="agent">
+      <span className="ic">{AGENTS[finding.agent].monogram}</span>
+      <div>
+        <h4>{AGENTS[finding.agent].label}</h4>
+        <p>{finding.text}</p>
+        {finding.source ? (
+          <div className="agent-src">
+            <SourceChip source={finding.source} freshness={DEFAULT_FRESHNESS[finding.source]} />
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function Answer({
+  insight,
+  scenario,
+  onScenario,
+  onOpenInsight,
+  elapsed,
+}: {
+  insight: Insight;
+  scenario: boolean;
+  onScenario: () => void;
+  onOpenInsight: () => void;
+  elapsed: string;
+}) {
+  const findings = insight.findings ?? [];
+  const positions = insight.crossOffice;
+  const toolCalls = insight.sources.length * 3 + insight.agents.length * 2 + 1;
+
+  return (
+    <>
+      <p>
+        <b>Short answer.</b>{' '}
+        {positions.length
+          ? 'The specialists reconcile on the mechanism and split on the response; the finding below preserves the dissent rather than averaging it.'
+          : 'The specialists are aligned here — the finding and its sources are below.'}
+      </p>
+      <p>{insight.why}</p>
+
+      <div className="ansdash">
+        <div className="eyebrow" style={{ marginBottom: 8 }}>
+          Key facts
         </div>
+        <div className="meta">
+          {insight.pills.map((p, i) => (
+            <Pill key={i} variant={p.variant}>
+              {p.text}
+            </Pill>
+          ))}
+        </div>
+        {insight.proof ? <InsightProofChart proof={insight.proof} /> : null}
+      </div>
+
+      {scenario ? (
+        <button type="button" className="feeds" onClick={onScenario}>
+          <span className="feeds-eyebrow">This is a what-if</span>
+          <span className="feeds-body">Model it to see the levers move the numbers together</span>
+          <span className="feeds-due">
+            Open Scenarios
+            <ChevronRight size={14} className="feeds-chev" />
+          </span>
+        </button>
+      ) : null}
+
+      <div style={{ marginTop: 16 }}>
+        <div className="eyebrow" style={{ marginBottom: 8 }}>
+          Specialists consulted
+        </div>
+        {findings.map((f) => (
+          <FindingRow key={f.agent} finding={f} />
+        ))}
+      </div>
+
+      {positions.length ? (
+        <div style={{ marginTop: 16 }}>
+          <div className="eyebrow" style={{ marginBottom: 8 }}>
+            Where the offices stand — preserved, not averaged
+          </div>
+          <CrossOfficeCards views={positions} />
+        </div>
+      ) : null}
+
+      <div className="srcs" style={{ marginTop: 16 }}>
+        {insight.sources.map((s) => (
+          <SourceChip key={s} source={s} freshness={DEFAULT_FRESHNESS[s]} />
+        ))}
+      </div>
+
+      <div className="pagefoot" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+        <span>
+          Answered in {elapsed}s · {insight.agents.length} specialists dispatched in parallel · {toolCalls} tool calls ·
+          full trace available
+        </span>
+        <button type="button" className="linklike" onClick={onOpenInsight}>
+          Open the full finding →
+        </button>
+      </div>
+    </>
+  );
+}
+
+function NoMatch({ onScenario }: { onScenario: () => void }) {
+  return (
+    <>
+      <p>
+        <b>No settled finding yet.</b> I could not route this question to a governed finding the specialists currently
+        hold. Try one of the suggested questions, or take it into Scenarios to model it directly.
+      </p>
+      <div className="btnrow">
+        <button type="button" className="btn" onClick={onScenario}>
+          Model this in Scenarios
+        </button>
       </div>
     </>
   );
