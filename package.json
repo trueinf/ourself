@@ -1,0 +1,38 @@
+{
+  "name": "ourself",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "ourse.l.f. — cross-functional executive intelligence surface for e.l.f. Beauty (demo build).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run test/functional.spec.ts",
+    "test:watch": "vitest",
+    "test:layout": "playwright test test/layout.spec.ts",
+    "test:contrast": "playwright test test/contrast.spec.ts",
+    "test:all": "vitest run test/functional.spec.ts && playwright test"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.2",
+    "@testing-library/react": "^16.0.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
+  }
+}
