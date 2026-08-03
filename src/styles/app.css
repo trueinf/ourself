@@ -2431,10 +2431,10 @@ input[type='range'] {
 
 /* Sign out — a strip at the top right of the content column. In flow rather
    than fixed, so it can never sit on top of a surface header at any width. */
+/* full content width, not the 1400px reading column — the control belongs to
+   the app frame, so it sits hard against the right edge at every width */
 .topbar {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 14px 20px 0;
+  padding: 14px 12px 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -2456,6 +2456,6 @@ input[type='range'] {
 }
 @media (max-width: 680px) {
   .topbar {
-    padding: 12px 14px 0;
+    padding: 12px 10px 0;
   }
 }
