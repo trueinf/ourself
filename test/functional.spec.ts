@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { cleanup, render } from '@testing-library/react';
+import { act, cleanup, render } from '@testing-library/react';
 import { createElement } from 'react';
 import App from '@/App';
 import { useApp, TABS, type TabId, type DetailRef } from '@/store/app';
@@ -9,6 +9,7 @@ import { rankByGoal, tokenizeGoal, scoreText, kpiText, insightText } from '@/lib
 import { resolveQuestion, isScenarioQuestion } from '@/data/askAnswers';
 import { SCENARIO_BACKS } from '@/data/scenarioBacks';
 import { SEEDED_DISCUSSIONS, discussionFromFocus, discussionFromInsight } from '@/data/discussions';
+import { checkCredentials } from '@/data/auth';
 import type { ScenarioModel, LeverValues, ScenarioModelId } from '@/types';
 
 /* =============================================================
@@ -24,6 +25,7 @@ const TAB_IDS: TabId[] = TABS.map(([id]) => id);
 
 function renderAt(state: { personaIndex: number; tab: TabId; detail?: DetailRef | null }) {
   useApp.setState({
+    authed: true, // past the demo sign-in gate — covered separately below
     personaIndex: state.personaIndex,
     tab: state.tab,
     detail: state.detail ?? null,
@@ -441,5 +443,57 @@ describe('data-model invariants (§8)', () => {
         }
       }
     }
+  });
+});
+
+/* =============================================================
+   Demo sign-in gate (shell/Login.tsx). Presentation only — it proves the
+   shell does not mount unsigned-in, and that the credentials gate works.
+   ============================================================= */
+describe('demo sign-in gate', () => {
+  it('renders the login card and no shell when signed out', () => {
+    useApp.setState({ authed: false, authError: null });
+    render(createElement(App));
+    expect(document.querySelector('.login-card')).toBeTruthy();
+    expect(document.getElementById('main')).toBeNull();
+  });
+
+  it('rejects wrong credentials and keeps the shell closed', () => {
+    useApp.setState({ authed: false, authError: null });
+    render(createElement(App));
+    expect(useApp.getState().signIn('manoj', 'wrong')).toBe(false);
+    expect(useApp.getState().authed).toBe(false);
+    expect(useApp.getState().authError).toBeTruthy();
+    expect(document.getElementById('main')).toBeNull();
+  });
+
+  it('accepts manoj / til and mounts the shell', () => {
+    useApp.setState({ authed: false, authError: null });
+    render(createElement(App));
+    let ok = false;
+    act(() => {
+      ok = useApp.getState().signIn('manoj', 'til');
+    });
+    expect(ok).toBe(true);
+    expect(useApp.getState().authed).toBe(true);
+    expect(useApp.getState().authError).toBeNull();
+    const main = document.getElementById('main');
+    expect(main).toBeTruthy();
+    expect(main!.innerHTML).not.toMatch(BAD);
+  });
+
+  it('username is case-insensitive and trimmed; password is exact', () => {
+    expect(checkCredentials('  MANOJ ', 'til')).toBe(true);
+    expect(checkCredentials('manoj', 'TIL')).toBe(false);
+    expect(checkCredentials('', '')).toBe(false);
+  });
+
+  it('signing out closes the shell again', () => {
+    useApp.setState({ authed: true });
+    render(createElement(App));
+    expect(document.getElementById('main')).toBeTruthy();
+    act(() => useApp.getState().signOut());
+    expect(useApp.getState().authed).toBe(false);
+    expect(document.getElementById('main')).toBeNull();
   });
 });

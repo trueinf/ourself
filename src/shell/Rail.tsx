@@ -15,6 +15,7 @@ export function Rail() {
   const setTab = useApp((s) => s.setTab);
   const pins = useApp((s) => s.pins);
   const discussions = useApp((s) => s.discussions);
+  const signOut = useApp((s) => s.signOut);
   const persona = PERSONAS[personaIndex]!;
 
   const counts: Partial<Record<TabId, number>> = {
@@ -64,6 +65,9 @@ export function Rail() {
         Demo data · FY2027 Q1
         <br />
         Built on verified FY2026 actuals
+        <button type="button" className="rail-out" onClick={signOut}>
+          Sign out
+        </button>
       </div>
 
       <PersonaSwitcher />

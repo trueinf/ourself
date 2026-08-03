@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useApp } from '@/store/app';
 import { PERSONAS } from '@/data/personas';
 import { Rail } from '@/shell/Rail';
+import { Login } from '@/shell/Login';
 import { MobileTopBar } from '@/shell/MobileTopBar';
 import { Insights } from '@/surfaces/Insights';
 import { Focus } from '@/surfaces/Focus';
@@ -18,6 +19,7 @@ import { FocusDetail } from '@/surfaces/detail/FocusDetail';
  * drawers (§2.4).
  */
 export default function App() {
+  const authed = useApp((s) => s.authed);
   const personaIndex = useApp((s) => s.personaIndex);
   const tab = useApp((s) => s.tab);
   const detail = useApp((s) => s.detail);
@@ -40,6 +42,7 @@ export default function App() {
         d: unknown = null,
       ) =>
         useApp.setState({
+          authed: true, // the demo sign-in gate is not what these harnesses test
           personaIndex: pIndex,
           tab: t as never,
           detail: d as never,
@@ -66,6 +69,9 @@ export default function App() {
       document.removeEventListener('keydown', onKey);
     };
   }, [menuOpen, closePersonaMenu]);
+
+  // Demo sign-in gate — the shell does not mount until credentials match.
+  if (!authed) return <Login />;
 
   return (
     <div className="app">

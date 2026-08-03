@@ -2205,3 +2205,239 @@ input[type='range'] {
     font-size: 23px;
   }
 }
+
+/* ---------- demo sign-in gate (shell/Login.tsx) ----------
+   Full-bleed black/white split: the rail black on the left, paper white on
+   the right. Colour comes from tokens.css only, as everywhere else in this
+   file — the black side reuses the audited rail text tokens. */
+.login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+}
+
+/* --- black half --- */
+.login-brand {
+  background: var(--ink);
+  color: var(--rail-on);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 64px 56px;
+  position: relative;
+  overflow: hidden;
+}
+/* a soft off-black wash so the black half is not a flat slab */
+.login-brand::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 12% 8%, var(--rail-2), transparent 62%);
+  pointer-events: none;
+}
+.login-brand > * {
+  position: relative;
+  z-index: 1;
+}
+.login-brand .wm {
+  font-size: 30px;
+  color: var(--rail-on);
+}
+.login-brand .wm i {
+  color: var(--pink-on-dark);
+  font-style: normal;
+}
+.login-tag {
+  font-size: 40px;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 40px;
+  max-width: 13ch;
+}
+.login-lede {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--rail-txt);
+  margin-top: 20px;
+  max-width: 46ch;
+}
+.login-offices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+.login-office {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--rail-txt);
+  border: 1px solid var(--rail-line);
+  background: var(--rail-2);
+  border-radius: 99px;
+  padding: 6px 13px;
+}
+.login-foot {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--rail-txt-2);
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rail-line);
+  max-width: 46ch;
+}
+
+/* --- white half --- */
+.login-panel {
+  background: var(--mist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 48px;
+}
+/* the form is a bordered card in its own right, lifted off the panel tint */
+.login-card {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  padding: 44px 42px 46px;
+}
+.login-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.login-h {
+  font-size: 32px;
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-top: 12px;
+}
+.login-sub {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.login-field {
+  display: block;
+  margin-top: 24px;
+}
+.login-field > span {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.login-field input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px 16px;
+  font: inherit;
+  font-size: 15.5px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.login-field input::placeholder {
+  color: var(--faint);
+}
+.login-field input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.login-err {
+  margin-top: 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--pink-text);
+  background: var(--pink-soft);
+  border: 1px solid var(--pink-line);
+  border-radius: var(--r);
+  padding: 12px 14px;
+}
+.login-btn {
+  margin-top: 28px;
+  width: 100%;
+  padding: 17px 16px;
+  font-size: 15.5px;
+  border-radius: var(--r);
+}
+
+/* stack the split: black band above, form below */
+@media (max-width: 900px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+  .login-brand {
+    padding: 40px 32px 36px;
+  }
+  .login-tag {
+    font-size: 30px;
+    margin-top: 24px;
+    max-width: none;
+  }
+  .login-lede {
+    font-size: 14px;
+    margin-top: 14px;
+  }
+  .login-offices {
+    margin-top: 22px;
+  }
+  .login-foot {
+    display: none;
+  }
+  .login-panel {
+    padding: 36px 32px 48px;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 620px) {
+  /* eight chips wrap into a slab at phone widths — the lede already says it */
+  .login-offices {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .login-brand {
+    padding: 32px 22px 28px;
+  }
+  .login-brand .wm {
+    font-size: 25px;
+  }
+  .login-tag {
+    font-size: 25px;
+  }
+  .login-panel {
+    padding: 26px 18px 36px;
+  }
+  .login-card {
+    padding: 30px 22px 32px;
+  }
+  .login-h {
+    font-size: 25px;
+  }
+}
+
+/* sign out sits with the rail note; both are hidden at the icon-only and
+   bottom-bar rail widths (see the media queries above). */
+.rail-out {
+  display: block;
+  margin-top: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--rail-txt);
+}
+.rail-out:hover {
+  color: var(--rail-on);
+}

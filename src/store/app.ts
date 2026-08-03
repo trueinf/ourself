@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Pin, DiscussionItem, LeverValue, LeverValues, ScenarioModelId } from '@/types';
 import { PERSONAS } from '@/data/personas';
+import { checkCredentials } from '@/data/auth';
 import { SEEDED_DISCUSSIONS } from '@/data/discussions';
 import { SCENARIO_MODELS, defaultLeverValues } from '@/scenarios';
 
@@ -29,6 +30,9 @@ export interface ScenarioContext {
 }
 
 export interface AppState {
+  /** demo sign-in gate (§ not in spec — demo shell only). See data/auth.ts. */
+  authed: boolean;
+  authError: string | null;
   personaIndex: number;
   tab: TabId;
   detail: DetailRef | null;
@@ -44,6 +48,8 @@ export interface AppState {
   /** monotonic counter bumped on every navigation, so the shell can scroll to top */
   navSeq: number;
 
+  signIn: (username: string, password: string) => boolean;
+  signOut: () => void;
   setPersona: (index: number) => void;
   setTab: (tab: TabId) => void;
   openDetail: (kind: DetailRef['kind'], id: string) => void;
@@ -96,7 +102,31 @@ function initialScenarioInputs(): Record<string, LeverValues> {
 
 export const currentPersona = (personaIndex: number) => PERSONAS[personaIndex] ?? PERSONAS[0]!;
 
+/* Session-scoped so the gate reappears in a fresh tab — sessionStorage, not
+   localStorage. Wrapped because it throws in privacy modes and under some
+   test runners. */
+const AUTH_KEY = 'ourself.authed';
+
+function readAuth(): boolean {
+  try {
+    return sessionStorage.getItem(AUTH_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writeAuth(value: boolean): void {
+  try {
+    if (value) sessionStorage.setItem(AUTH_KEY, '1');
+    else sessionStorage.removeItem(AUTH_KEY);
+  } catch {
+    /* non-fatal — the gate simply re-asks on reload */
+  }
+}
+
 export const useApp = create<AppState>((set, get) => ({
+  authed: readAuth(),
+  authError: null,
   personaIndex: 0,
   tab: 'insights',
   detail: null,
@@ -109,6 +139,32 @@ export const useApp = create<AppState>((set, get) => ({
   scenarioContext: null,
   personaMenuOpen: false,
   navSeq: 0,
+
+  signIn: (username, password) => {
+    if (!checkCredentials(username, password)) {
+      set({ authError: 'That username and password do not match.' });
+      return false;
+    }
+    writeAuth(true);
+    set({ authed: true, authError: null });
+    return true;
+  },
+
+  // Signing out returns to the gate and drops the view back to the default
+  // surface — session state (pins, levers, goals) is left as it was.
+  signOut: () => {
+    writeAuth(false);
+    set((s) => ({
+      authed: false,
+      authError: null,
+      tab: 'insights',
+      detail: null,
+      askedQuestion: null,
+      personaMenuOpen: false,
+      goalEditorOpen: false,
+      navSeq: s.navSeq + 1,
+    }));
+  },
 
   // §11: switching persona clears detail and askedQuestion; pins, scenario
   // inputs and goal overrides persist per persona.
