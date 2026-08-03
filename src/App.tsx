@@ -26,6 +26,7 @@ export default function App() {
   const navSeq = useApp((s) => s.navSeq);
   const menuOpen = useApp((s) => s.personaMenuOpen);
   const closePersonaMenu = useApp((s) => s.closePersonaMenu);
+  const signOut = useApp((s) => s.signOut);
 
   // §11: any navigation scrolls to top instantly (not smoothly).
   useEffect(() => {
@@ -78,6 +79,11 @@ export default function App() {
       <Rail />
       <div className="content">
         <MobileTopBar />
+        <div className="topbar">
+          <button type="button" className="signout" onClick={signOut}>
+            Sign out
+          </button>
+        </div>
         <main className="wrap" id="main">
           <Surface personaIndex={personaIndex} tab={tab} detail={detail} />
         </main>

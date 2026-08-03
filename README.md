@@ -35,7 +35,7 @@ from this repo, so pushing to `main` publishes it. No manual deploy step.
 The demo opens on a sign-in gate — **`manoj` / `til`** (`src/data/auth.ts`). It is
 presentation only, not security: the credentials are in the client bundle and nothing
 behind the gate is protected. The session is held in `sessionStorage`, so a fresh tab
-asks again; `Sign out` sits under the rail note. The Playwright harnesses' `__setView`
+asks again; `Sign out` sits at the top right of the content column. The Playwright harnesses' `__setView`
 hook and the Vitest `renderAt` helper both start signed in, so the gate never gates a test.
 
 ## Tests — the three harnesses (§18)

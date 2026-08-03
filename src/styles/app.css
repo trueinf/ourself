@@ -2429,15 +2429,33 @@ input[type='range'] {
   }
 }
 
-/* sign out sits with the rail note; both are hidden at the icon-only and
-   bottom-bar rail widths (see the media queries above). */
-.rail-out {
-  display: block;
-  margin-top: 6px;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--rail-txt);
+/* Sign out — a strip at the top right of the content column. In flow rather
+   than fixed, so it can never sit on top of a surface header at any width. */
+.topbar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 20px 0;
+  display: flex;
+  justify-content: flex-end;
 }
-.rail-out:hover {
-  color: var(--rail-on);
+.topbar + .wrap {
+  padding-top: 10px;
+}
+.signout {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--body);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 7px 15px;
+}
+.signout:hover {
+  background: var(--mist);
+  color: var(--ink);
+}
+@media (max-width: 680px) {
+  .topbar {
+    padding: 12px 14px 0;
+  }
 }
