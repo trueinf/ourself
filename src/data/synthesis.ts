@@ -5,19 +5,19 @@
  */
 export const SYNTHESIS: Record<string, string> = {
   fields:
-    'Margin held at 71.8%, but the realised tariff is 350 bps above the guide’s assumption and marketing is over its envelope — the exposure is the guide, not this quarter’s P&L.',
+    'Margin held at 71.8%, so the quarter itself is fine. The exposure is further out. The realised tariff is running 350 bps above what the guide assumes, and marketing is over budget.',
   franks:
-    'Ex-China capacity is climbing, yet two plants are still qualifying: landed cost is 6% over plan and lip is the constraint Commercial is already planning against.',
+    'Ex-China capacity is climbing, but two plants are still qualifying, and landed cost is 6% over plan. Lip is the real pinch point, and Commercial is already building its plans around it.',
   savur:
-    'Awareness is moving and GEO is compounding at no media cost, but spend sits over the envelope and Finance is moving to claw it back before it converts.',
+    'Awareness is moving, and GEO is compounding at no media cost. The catch is the spend. It is over budget, and Finance wants to claw it back before it has a chance to convert.',
   chopra:
-    'Fourteen of 85 pilots are in production and four clear their cost of capital — the ceiling is the missing semantic layer, not the pilot count.',
+    'Fourteen of 85 pilots are in production, and four clear their cost of capital. What is holding the rest back is the semantic layer none of them share yet.',
   amin:
-    'The growth streak is intact, but the rhode base transition changes the optics in three weeks and three offices are optimising against each other on the same $22.4M.',
+    'The growth streak is still alive. In three weeks the rhode base transition changes how growth reads, and right now three offices are pulling against each other over the same $22.4M.',
   laar:
-    'Units share is #1 and the face reversal is earning shelf, but the Q2 lip plan is written against volume Operations cannot ship until August.',
+    'Units share is #1, and the face reversal is winning shelf. The problem is the Q2 lip plan, which leans on volume Operations cannot ship until August.',
   marchisotto:
-    'Skincare has become a genuine second core, yet the spring slate is converting at 31% against a 40% norm — the funnel is the problem, not the portfolio.',
+    'Skincare has grown into a real second business. Spring is the worry: the slate is converting at 31% against a 40% norm, which looks more like a funnel problem than weak products.',
   milsten:
-    'Every launch cleared and engagement runs 18 pts above benchmark, but clearance time is drifting and three deployed agents still need an AI Act classification before enforcement.',
+    'Every launch cleared, and engagement is running 18 pts above benchmark. Two things are creeping up, though. Clearance time is drifting, and three deployed agents still need an AI Act classification before the enforcement date.',
 };

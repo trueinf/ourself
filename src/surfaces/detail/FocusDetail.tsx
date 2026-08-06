@@ -96,8 +96,8 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
             <div className="blk">
               <h3>Next steps</h3>
               <p>
-                No options have been modelled yet. Dispatch the specialists to assemble the trade-offs, or take this into
-                Scenarios and model it directly.
+                No options modelled yet. Ask the teams to lay out the trade-offs, or take this into Scenarios and model
+                it directly.
               </p>
               <div className="btnrow">
                 <button type="button" className="btn" onClick={modelThis}>
@@ -105,7 +105,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
                 </button>
                 <AddToDiscussion item={discussionFromFocus(item)} />
                 <button type="button" className="btn ghost">
-                  Request specialist analysis
+                  Ask the teams to analyse it
                 </button>
               </div>
             </div>

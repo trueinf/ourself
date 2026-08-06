@@ -35,23 +35,23 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Supply — qualification reality',
         text:
           exChina > 55
-            ? 'Above 55% assumes two plants beyond the current qualification pipeline. That is a two-quarter build, not a lever available this year.'
-            : 'This level is reachable within the existing qualification pipeline.',
+            ? 'Above 55% assumes two plants beyond the current qualification pipeline. That build takes two quarters. It is not available this year.'
+            : 'The existing qualification pipeline can reach this level.',
       },
       {
         agent: 'fin',
         heading: 'Finance — working-capital ceiling',
         text:
           weeksOfSupply > 10.5
-            ? 'Above 10.5 weeks breaches the working-capital ceiling. Inventory funding would need Finance approval.'
-            : 'Inventory sits within the agreed working-capital ceiling.',
+            ? 'Above 10.5 weeks breaks the working-capital ceiling. Inventory funding would need Finance approval.'
+            : 'Inventory stays within the agreed working-capital ceiling.',
       },
       {
         agent: 'com',
         heading: 'Commercial — service impact',
         text:
           fillRate < 96
-            ? 'Below 96% fill, the two largest accounts begin applying service penalties and shelf position is at risk.'
+            ? 'Below 96% fill, the two largest accounts start applying service penalties. Shelf position is at risk.'
             : 'Service levels hold at both major accounts.',
       },
     ],
@@ -61,9 +61,9 @@ function compute(values: LeverValues): ScenarioResult {
 export const cooModel: ScenarioModel = {
   id: 'coo',
   title: 'Origin transition, landed cost and service',
-  read: 'You’re modelling origin transition, landed cost and service against today’s plan — every move trades cost against capacity and fill.',
+  read: 'You’re modelling origin transition, landed cost, and service against today’s plan. Every move trades cost against capacity and fill.',
   baselineLabel: 'today’s plan',
-  lede: 'Computes landed cost and fill rate against qualification pace and freight mode. Supply and Finance reason about the trade separately.',
+  lede: 'Computes landed cost and fill rate from qualification pace and freight mode. Supply and Finance weigh the trade on their own.',
   levers: [
     {
       id: 'air',

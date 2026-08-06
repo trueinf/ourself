@@ -35,7 +35,7 @@ export function InsightProofChart({ proof }: { proof: InsightProof }) {
                 fill="var(--teal)"
                 fillOpacity={0.08}
                 stroke="none"
-                label={{ value: proof.bandLabel, position: 'insideTopLeft', fontSize: 10, fill: 'var(--muted)' }}
+                label={{ value: proof.bandLabel, position: 'insideTopLeft', fontSize: 11.5, fill: 'var(--muted)' }}
               />
             ) : null}
             {proof.threshold != null ? (
@@ -43,13 +43,13 @@ export function InsightProofChart({ proof }: { proof: InsightProof }) {
                 y={proof.threshold}
                 stroke="var(--faint)"
                 strokeDasharray="4 3"
-                label={{ value: proof.thresholdLabel, position: 'insideBottomRight', fontSize: 10, fill: 'var(--muted)' }}
+                label={{ value: proof.thresholdLabel, position: 'insideBottomRight', fontSize: 11.5, fill: 'var(--muted)' }}
               />
             ) : null}
-            <XAxis dataKey="w" tick={{ fontSize: 10, fill: 'var(--muted)' }} tickLine={false} axisLine={{ stroke: 'var(--line)' }} />
+            <XAxis dataKey="w" tick={{ fontSize: 11.5, fill: 'var(--muted)' }} tickLine={false} axisLine={{ stroke: 'var(--line)' }} />
             <YAxis
               domain={proof.domain}
-              tick={{ fontSize: 10, fill: 'var(--muted)' }}
+              tick={{ fontSize: 11.5, fill: 'var(--muted)' }}
               tickLine={false}
               axisLine={false}
               width={40}

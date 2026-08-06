@@ -39,25 +39,25 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Finance — return test',
         text:
           funding > 5
-            ? 'Above $5M the request exceeds attributed value from measured pilots. Expect it to be cut back to the four that clear cost of capital.'
-            : 'Funding sits within the range that measured pilots can defend.',
+            ? 'Above $5M the request runs past the value attributed to measured pilots. It will get cut back to the four that clear cost of capital.'
+            : 'Funding stays within the range that measured pilots can defend.',
       },
       {
         agent: 'tec',
         heading: 'Technology — build reality',
         text:
           approach === 'full'
-            ? 'A full layer takes two quarters and pauses four in-flight pilots. Throughput falls before it rises.'
+            ? 'A full layer takes two quarters and pauses four in-flight pilots. Throughput drops before it recovers.'
             : approach === 'top6'
-              ? 'Top six entities covers more than half of pilot usage in one quarter, pausing one pilot.'
-              : 'Deferring keeps velocity, but every new pilot adds reconciliation debt.',
+              ? 'Top six entities cover more than half of pilot usage in one quarter and pause one pilot.'
+              : 'Deferring keeps velocity. Every new pilot adds reconciliation debt.',
       },
       {
         agent: 'com',
         heading: 'Commercial — trust',
         text:
           coverage < 50
-            ? 'Below 50% coverage, pilots continue to report different numbers for the same account. Business trust stays low regardless of pilot count.'
+            ? 'Below 50% coverage, pilots keep reporting different numbers for the same account. Business trust stays low no matter how many pilots run.'
             : 'Coverage is high enough that pilots reconcile on the entities the business argues about.',
       },
     ],
@@ -67,9 +67,9 @@ function compute(values: LeverValues): ScenarioResult {
 export const ctaioModel: ScenarioModel = {
   id: 'ctaio',
   title: 'Semantic layer, pilot throughput and cost',
-  read: 'You’re modelling the semantic layer, throughput and cost against today’s 38% coverage — every move trades build time against pilot velocity.',
+  read: 'You’re modelling the semantic layer, throughput, and cost against today’s 38% coverage. Every move trades build time against pilot velocity.',
   baselineLabel: 'today',
-  lede: 'Computes pilot build time and production throughput against semantic coverage. Finance reasons about the return separately.',
+  lede: 'Computes pilot build time and production throughput from semantic coverage. Finance weighs the return on its own.',
   levers: [
     { id: 'entityCoverage', kind: 'range', label: 'Shared entity coverage', min: 0, max: 100, default: 38, step: 1, unit: '%', loCaption: '0%', hiCaption: '100%' },
     {

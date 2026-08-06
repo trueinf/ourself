@@ -57,8 +57,8 @@ export function Insights({ persona }: { persona: Persona }) {
           <h2>What changed</h2>
           <span className="sub">
             {goalActive
-              ? `${persona.insights.length} items · re-ranked for your goal, dissent preserved`
-              : `${persona.insights.length} items · specialists reconciled, dissent preserved`}
+              ? `${persona.insights.length} items · re-ordered for your goal`
+              : `${persona.insights.length} items · across the offices, disagreements kept`}
           </span>
         </div>
         <div className="grid">

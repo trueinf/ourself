@@ -11,9 +11,9 @@ import { DiscussionCard } from '@/components/DiscussionCard';
  * acts (§2.8): scheduling is proposed, and Outlook integration is the next step.
  */
 const GROUPS: Array<{ key: DiscussionItem['whenUrgency']; title: string; sub: string }> = [
-  { key: 'now', title: 'This week', sub: 'Needs a room now' },
-  { key: 'soon', title: 'Coming up', sub: 'On the calendar horizon' },
-  { key: 'ok', title: 'Backlog', sub: 'Queued — no date yet' },
+  { key: 'now', title: 'This week', sub: 'Needs a meeting now' },
+  { key: 'soon', title: 'Coming up', sub: 'On the calendar soon' },
+  { key: 'ok', title: 'Backlog', sub: 'Queued, no date yet' },
 ];
 
 export function Discussions({ persona }: { persona: Persona }) {
@@ -64,8 +64,8 @@ export function Discussions({ persona }: { persona: Persona }) {
         })
       ) : (
         <div className="card" style={{ padding: 30, textAlign: 'center' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 650 }}>Nothing queued to discuss</h3>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', marginTop: 6 }}>
+          <h3 style={{ fontSize: 'calc(15px * var(--fs))', fontWeight: 650 }}>Nothing queued to discuss</h3>
+          <p style={{ fontSize: 'calc(13px * var(--fs))', color: 'var(--muted)', marginTop: 6 }}>
             Add an item from a finding, a decision, or a what-if, and it lands here — with whom and when.
           </p>
         </div>

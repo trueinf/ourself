@@ -35,15 +35,15 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Finance — envelope commitment',
         text:
           pct > 26
-            ? 'Above 26% breaches the range committed to the street. Sustaining it requires an EBITDA restatement or an offset elsewhere.'
-            : 'Spend sits inside the committed 24–26% envelope.',
+            ? 'Above 26% breaks the range committed to the street. Holding it there means an EBITDA restatement or an offset somewhere else.'
+            : 'Spend stays inside the committed 24–26% envelope.',
       },
       {
         agent: 'tec',
         heading: 'Technology — GEO ownership',
         text:
           geo > 6
-            ? 'At this allocation GEO work is an engineering programme, not a media line. It should be resourced and governed accordingly.'
+            ? 'At this allocation GEO work runs as an engineering programme. Fund and govern it like one, and keep it out of the media plan.'
             : 'GEO allocation is small enough to sit inside the media plan.',
       },
       {
@@ -51,8 +51,8 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Commercial — measurability',
         text:
           mix === 'brand'
-            ? 'A brand-led mix has no measurable sell-through inside the quarter. Expect Finance to challenge it first when cuts are made.'
-            : 'Mix retains enough performance weight to show sell-through within the quarter.',
+            ? 'A brand-led mix shows no measurable sell-through inside the quarter. Finance will challenge it first when cuts come.'
+            : 'The mix keeps enough performance weight to show sell-through within the quarter.',
       },
     ],
   };
@@ -61,9 +61,9 @@ function compute(values: LeverValues): ScenarioResult {
 export const cmoModel: ScenarioModel = {
   id: 'cmo',
   title: 'Media mix, awareness and discovery',
-  read: 'You’re modelling media mix, awareness and discovery against the committed plan — every move trades spend against reach and CAC.',
+  read: 'You’re modelling media mix, awareness, and discovery against the committed plan. Every move trades spend against reach and CAC.',
   baselineLabel: 'the plan',
-  lede: 'Computes awareness, CAC and conversion against spend and mix. Finance and Technology reason about the constraints separately.',
+  lede: 'Computes awareness, CAC, and conversion from spend and mix. Finance and Technology weigh the constraints on their own.',
   levers: [
     { id: 'pct', kind: 'range', label: 'Marketing % of net sales', min: 22, max: 31, default: 26, step: 0.1, unit: '%', loCaption: '22%', hiCaption: '31%' },
     {

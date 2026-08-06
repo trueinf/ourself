@@ -43,7 +43,7 @@ function AskEmpty({ persona }: { persona: Persona }) {
       <div className="askwrap">
         <div className="askhero">
           <h2>Ask across every office</h2>
-          <p>Questions are answered by the specialists that hold the data — and they are allowed to disagree.</p>
+          <p>Each question goes to the teams that own the data, and they are free to disagree.</p>
         </div>
         <div className="askbox">
           <textarea
@@ -77,8 +77,8 @@ function AskEmpty({ persona }: { persona: Persona }) {
           ))}
         </div>
         <div className="pagefoot" style={{ marginTop: 26 }}>
-          Answers are produced by dispatching specialist agents in parallel over the systems named on each finding.
-          Agents never return a number they did not obtain from a tool.
+          Answers come from the teams that read the systems named on each finding. No team reports a number it did
+          not pull from a source.
         </div>
       </div>
     </>
@@ -98,27 +98,27 @@ function officeList(insight: Insight): string {
 function buildSteps(insight: Insight | null): Array<{ title: string; detail: string }> {
   if (!insight) {
     return [
-      { title: 'Planning the question', detail: 'Decomposing it into sub-questions across the offices.' },
-      { title: 'Searching the governed findings', detail: 'Matching the question against what the specialists currently hold.' },
+      { title: 'Reading the question', detail: 'Working out which offices it touches.' },
+      { title: 'Searching the findings', detail: 'Matching it against what each office is seeing right now.' },
     ];
   }
   const findings = insight.findings ?? [];
   const dissent = insight.crossOffice.length;
   return [
-    { title: 'Planning the question', detail: `Decomposing it into sub-questions across ${officeList(insight)}.` },
+    { title: 'Reading the question', detail: `Working out how it splits across ${officeList(insight)}.` },
     {
-      title: `Dispatched ${insight.agents.length} specialists in parallel`,
-      detail: 'Deterministic dispatch — the same specialists are consulted for this class of finding every time.',
+      title: `Asked ${insight.agents.length} offices`,
+      detail: 'The same offices get asked for this kind of question every time, so the answer stays consistent.',
     },
     ...findings.map((f) => ({
       title: `${AGENTS[f.agent].label} · read ${f.source ?? 'the source systems'}`,
       detail: truncate(f.text),
     })),
     {
-      title: 'Judgement node reconciled the findings',
+      title: 'Pulled the findings together',
       detail: dissent
-        ? `One finding returned; ${dissent} dissenting position${dissent === 1 ? '' : 's'} preserved, not averaged.`
-        : 'The specialists aligned; one finding returned with its sources.',
+        ? `One answer, with the ${dissent} office${dissent === 1 ? '' : 's'} that see it differently kept separate rather than blended in.`
+        : 'The offices agreed. One answer, with its sources.',
     },
   ];
 }
@@ -191,7 +191,7 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
             </div>
             <div className="ans-b">
               <div className="eyebrow" style={{ marginBottom: 10 }}>
-                Assembling the answer from the specialists that hold the data
+                Building the answer from the teams that own the data
               </div>
               <div className="trace">
                 {steps.map((s, i) => {
@@ -207,8 +207,8 @@ function AskAnswer({ persona, question }: { persona: Persona; question: string }
             </div>
           </div>
           <div className="pagefoot">
-            Reasoning and computation are peer layers bound by a contract — agents narrate and interpret figures, but
-            never author them. Every number is reconciled against its source before it renders.
+            The teams read and explain the numbers, but they never make them up. Every figure is checked against its
+            source before it shows up here.
           </div>
         </div>
       </>
@@ -294,8 +294,8 @@ function Answer({
       <p>
         <b>Short answer.</b>{' '}
         {positions.length
-          ? 'The specialists reconcile on the mechanism and split on the response; the finding below preserves the dissent rather than averaging it.'
-          : 'The specialists are aligned here — the finding and its sources are below.'}
+          ? 'The offices agree on what is happening but not on what to do about it. The disagreement is kept below rather than smoothed over.'
+          : 'The offices agree here. The finding and its sources are below.'}
       </p>
       <p>{insight.why}</p>
 
@@ -326,7 +326,7 @@ function Answer({
 
       <div style={{ marginTop: 16 }}>
         <div className="eyebrow" style={{ marginBottom: 8 }}>
-          Specialists consulted
+          Teams consulted
         </div>
         {findings.map((f) => (
           <FindingRow key={f.agent} finding={f} />
@@ -336,7 +336,7 @@ function Answer({
       {positions.length ? (
         <div style={{ marginTop: 16 }}>
           <div className="eyebrow" style={{ marginBottom: 8 }}>
-            Where the offices stand — preserved, not averaged
+            Where the offices stand
           </div>
           <CrossOfficeCards views={positions} />
         </div>
@@ -354,8 +354,7 @@ function Answer({
 
       <div className="pagefoot" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <span>
-          Answered in {elapsed}s · {insight.agents.length} specialists dispatched in parallel · {toolCalls} tool calls ·
-          full trace available
+          Answered in {elapsed}s · {insight.agents.length} teams asked · {toolCalls} tool calls · full trace available
         </span>
         <button type="button" className="linklike" onClick={onOpenInsight}>
           Open the full finding →
@@ -369,8 +368,8 @@ function NoMatch({ onScenario }: { onScenario: () => void }) {
   return (
     <>
       <p>
-        <b>No settled finding yet.</b> I could not route this question to a governed finding the specialists currently
-        hold. Try one of the suggested questions, or take it into Scenarios to model it directly.
+        <b>Nothing settled on this yet.</b> I could not match this question to a finding the teams are currently
+        holding. Try one of the suggested questions, or take it into Scenarios to model it directly.
       </p>
       <div className="btnrow">
         <button type="button" className="btn" onClick={onScenario}>

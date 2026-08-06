@@ -55,8 +55,8 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Supply — feasibility',
         text:
           scope === 'facelip' || scope === 'all'
-            ? 'Lip capacity is committed until August. Any lip volume before then requires premium capacity that is not in this calculation.'
-            : 'Face volume is servable from qualified lines. No supply constraint at this scope.',
+            ? 'Lip capacity is committed until August. Lip volume before then needs premium capacity, which this calculation leaves out.'
+            : 'Qualified lines can serve the face volume. No supply constraint at this scope.',
       },
       {
         agent: 'fin',
@@ -64,15 +64,15 @@ function compute(values: LeverValues): ScenarioResult {
         text:
           tariff > 36
             ? 'A realised rate above 36% puts the published 35% assumption at risk of restatement at the Q2 print.'
-            : 'The realised rate sits within the published assumption. No restatement exposure.',
+            : 'The realised rate stays within the published assumption. No restatement exposure.',
       },
       {
         agent: 'mkt',
         heading: 'Marketing — conversion lag',
         text:
           marketing < 26
-            ? 'Below 26% the brand tranche is cut before the 11–14 week awareness-to-unit lag completes. Unit lift in this model may be optimistic.'
-            : 'Spend supports the awareness programme through the conversion window.',
+            ? 'Below 26% the brand tranche gets cut before the 11–14 week awareness-to-unit lag runs out. Unit lift in this model may be too high.'
+            : 'Spend covers the awareness programme through the conversion window.',
       },
     ],
   };
@@ -81,9 +81,9 @@ function compute(values: LeverValues): ScenarioResult {
 export const cfoModel: ScenarioModel = {
   id: 'cfo',
   title: 'Margin, price and the tariff assumption',
-  read: 'You’re modelling margin, price and the tariff assumption against the FY2027 guide — every move is a deviation from where the company sits today.',
+  read: 'You’re modelling margin, price, and the tariff assumption against the FY2027 guide. Every move is a change from where the company sits today.',
   baselineLabel: 'FY27 guide',
-  lede: 'Levers compute over FY2027 guidance and Q1 actuals. Specialists reason about feasibility separately — no agent produces a number it did not get from a tool.',
+  lede: 'Levers compute over FY2027 guidance and Q1 actuals. Specialists judge feasibility on their own. Every number here comes from a tool.',
   levers: [
     {
       id: 'scope',

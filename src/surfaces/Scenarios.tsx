@@ -64,7 +64,7 @@ export function Scenarios({ persona }: { persona: Persona }) {
           <div className="eyebrow" style={{ marginBottom: 3 }}>
             Levers
           </div>
-          <div style={{ fontSize: '13.5px', fontWeight: 650, marginBottom: 14 }}>{model.title}</div>
+          <div style={{ fontSize: 'calc(13.5px * var(--fs))', fontWeight: 650, marginBottom: 14 }}>{model.title}</div>
           {model.levers.map((lever) => (
             <LeverGroup
               key={lever.id}
@@ -95,8 +95,8 @@ export function Scenarios({ persona }: { persona: Persona }) {
 
           <div className="sec">
             <div className="sec-h">
-              <h2>What the specialists say about it</h2>
-              <span className="sub">Judgement, not arithmetic</span>
+              <h2>What the teams say about it</h2>
+              <span className="sub">Their read, not the math</span>
             </div>
             <div className="card">
               {result.judgements.map((j, i) => (

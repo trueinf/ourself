@@ -11,10 +11,11 @@
   --ink-2: #2a2a30; /* secondary strong text, badge text on light fills */
   --body: #43434b; /* body copy */
   --muted: #64646e; /* labels, secondary copy, eyebrows */
-  --faint: #70707a; /* captions, footnotes, icon strokes */
+  --faint: #67676f; /* captions, footnotes, icon strokes — nudged 1 step darker so it clears AA on the tinted --canvas as well as on white */
 
   /* surfaces */
   --paper: #ffffff;
+  --canvas: #eaecf1; /* app background behind white cards — keeps the surface from reading as one white slab */
   --mist: #f7f7f8; /* card tint */
   --mist-2: #f1f1f3; /* raised chip / active tint */
   --line: #e4e4e8; /* borders */
@@ -42,10 +43,15 @@
   --rail-txt-2: #9c9ca6; /* rail dim text — do NOT go darker, it fails AA */
   --rail-on: #ffffff; /* rail active label */
 
+  /* typography scale — one knob for app-wide font size. 1 = original.
+     Every font-size in app.css is calc(<px> * var(--fs)); tune 1.0–1.25 here. */
+  --fs: 1.15;
+
   /* geometry */
   --r: 10px;
   --r-lg: 14px;
   --shadow: 0 1px 2px rgba(14, 14, 16, 0.04), 0 8px 24px -12px rgba(14, 14, 16, 0.1);
+  --card-shadow: 0 1px 2px rgba(14, 14, 16, 0.04), 0 2px 6px -3px rgba(14, 14, 16, 0.08); /* soft lift for cards off the canvas */
   --rail-w: 236px;
   --rail-w-collapsed: 76px;
   --rail-h-mobile: 60px;

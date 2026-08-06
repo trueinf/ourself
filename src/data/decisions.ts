@@ -38,7 +38,7 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
     },
     {
       title: 'Hold weeks of supply at 9.5 through the transition',
-      outcome: 'Drifted to 9.8; fill rate held',
+      outcome: 'Drifted to 9.8. Fill rate held',
       when: '4 weeks ago',
       result: 'mixed',
     },
@@ -46,7 +46,7 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
   savur: [
     {
       title: 'Fund the spring awareness campaign at 28% of net sales',
-      outcome: 'Awareness +2 pts; conversion not yet proven',
+      outcome: 'Awareness +2 pts. Conversion not yet proven',
       when: '8 weeks ago',
       result: 'mixed',
     },
@@ -74,13 +74,13 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
   amin: [
     {
       title: 'Take the $1 price increase across the range',
-      outcome: 'Margin held at 73%; cost ~5 pts of units',
+      outcome: 'Margin held at 73%. Cost ~5 pts of units',
       when: 'Last year',
       result: 'mixed',
     },
     {
       title: 'Acquire rhode',
-      outcome: '~$390M at ~80% growth; drives most of FY27',
+      outcome: '~$390M at ~80% growth. Drives most of FY27',
       when: 'Aug 2025',
       result: 'worked',
     },
@@ -94,13 +94,13 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
   laar: [
     {
       title: 'Trade promotional depth for linear footage at Walmart',
-      outcome: '+20% footage; deductions +30 bps',
+      outcome: '+20% footage. Deductions +30 bps',
       when: '9 weeks ago',
       result: 'mixed',
     },
     {
       title: 'Prioritise face over lip in the spring reset',
-      outcome: 'Face share +0.6 pts; lip gap widened',
+      outcome: 'Face share +0.6 pts. Lip gap widened',
       when: '12 weeks ago',
       result: 'mixed',
     },

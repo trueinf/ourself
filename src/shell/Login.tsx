@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useApp } from '@/store/app';
 import { PERSONAS } from '@/data/personas';
+import { DEMO_USERNAME, DEMO_PASSWORD } from '@/data/auth';
 
 /** The offices behind the gate, read off the persona set — never a second list
  *  to keep in sync (§8.1). */
@@ -17,12 +18,20 @@ const OFFICES = PERSONAS.map((p) => {
 export function Login() {
   const signIn = useApp((s) => s.signIn);
   const authError = useApp((s) => s.authError);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // Demo build: credentials are pre-filled so the gate is a one-click formality.
+  const [username, setUsername] = useState(DEMO_USERNAME);
+  const [password, setPassword] = useState(DEMO_PASSWORD);
+  const [signingIn, setSigningIn] = useState(false);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    signIn(username, password);
+    if (signingIn) return;
+    // Brief pause so the sign-in reads as a real hand-off into the app.
+    setSigningIn(true);
+    window.setTimeout(() => {
+      const ok = signIn(username, password);
+      if (!ok) setSigningIn(false);
+    }, 2500);
   };
 
   // Editing after a failed attempt clears the error, so it never sits stale
@@ -73,6 +82,7 @@ export function Login() {
               spellCheck={false}
               placeholder="Your username"
               value={username}
+              disabled={signingIn}
               onChange={(e) => edit(setUsername)(e.target.value)}
             />
           </label>
@@ -85,6 +95,7 @@ export function Login() {
               autoComplete="current-password"
               placeholder="Your password"
               value={password}
+              disabled={signingIn}
               onChange={(e) => edit(setPassword)(e.target.value)}
             />
           </label>
@@ -95,9 +106,20 @@ export function Login() {
             </div>
           ) : null}
 
-          <button type="submit" className="btn login-btn">
-            Sign in
+          <button type="submit" className="btn login-btn" disabled={signingIn} aria-busy={signingIn}>
+            {signingIn ? (
+              <>
+                <span className="login-spin" aria-hidden="true" />
+                Signing you in…
+              </>
+            ) : (
+              'Sign in'
+            )}
           </button>
+
+          <p className="login-hint">
+            Demo access — pre-filled. <code>{DEMO_USERNAME}</code>
+          </p>
         </form>
       </div>
     </div>

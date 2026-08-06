@@ -67,8 +67,8 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
       <div className="two">
         <div>
           <div className="blk">
-            <h3>What the specialists found</h3>
-            <div className="blk-sub">Facts — each reconciled against its source before it renders</div>
+            <h3>What each team found</h3>
+            <div className="blk-sub">The facts, each checked against its source</div>
             {findings.map((f) => (
               <div className="agent" key={f.agent}>
                 <span className="ic">{AGENTS[f.agent].monogram}</span>
@@ -96,33 +96,33 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
           {dissentCount ? (
             <div className="blk">
               <h3>Where the offices stand</h3>
-              <div className="blk-sub">Positions — judgement, preserved rather than averaged into a house view</div>
+              <div className="blk-sub">Their positions, kept as they are rather than merged into one house view</div>
               <CrossOfficeCards views={insight.crossOffice} />
-              <p style={{ fontSize: '12.5px', color: 'var(--muted)', marginTop: 12, maxWidth: '74ch' }}>
-                Each position is correct against the metric that office is accountable for. They are preserved, not
-                reconciled into a single recommendation.
+              <p style={{ fontSize: 'calc(12.5px * var(--fs))', color: 'var(--muted)', marginTop: 12, maxWidth: '74ch' }}>
+                Each position is right for the metric that office answers for. We keep them side by side instead of
+                forcing them into one recommendation.
               </p>
             </div>
           ) : null}
 
           <div className="blk">
-            <h3>How this was assembled</h3>
+            <h3>How this was put together</h3>
             <div className="trace">
               <div className="tr done">
-                <h5>Orchestrator dispatched {insight.agents.length} specialists in parallel</h5>
-                <p>Deterministic dispatch — the same specialists are consulted for this class of finding every time.</p>
+                <h5>Asked {insight.agents.length} teams at once</h5>
+                <p>The same teams get asked for this kind of finding every time, so the answer stays consistent.</p>
               </div>
               {insight.sources.map((s) => (
                 <div className="tr done" key={s}>
                   <h5>Read from {s}</h5>
                   <p>
-                    <code>entity: launch, market, sku</code> · reconciled against shared definitions
+                    <code>entity: launch, market, sku</code> · checked against shared definitions
                   </p>
                 </div>
               ))}
               <div className="tr done">
-                <h5>Judgement node reconciled the findings</h5>
-                <p>Produced one recommendation and preserved {dissentCount} dissenting positions.</p>
+                <h5>Pulled the findings together</h5>
+                <p>Landed on one recommendation and kept {dissentCount} dissenting positions.</p>
               </div>
             </div>
           </div>
@@ -152,8 +152,8 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
           rows={[
             ...insight.sources.map((s) => [s, FRESHNESS_LABEL[DEFAULT_FRESHNESS[s]]] as [string, string]),
             ['Entities queried', <code key="ent">launch, market, sku</code>],
-            ['Specialists', String(insight.agents.length)],
-            ['Dissent preserved', String(dissentCount)],
+            ['Teams asked', String(insight.agents.length)],
+            ['Positions kept', String(dissentCount)],
             ['Confidence', 'High'],
             ['Basis', `${insight.sources.length} sources${lagging ? `, ${lagging} lagging` : ', all current'}`],
           ]}

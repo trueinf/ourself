@@ -6,21 +6,21 @@
  */
 export const FOCUS_READ: Record<string, string> = {
   fields:
-    'Two calls close this week, both crossing more than one office — the $22.4M refund split and the marketing envelope are the two only you can settle.',
+    'Two calls close this week, and both cross more than one office. The $22.4M refund split and the marketing budget are the ones only you can settle.',
   franks:
-    'Two land this week: the $2.1M air-freight call that protects the tariff assumption, and lip volume the Q2 plan has already over-committed.',
+    'Two things land this week. The $2.1M air-freight call protects the tariff assumption. Separately, lip volume is already over-committed in the Q2 plan.',
   savur:
-    'The envelope decision goes to the CFO on Tuesday — get the conversion case in front of Finance before it, not after.',
+    'The envelope decision goes to the CFO on Tuesday. Get the conversion case in front of Finance before then.',
   chopra:
-    'Two both run through Finance: whether to build the semantic layer now, and how to get the $4.1M request past a return test with four of twelve measured.',
+    'Both open calls run through Finance. First, whether to build the semantic layer now. Second, how to get the $4.1M request past a return test when only four of twelve are measured.',
   amin:
-    'One arbitration only you can make — three offices, three correct answers, the same $22.4M — plus the Q2 guidance language before the pre-close window.',
+    'One call only you can make. Three offices each have a defensible answer on the same $22.4M, and someone has to choose between them. The Q2 guidance language also needs settling before the pre-close window.',
   laar:
-    'The lip plan is the live one: retailer commitments are being made now against volume Operations cannot ship until August.',
+    'The lip plan is the live one. Retailer commitments are being made now against volume Operations cannot ship until August.',
   marchisotto:
-    'The spring-slate call cannot wait on a clean read — eleven under-performing SKUs, with the autumn gate stacked behind them.',
+    'The spring-slate call cannot wait on a clean read. Eleven under-performing SKUs, with the autumn gate stacked behind them.',
   milsten:
-    'The EU AI Act classification is the clock that does not move; everything else can flex around the 13-week cycle.',
+    'The EU AI Act classification is the one deadline that will not move. Everything else can flex around the 13-week cycle.',
 };
 
 export const STAKES: Record<string, string> = {
@@ -39,7 +39,7 @@ export const STAKES: Record<string, string> = {
   mq3: '40% of creator spend on six creators',
   // Chopra
   tq1: 'Two quarters and four paused pilots against the reconciliation debt',
-  tq2: '$4.1M — four measured returns of twelve',
+  tq2: '$4.1M, four measured returns of twelve',
   tq3: 'Three deployed agents’ EU AI Act exposure',
   // Amin
   cq1: '$22.4M · a quarter of lip share against the guide',
@@ -48,7 +48,7 @@ export const STAKES: Record<string, string> = {
   lq1: 'The lip shelf you just won against unshippable supply',
   lq2: '30 bps of gross-to-net leakage',
   // Marchisotto
-  bq1: 'Eleven spring SKUs — cut or re-support',
+  bq1: 'Eleven spring SKUs to cut or re-support',
   bq2: '34 autumn concepts against capacity for 22',
   // Milsten
   gq1: 'Three deployed agents before the enforcement date',

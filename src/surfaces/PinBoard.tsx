@@ -33,9 +33,8 @@ export function PinBoard({ persona }: { persona: Persona }) {
         <div className="synth">
           <div className="synth-eyebrow">The watchlist</div>
           <p>
-            You’re tracking {list.length} question{list.length === 1 ? '' : 's'} — {counts.down} worsening,{' '}
-            {counts.up} improving, {counts.flat} holding. Each is re-answered against its governed finding as the data
-            moves; last checked this week.
+            You’re tracking {list.length} question{list.length === 1 ? '' : 's'}. {counts.down} worsening,{' '}
+            {counts.up} improving, {counts.flat} holding. Each one updates as its finding moves. Last checked this week.
           </p>
         </div>
       ) : null}
@@ -60,8 +59,8 @@ export function PinBoard({ persona }: { persona: Persona }) {
         </>
       ) : (
         <div className="card" style={{ padding: 30, textAlign: 'center' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 650 }}>Nothing pinned yet</h3>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', marginTop: 6 }}>
+          <h3 style={{ fontSize: 'calc(15px * var(--fs))', fontWeight: 650 }}>Nothing pinned yet</h3>
+          <p style={{ fontSize: 'calc(13px * var(--fs))', color: 'var(--muted)', marginTop: 6 }}>
             Pin a question and ourse.l.f. keeps re-answering it as the data moves.
           </p>
         </div>

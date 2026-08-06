@@ -22,7 +22,7 @@ export function GoalEditor({ persona }: { persona: Persona }) {
 
   return (
     <div className="goaled">
-      <div className="eyebrow">Edit goal · re-ranks the same governed facts</div>
+      <div className="eyebrow">Edit goal · changes what leads, not the numbers</div>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -30,7 +30,7 @@ export function GoalEditor({ persona }: { persona: Persona }) {
           if (e.key === 'Escape') closeGoalEditor();
         }}
         rows={2}
-        placeholder="Describe what this office is optimising for…"
+        placeholder="What is this office trying to do right now?…"
         aria-label="Objective function"
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus

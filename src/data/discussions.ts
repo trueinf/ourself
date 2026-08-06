@@ -12,9 +12,9 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   fields: [
     {
       id: 'fd1',
-      title: 'Split the $22.4M refund — lip vs the tariff cushion',
+      title: 'Split the $22.4M refund between lip and the tariff cushion',
       agenda:
-        'Commercial wants tranche 2 on lip; Operations can only supply from August; the tariff cushion is 350 bps adrift. The trade has to be made across the table, not inside any one office.',
+        'Commercial wants tranche 2 on lip. Operations can only supply from August. The tariff cushion is 350 bps adrift. No single office can make this call, so we need all three in the room.',
       participants: ['TA', 'JL', 'JF'],
       when: 'Thursday 2:00pm',
       whenUrgency: 'now',
@@ -24,9 +24,9 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
     },
     {
       id: 'fd2',
-      title: 'Marketing envelope — accept Q1 or hold the year at 26%',
+      title: 'Accept the Q1 marketing envelope or hold the year at 26%',
       agenda:
-        'Savur wants the 27.3% run-rate for the year; that puts EBITDA below the guide unless offset. Align the conversion case before Tuesday.',
+        'Savur wants the 27.3% run-rate for the year. That puts EBITDA below the guide unless we offset it. Align the conversion case before Tuesday.',
       participants: ['OS', 'TA'],
       when: 'Monday 9:30am',
       whenUrgency: 'soon',
@@ -38,7 +38,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   franks: [
     {
       id: 'od1',
-      title: 'Air freight $2.1M — protect the tariff assumption before the Q2 print',
+      title: 'Air freight $2.1M to protect the tariff assumption before the Q2 print',
       agenda:
         'Closing the qualification gap needs freight that lands on gross margin. Decide the spend with Finance before the print.',
       participants: ['MF'],
@@ -66,7 +66,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'sd1',
       title: 'Take the conversion case to the CFO before Tuesday',
       agenda:
-        'Concede the brand tranche, protect retail media and GEO. Get in front of Finance before the envelope decision, not after.',
+        'Concede the brand tranche and protect retail media and GEO. Get to Finance before the envelope decision.',
       participants: ['MF', 'TA'],
       when: 'Monday',
       whenUrgency: 'now',
@@ -78,7 +78,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'sd2',
       title: 'Move $3.2M from prospecting to retail media and GEO',
       agenda:
-        'Prospecting CAC is 9.5% over plan; retail media returns 3.8×. Needs Commercial to agree the retail-media calendar.',
+        'Prospecting CAC is 9.5% over plan. Retail media returns 3.8×. Commercial needs to agree the retail-media calendar.',
       participants: ['JL'],
       when: 'Next week',
       whenUrgency: 'soon',
@@ -90,7 +90,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   chopra: [
     {
       id: 'cd1',
-      title: 'Semantic layer — build the top six entities now',
+      title: 'Build the top six semantic-layer entities now',
       agenda:
         'A shared definition layer cuts ~40% of each pilot build but pauses in-flight work. Finance wants it as cost per pilot.',
       participants: ['MF'],
@@ -104,7 +104,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'cd2',
       title: 'Prep the $4.1M production request for the CFO review',
       agenda:
-        'Four of twelve pilots clear cost of capital; the other eight need a measurement plan or removal before it reaches Fields.',
+        'Four of twelve pilots clear cost of capital. The other eight need a measurement plan or removal before this reaches Fields.',
       participants: ['MF'],
       when: 'End of month',
       whenUrgency: 'soon',
@@ -116,9 +116,9 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   amin: [
     {
       id: 'ad1',
-      title: 'Arbitrate the $22.4M — three offices, three correct answers',
+      title: 'Arbitrate the $22.4M across three offices',
       agenda:
-        'Finance holds a reserve, Commercial wants lip, Operations cannot supply. Only this table settles the trade.',
+        'Finance holds a reserve and Commercial wants lip. Operations cannot supply. Settle the trade here.',
       participants: ['MF', 'JL', 'JF'],
       when: 'Friday 3:00pm',
       whenUrgency: 'now',
@@ -141,7 +141,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   laar: [
     {
       id: 'ld1',
-      title: 'Lip plan vs supply — resolve before retailer commitments',
+      title: 'Resolve the lip plan against supply before retailer commitments',
       agenda:
         "The Q2 plan carries volume Operations can't ship until August. Move the plan or get premium capacity funded.",
       participants: ['JF', 'MF'],
@@ -154,7 +154,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
     {
       id: 'ld2',
       title: 'Deduction validation backlog at two accounts',
-      agenda: 'Claims are filed faster than validated; the backlog is 30 bps of gross. Agree the validation push.',
+      agenda: 'Claims are filed faster than we validate them. The backlog is 30 bps of gross. Agree the validation push.',
       participants: [],
       when: 'Backlog',
       whenUrgency: 'ok',
@@ -168,7 +168,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'bd1',
       title: 'Cut or re-support the eleven spring SKUs',
       agenda:
-        'Marketing says under-supported; Commercial says three never got their doors. Settle the read before the autumn gate.',
+        'Marketing says they were under-supported. Commercial says three never got their doors. Settle it before the autumn gate.',
       participants: ['OS', 'JL'],
       when: 'Next week',
       whenUrgency: 'soon',
@@ -178,7 +178,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
     },
     {
       id: 'bd2',
-      title: 'Skincare as a second core — resourcing and governance',
+      title: 'Resource and govern skincare as a second core',
       agenda:
         'Skincare is 24% of consumption with different substantiation and retail dynamics. Align the operating model.',
       participants: ['SM'],
@@ -194,7 +194,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'gd1',
       title: 'EU AI Act classification for three deployed agents',
       agenda:
-        'Enforcement dates are fixed; Technology holds the documentation. Close the classification with Chopra.',
+        'Enforcement dates are fixed and Technology holds the documentation. Close the classification with Chopra.',
       participants: ['EC'],
       when: 'This week',
       whenUrgency: 'now',
@@ -206,7 +206,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'gd2',
       title: 'Substantiation capacity as the skincare mix grows',
       agenda:
-        'Skincare carries heavier substantiation; current team capacity assumes the old mix. Plan the resourcing.',
+        'Skincare carries heavier substantiation. Current team capacity assumes the old mix. Plan the resourcing.',
       participants: [],
       when: 'Backlog',
       whenUrgency: 'ok',
@@ -278,7 +278,7 @@ export function discussionFromQuestion(question: string, insight: Insight | null
   return {
     id: `disc-q-${question.slice(0, 24)}`,
     title: question,
-    agenda: 'Take this question into a working session — it does not yet resolve to a settled finding.',
+    agenda: 'Take this question into a working session. It does not yet resolve to a settled finding.',
     participants: [],
     when: 'Backlog',
     whenUrgency: 'ok',
@@ -294,7 +294,7 @@ export function discussionFromScenario(
   return {
     id: `disc-scn-${model.id}`,
     title: `Walk the ${model.title.toLowerCase()} model`,
-    agenda: 'Take the modelled trade-offs to the table — the levers move the guide, the specialists speak to feasibility.',
+    agenda: 'Take the modelled trade-offs to the table. The levers move the guide. Ask the specialists about feasibility.',
     participants: backedFocus?.waitingOn ?? [],
     when: 'Next week',
     whenUrgency: 'soon',

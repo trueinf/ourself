@@ -10,19 +10,19 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
   fields: [
     {
       label: 'Protect the guide',
-      objective: 'Hold the FY2027 guide and the marketing envelope, whatever the tariff does.',
+      objective: 'Hold the FY2027 guide and the marketing envelope through the tariff.',
       keywords: ['guide', 'envelope', 'marketing', 'tariff', 'ebitda', 'assumption', 'restatement'],
     },
     {
       label: 'Recover the top line',
-      objective: 'Get back to growth — defend velocity and extend the price reversal.',
+      objective: 'Get back to growth. Defend velocity and extend the price reversal.',
       keywords: ['units', 'price', 'reversal', 'organic', 'growth', 'net sales', 'elasticity', 'rhode'],
     },
   ],
   franks: [
     {
       label: 'Cut landed cost',
-      objective: 'Bring landed cost down — recover tariff and freight exposure.',
+      objective: 'Bring landed cost down and recover tariff and freight exposure.',
       keywords: ['landed', 'cost', 'tariff', 'freight', 'china', 'concession', 'offset'],
     },
     {
@@ -39,12 +39,12 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
     },
     {
       label: 'Win discovery',
-      objective: 'Lead AI-answer discovery while it is still cheap to own.',
+      objective: 'Get ahead in AI-answer discovery.',
       keywords: ['geo', 'ai answer', 'visibility', 'discovery', 'engines', 'compounding'],
     },
     {
       label: 'Lower CAC',
-      objective: 'Buy attention more efficiently — take the cost of acquisition down.',
+      objective: 'Bring the cost of acquisition down.',
       keywords: ['cac', 'prospecting', 'social', 'roas', 'retail media'],
     },
   ],
@@ -56,7 +56,7 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
     },
     {
       label: 'Build the substrate',
-      objective: 'Ship the shared semantic layer and compound every pilot on top of it.',
+      objective: 'Ship the shared semantic layer so pilots build on it.',
       keywords: ['semantic', 'layer', 'entity', 'coverage', 'definition', 'launch', 'market', 'data model'],
     },
     {
@@ -72,8 +72,8 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
       keywords: ['growth', 'streak', 'organic', 'net sales', 'comp', 'rhode', 'quarters'],
     },
     {
-      label: 'Compound the moat',
-      objective: 'Widen the operational moat — international reach and multi-country supply.',
+      label: 'Widen the lead',
+      objective: 'Widen the operational lead with international reach and multi-country supply.',
       keywords: ['international', 'capacity', 'china', 'operational', 'awareness'],
     },
     {
@@ -124,7 +124,7 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
     },
     {
       label: 'Keep the people',
-      objective: 'Protect engagement while the pace stays high.',
+      objective: 'Keep engagement up as the pace stays high.',
       keywords: ['engagement', 'people', 'benchmark', 'participation'],
     },
   ],

@@ -47,8 +47,8 @@ export function ContextRow({ persona, tab }: { persona: Persona; tab: TabId }) {
         {showObjective ? (
           <>
             <span className="obj">
-              <b>Optimising for</b> · {objective}
-              {override ? <span className="obj-edited" title="Custom goal — data re-ranked" /> : null}
+              <b>Focused on</b> · {objective}
+              {override ? <span className="obj-edited" title="Custom goal · order updated" /> : null}
             </span>
             <button type="button" className="editgoal" aria-expanded={editorOpen} onClick={toggleGoalEditor}>
               <EditIcon /> Edit goal

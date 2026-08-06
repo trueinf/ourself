@@ -24,9 +24,9 @@ body {
 }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--paper);
+  background: var(--canvas);
   color: var(--ink);
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'cv05' 1, 'ss01' 1;
@@ -87,7 +87,7 @@ a {
 }
 .wm {
   font-weight: 800;
-  font-size: 18px;
+  font-size: calc(18px * var(--fs));
   letter-spacing: -0.03em;
 }
 .wm i {
@@ -95,7 +95,7 @@ a {
   color: var(--pink);
 }
 .env {
-  font-size: 9px;
+  font-size: calc(9px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ a {
   border: 1px solid var(--rail-line);
   border-radius: 9px;
   color: var(--rail-txt);
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   width: calc(100% - 24px);
 }
 .rsearch:hover {
@@ -125,7 +125,7 @@ a {
 .rsearch kbd {
   margin-left: auto;
   font: inherit;
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   color: var(--rail-txt-2);
   border: 1px solid var(--rail-line);
   border-radius: 4px;
@@ -139,7 +139,7 @@ a {
   gap: 2px;
 }
 .nav-h {
-  font-size: 9.5px;
+  font-size: calc(9.5px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -152,7 +152,7 @@ a {
   gap: 11px;
   padding: 9px 11px;
   border-radius: 8px;
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   font-weight: 500;
   color: var(--rail-txt);
   width: 100%;
@@ -182,7 +182,7 @@ a {
 }
 .nv .cnt {
   margin-left: auto;
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   font-weight: 700;
   background: var(--pink-text);
   color: #fff;
@@ -203,7 +203,7 @@ a {
   flex: 1;
 }
 .rail-note {
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   color: var(--rail-txt-2);
   line-height: 1.5;
   padding: 0 18px 12px;
@@ -234,13 +234,13 @@ a {
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
   flex: none;
 }
 .psw-name {
   display: block;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 600;
   line-height: 1.25;
   color: var(--rail-on);
@@ -250,7 +250,7 @@ a {
 }
 .psw-role {
   display: block;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--rail-txt);
   line-height: 1.25;
 }
@@ -279,7 +279,7 @@ a {
   display: block;
 }
 .psw-h {
-  font-size: 9.5px;
+  font-size: calc(9.5px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -306,7 +306,7 @@ a {
   height: 27px;
   background: var(--mist-2);
   color: var(--ink-2);
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
 }
 .psw-i[aria-current='true'] .av {
   background: var(--pink-text);
@@ -314,12 +314,12 @@ a {
 }
 .psw-i b {
   display: block;
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 600;
 }
 .psw-i span {
   display: block;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--muted);
 }
 /* content column */
@@ -334,9 +334,9 @@ a {
 
 /* ---------- shell ---------- */
 .wrap {
-  max-width: 1400px;
+  max-width: 1760px;
   margin: 0 auto;
-  padding: 22px 20px 64px;
+  padding: 22px 40px 64px;
 }
 .ctx {
   display: flex;
@@ -346,7 +346,7 @@ a {
   margin-bottom: 18px;
 }
 .ctx h1 {
-  font-size: 21px;
+  font-size: calc(21px * var(--fs));
   font-weight: 700;
   letter-spacing: -0.022em;
 }
@@ -355,7 +355,7 @@ a {
   font-weight: 600;
 }
 .ctx p {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   color: var(--muted);
 }
 .asof {
@@ -363,7 +363,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--muted);
   font-weight: 500;
   white-space: nowrap;
@@ -376,7 +376,7 @@ a {
   flex: none;
 }
 .obj {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: var(--body);
   background: var(--mist);
   border: 1px solid var(--line-2);
@@ -402,7 +402,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   padding: 4px 10px;
@@ -433,7 +433,7 @@ a {
   border-radius: 10px;
   padding: 10px 12px;
   font: inherit;
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   line-height: 1.5;
   resize: none;
   background: var(--paper);
@@ -451,7 +451,7 @@ a {
   margin-top: 10px;
 }
 .goalchip {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   border: 1px solid var(--pink-line);
   background: var(--pink-soft);
@@ -464,12 +464,12 @@ a {
   border-color: var(--pink-text);
 }
 .goaled-note {
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   color: var(--faint);
   margin-top: 10px;
 }
 .goalnote {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
   margin: -6px 0 16px;
   padding: 8px 12px;
@@ -499,7 +499,7 @@ a {
   max-width: 940px;
 }
 .synth-eyebrow {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -509,7 +509,7 @@ a {
 }
 .synth p {
   flex: 1 1 320px;
-  font-size: 15px;
+  font-size: calc(15px * var(--fs));
   line-height: 1.5;
   color: var(--ink-2);
   font-weight: 500;
@@ -518,7 +518,7 @@ a {
 
 /* ---------- primitives ---------- */
 .eyebrow {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -535,12 +535,12 @@ a {
   margin-bottom: 11px;
 }
 .sec-h h2 {
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   font-weight: 650;
   letter-spacing: -0.01em;
 }
 .sec-h .sub {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   color: var(--muted);
   font-weight: 400;
 }
@@ -549,6 +549,7 @@ a {
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 16px;
+  box-shadow: var(--card-shadow);
 }
 .card.tap {
   cursor: pointer;
@@ -572,7 +573,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   color: var(--muted);
   white-space: nowrap;
 }
@@ -600,7 +601,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   font-weight: 600;
   border-radius: 99px;
   padding: 2px 8px;
@@ -644,23 +645,24 @@ button.pill {
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 14px 15px;
+  box-shadow: var(--card-shadow);
 }
 .kpi .lab {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
   font-weight: 500;
   line-height: 1.3;
   min-height: 30px;
 }
 .kpi .val {
-  font-size: 26px;
+  font-size: calc(26px * var(--fs));
   font-weight: 700;
   letter-spacing: -0.035em;
   margin: 6px 0 2px;
   line-height: 1.05;
 }
 .kpi .dlt {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
 }
 .kpi .dlt.up {
@@ -674,7 +676,7 @@ button.pill {
   color: var(--muted);
 }
 .kpi .kpi-note {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--muted);
   line-height: 1.35;
   margin-top: 5px;
@@ -732,14 +734,14 @@ button.pill {
   background: var(--faint);
 }
 .ins h3 {
-  font-size: 14.5px;
+  font-size: calc(14.5px * var(--fs));
   font-weight: 650;
   letter-spacing: -0.012em;
   line-height: 1.35;
   max-width: 68ch;
 }
 .ins .why {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: var(--body);
   margin-top: 5px;
   line-height: 1.55;
@@ -769,7 +771,7 @@ button.pill {
   border-top: 1px dashed var(--line);
 }
 .xo-h {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -816,7 +818,7 @@ button.pill {
   border-radius: 6px;
   background: var(--mist-2);
   color: var(--ink-2);
-  font-size: 9px;
+  font-size: calc(9px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.02em;
   display: grid;
@@ -828,11 +830,11 @@ button.pill {
   color: #fff;
 }
 .xo-c b {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 650;
 }
 .xo-c .st {
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   font-weight: 600;
   margin: 0 0 4px;
 }
@@ -849,7 +851,7 @@ button.pill {
   color: var(--ink-2);
 }
 .xo-c p {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--body);
   line-height: 1.45;
 }
@@ -872,7 +874,7 @@ button.pill {
   display: grid;
   place-items: center;
   flex: none;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -890,27 +892,27 @@ button.pill {
   color: var(--ink-2);
 }
 .fitem h3 {
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   font-weight: 650;
   line-height: 1.35;
   max-width: 68ch;
 }
 .fitem .sl {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: var(--body);
   margin-top: 4px;
   line-height: 1.5;
   max-width: 74ch;
 }
 .stake {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--body);
   margin-top: 8px;
   line-height: 1.4;
   max-width: 74ch;
 }
 .stake span {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -918,7 +920,7 @@ button.pill {
   margin-right: 7px;
 }
 .wait {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
   margin-top: 8px;
   display: flex;
@@ -932,7 +934,7 @@ button.pill {
 .avs .av {
   width: 22px;
   height: 22px;
-  font-size: 9px;
+  font-size: calc(9px * var(--fs));
   border: 2px solid #fff;
   margin-left: -6px;
   background: var(--ink-2);
@@ -941,7 +943,7 @@ button.pill {
   margin-left: 0;
 }
 .due {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   text-align: right;
   white-space: nowrap;
@@ -970,7 +972,7 @@ button.pill {
   min-width: 0;
 }
 .disc-when {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 3px;
@@ -985,13 +987,13 @@ button.pill {
   color: var(--muted);
 }
 .disc-head h3 {
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   font-weight: 650;
   line-height: 1.35;
 }
 .disc-status {
   flex: none;
-  font-size: 9.5px;
+  font-size: calc(9.5px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1008,7 +1010,7 @@ button.pill {
   color: var(--teal);
 }
 .disc-agenda {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: var(--body);
   line-height: 1.55;
   margin-top: 8px;
@@ -1021,7 +1023,7 @@ button.pill {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 11px;
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
 }
 .disc-with {
@@ -1044,12 +1046,12 @@ button.pill {
   padding: 16px 0 22px;
 }
 .askhero h2 {
-  font-size: 25px;
+  font-size: calc(25px * var(--fs));
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 .askhero p {
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   color: var(--muted);
   margin-top: 7px;
 }
@@ -1072,7 +1074,7 @@ button.pill {
   outline: none;
   resize: none;
   font: inherit;
-  font-size: 14.5px;
+  font-size: calc(14.5px * var(--fs));
   line-height: 1.5;
   max-height: 150px;
   background: transparent;
@@ -1117,7 +1119,7 @@ button.pill {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 11px 14px;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   transition: 0.14s;
 }
 .sg:hover {
@@ -1125,7 +1127,7 @@ button.pill {
   background: var(--mist);
 }
 .sg .tg {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -1145,7 +1147,7 @@ button.pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   white-space: nowrap;
@@ -1233,11 +1235,11 @@ button.pill {
   margin-bottom: 8px;
 }
 .chartcard .ch-h b {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 650;
 }
 .linklike {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 600;
   color: var(--pink-text);
   white-space: nowrap;
@@ -1249,7 +1251,7 @@ button.pill {
   padding: 14px 18px;
   background: var(--mist);
   border-bottom: 1px solid var(--line);
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   font-weight: 600;
   display: flex;
   gap: 12px;
@@ -1260,7 +1262,7 @@ button.pill {
   padding: 18px;
 }
 .ans-b p {
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   line-height: 1.65;
   color: var(--body);
 }
@@ -1285,16 +1287,16 @@ button.pill {
   background: var(--mist-2);
   display: grid;
   place-items: center;
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   color: var(--ink-2);
 }
 .agent h4 {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 650;
 }
 .agent p {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   color: var(--body);
   margin-top: 2px;
   line-height: 1.5;
@@ -1307,14 +1309,14 @@ button.pill {
   margin-top: 14px;
 }
 .dissent h4 {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 700;
   color: var(--amber);
   letter-spacing: 0.02em;
   margin-bottom: 4px;
 }
 .dissent p {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: #5a3d0e;
   line-height: 1.5;
 }
@@ -1342,11 +1344,11 @@ button.pill {
   margin-bottom: 9px;
 }
 .lev-h label {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 600;
 }
 .lev-h output {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 700;
   color: var(--pink-text);
 }
@@ -1360,7 +1362,7 @@ button.pill {
 .seg button {
   flex: 1;
   padding: 6px 4px;
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 500;
   border-radius: 6px;
   color: var(--muted);
@@ -1380,12 +1382,12 @@ input[type='range'] {
 .rlab {
   display: flex;
   justify-content: space-between;
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   color: var(--faint);
   margin-top: -2px;
 }
 .lev-now {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   white-space: nowrap;
@@ -1415,7 +1417,7 @@ input[type='range'] {
   background: var(--mist);
 }
 .back-kind {
-  font-size: 9px;
+  font-size: calc(9px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -1434,7 +1436,7 @@ input[type='range'] {
   color: var(--muted);
 }
 .back-title {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 600;
   color: var(--ink-2);
   flex: 1;
@@ -1463,20 +1465,20 @@ input[type='range'] {
   padding: 12px 13px;
 }
 .out .l {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--muted);
   font-weight: 500;
   min-height: 28px;
   line-height: 1.3;
 }
 .out .v {
-  font-size: 20px;
+  font-size: calc(20px * var(--fs));
   font-weight: 700;
   letter-spacing: -0.03em;
   margin: 5px 0 1px;
 }
 .out .d {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 600;
 }
 .out .d.up {
@@ -1496,7 +1498,7 @@ input[type='range'] {
   margin-top: 12px;
 }
 .calc h4 {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1507,7 +1509,7 @@ input[type='range'] {
   display: flex;
   justify-content: space-between;
   gap: 14px;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   padding: 4px 0;
   border-bottom: 1px dotted var(--line);
 }
@@ -1532,7 +1534,7 @@ input[type='range'] {
 }
 .pin .q,
 .pin-q {
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   font-weight: 650;
   line-height: 1.4;
 }
@@ -1545,7 +1547,7 @@ input[type='range'] {
   color: var(--pink-text);
 }
 .pin .mv {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   color: var(--body);
   margin-top: 8px;
   line-height: 1.5;
@@ -1554,7 +1556,7 @@ input[type='range'] {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10.5px;
+  font-size: calc(10.5px * var(--fs));
   color: var(--faint);
   margin-top: 9px;
 }
@@ -1569,7 +1571,7 @@ input[type='range'] {
   flex: 1;
   min-width: 0;
   text-align: left;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   color: var(--ink);
 }
 .sg-q:hover {
@@ -1577,7 +1579,7 @@ input[type='range'] {
 }
 .sg-pin {
   flex: none;
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -1598,11 +1600,11 @@ input[type='range'] {
   margin-top: 11px;
   padding-top: 10px;
   border-top: 1px solid var(--line-2);
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--muted);
 }
 .trend {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
 }
 .trend.up {
@@ -1620,7 +1622,7 @@ input[type='range'] {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   margin-bottom: 14px;
@@ -1639,14 +1641,14 @@ input[type='range'] {
   margin-bottom: 20px;
 }
 .dt-h h1 {
-  font-size: 24px;
+  font-size: calc(24px * var(--fs));
   font-weight: 700;
   letter-spacing: -0.028em;
   line-height: 1.25;
   max-width: 840px;
 }
 .dt-h .lede {
-  font-size: 14px;
+  font-size: calc(14px * var(--fs));
   color: var(--body);
   margin-top: 9px;
   max-width: 760px;
@@ -1668,13 +1670,13 @@ input[type='range'] {
   margin-bottom: 22px;
 }
 .blk h3 {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 10px;
 }
 .blk p {
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   line-height: 1.65;
   color: var(--body);
   max-width: 74ch;
@@ -1683,7 +1685,7 @@ input[type='range'] {
   margin-top: 10px;
 }
 .blk-sub {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
   margin: -6px 0 12px;
   line-height: 1.4;
@@ -1693,7 +1695,7 @@ input[type='range'] {
   margin-top: 6px;
 }
 .ch-cap {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   color: var(--muted);
   line-height: 1.5;
   margin-top: 8px;
@@ -1719,7 +1721,7 @@ input[type='range'] {
   background: var(--mist-2);
 }
 .feeds-eyebrow {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -1727,7 +1729,7 @@ input[type='range'] {
   flex: none;
 }
 .feeds-body {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 600;
   color: var(--ink-2);
   flex: 1;
@@ -1737,7 +1739,7 @@ input[type='range'] {
   white-space: nowrap;
 }
 .feeds-due {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   flex: none;
@@ -1769,7 +1771,7 @@ input[type='range'] {
   padding: 14px;
 }
 .side h4 {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -1780,7 +1782,7 @@ input[type='range'] {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   padding: 6px 0;
   border-bottom: 1px solid var(--line-2);
 }
@@ -1805,14 +1807,14 @@ input[type='range'] {
   background: var(--pink-soft);
 }
 .opt h4 {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 650;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 .opt p {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   color: var(--body);
   margin-top: 5px;
   line-height: 1.5;
@@ -1822,7 +1824,7 @@ input[type='range'] {
   gap: 16px;
   flex-wrap: wrap;
   margin-top: 9px;
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
 }
 .opt .imp b {
   font-weight: 650;
@@ -1832,7 +1834,7 @@ input[type='range'] {
   color: #fff;
   border-radius: 9px;
   padding: 9px 16px;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 600;
 }
 .btn:hover {
@@ -1879,18 +1881,18 @@ input[type='range'] {
   border-color: var(--teal);
 }
 .tr h5 {
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 650;
 }
 .tr p {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   color: var(--muted);
   margin-top: 2px;
   line-height: 1.45;
 }
 .tr code {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   background: var(--mist-2);
   padding: 1px 5px;
   border-radius: 4px;
@@ -1904,18 +1906,18 @@ input[type='range'] {
   align-items: center;
 }
 .dec h3 {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   font-weight: 600;
   line-height: 1.35;
 }
 .dec p {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   color: var(--muted);
   margin-top: 2px;
   line-height: 1.4;
 }
 .res {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1936,7 +1938,7 @@ input[type='range'] {
   color: var(--pink-text);
 }
 .when {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   color: var(--faint);
   white-space: nowrap;
 }
@@ -1946,20 +1948,20 @@ input[type='range'] {
   color: var(--muted);
 }
 .empty h3 {
-  font-size: 15px;
+  font-size: calc(15px * var(--fs));
   font-weight: 650;
   color: var(--ink);
 }
 .empty p {
-  font-size: 13px;
+  font-size: calc(13px * var(--fs));
   margin-top: 6px;
 }
 .pagefoot {
   margin-top: 40px;
   padding-top: 16px;
   border-top: 1px solid var(--line-2);
-  font-size: 11px;
-  color: var(--faint);
+  font-size: calc(11px * var(--fs));
+  color: var(--muted); /* on the tinted canvas --faint drops below AA; --muted stays ≥4.5:1 */
   line-height: 1.6;
 }
 
@@ -2021,7 +2023,7 @@ input[type='range'] {
     top: 4px;
     right: 10px;
     margin: 0;
-    font-size: 9px;
+    font-size: calc(9px * var(--fs));
     padding: 0 5px;
   }
   .rail-note {
@@ -2089,7 +2091,7 @@ input[type='range'] {
   }
   .nv span {
     display: block;
-    font-size: 9.5px;
+    font-size: calc(9.5px * var(--fs));
     font-weight: 600;
     letter-spacing: 0.01em;
   }
@@ -2104,7 +2106,7 @@ input[type='range'] {
     position: absolute;
     top: 3px;
     right: calc(50% - 20px);
-    font-size: 9px;
+    font-size: calc(9px * var(--fs));
     padding: 0 5px;
   }
   .psw {
@@ -2140,7 +2142,7 @@ input[type='range'] {
     padding: 11px 16px;
   }
   .mtop .wm {
-    font-size: 16px;
+    font-size: calc(16px * var(--fs));
     color: var(--ink);
   }
   .mtop .wm i {
@@ -2185,7 +2187,7 @@ input[type='range'] {
     margin-top: 6px;
   }
   .dt-h h1 {
-    font-size: 20px;
+    font-size: calc(20px * var(--fs));
   }
   .dec {
     grid-template-columns: auto 1fr;
@@ -2202,7 +2204,7 @@ input[type='range'] {
     grid-template-columns: 1fr;
   }
   .kpi .val {
-    font-size: 23px;
+    font-size: calc(23px * var(--fs));
   }
 }
 
@@ -2240,7 +2242,7 @@ input[type='range'] {
   z-index: 1;
 }
 .login-brand .wm {
-  font-size: 30px;
+  font-size: calc(30px * var(--fs));
   color: var(--rail-on);
 }
 .login-brand .wm i {
@@ -2248,7 +2250,7 @@ input[type='range'] {
   font-style: normal;
 }
 .login-tag {
-  font-size: 40px;
+  font-size: calc(40px * var(--fs));
   line-height: 1.12;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -2256,7 +2258,7 @@ input[type='range'] {
   max-width: 13ch;
 }
 .login-lede {
-  font-size: 15px;
+  font-size: calc(15px * var(--fs));
   line-height: 1.65;
   color: var(--rail-txt);
   margin-top: 20px;
@@ -2269,7 +2271,7 @@ input[type='range'] {
   margin-top: 32px;
 }
 .login-office {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--rail-txt);
@@ -2279,7 +2281,7 @@ input[type='range'] {
   padding: 6px 13px;
 }
 .login-foot {
-  font-size: 11.5px;
+  font-size: calc(11.5px * var(--fs));
   line-height: 1.6;
   color: var(--rail-txt-2);
   margin-top: 44px;
@@ -2308,14 +2310,14 @@ input[type='range'] {
   padding: 44px 42px 46px;
 }
 .login-eyebrow {
-  font-size: 11px;
+  font-size: calc(11px * var(--fs));
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
 }
 .login-h {
-  font-size: 32px;
+  font-size: calc(32px * var(--fs));
   line-height: 1.18;
   font-weight: 800;
   letter-spacing: -0.015em;
@@ -2323,7 +2325,7 @@ input[type='range'] {
   margin-top: 12px;
 }
 .login-sub {
-  font-size: 15px;
+  font-size: calc(15px * var(--fs));
   line-height: 1.6;
   color: var(--muted);
   margin-top: 10px;
@@ -2334,7 +2336,7 @@ input[type='range'] {
 }
 .login-field > span {
   display: block;
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--fs));
   font-weight: 600;
   color: var(--muted);
   margin-bottom: 8px;
@@ -2343,22 +2345,32 @@ input[type='range'] {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--r);
-  padding: 16px 16px;
+  padding: 15px 15px;
   font: inherit;
-  font-size: 15.5px;
-  background: var(--paper);
+  font-size: calc(15.5px * var(--fs));
+  background: var(--mist);
   color: var(--ink);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 .login-field input::placeholder {
   color: var(--faint);
 }
+.login-field input:hover:not(:disabled) {
+  border-color: var(--faint);
+}
 .login-field input:focus {
   outline: none;
-  border-color: var(--ink);
+  border-color: var(--pink);
+  background: var(--paper);
+  box-shadow: 0 0 0 4px var(--pink-soft);
+}
+.login-field input:disabled {
+  opacity: 0.65;
+  cursor: default;
 }
 .login-err {
   margin-top: 18px;
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--fs));
   font-weight: 600;
   color: var(--pink-text);
   background: var(--pink-soft);
@@ -2369,9 +2381,52 @@ input[type='range'] {
 .login-btn {
   margin-top: 28px;
   width: 100%;
-  padding: 17px 16px;
-  font-size: 15.5px;
+  padding: 16px 16px;
+  font-size: calc(15.5px * var(--fs));
   border-radius: var(--r);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.login-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px -12px rgba(14, 14, 16, 0.55);
+}
+.login-btn:not(:disabled):active {
+  transform: translateY(0);
+}
+.login-btn:disabled {
+  opacity: 0.9;
+  cursor: default;
+}
+/* spinner — inherits the button's white text via currentColor, no hardcoded hue */
+.login-spin {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-top-color: currentColor;
+  animation: login-spin 0.6s linear infinite;
+}
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* demo-access hint under the card actions */
+.login-hint {
+  margin-top: 18px;
+  font-size: calc(12px * var(--fs));
+  line-height: 1.5;
+  color: var(--faint);
+  text-align: center;
+}
+.login-hint code {
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--muted);
 }
 
 /* stack the split: black band above, form below */
@@ -2383,12 +2438,12 @@ input[type='range'] {
     padding: 40px 32px 36px;
   }
   .login-tag {
-    font-size: 30px;
+    font-size: calc(30px * var(--fs));
     margin-top: 24px;
     max-width: none;
   }
   .login-lede {
-    font-size: 14px;
+    font-size: calc(14px * var(--fs));
     margin-top: 14px;
   }
   .login-offices {
@@ -2413,10 +2468,10 @@ input[type='range'] {
     padding: 32px 22px 28px;
   }
   .login-brand .wm {
-    font-size: 25px;
+    font-size: calc(25px * var(--fs));
   }
   .login-tag {
-    font-size: 25px;
+    font-size: calc(25px * var(--fs));
   }
   .login-panel {
     padding: 26px 18px 36px;
@@ -2425,7 +2480,7 @@ input[type='range'] {
     padding: 30px 22px 32px;
   }
   .login-h {
-    font-size: 25px;
+    font-size: calc(25px * var(--fs));
   }
 }
 
@@ -2442,7 +2497,7 @@ input[type='range'] {
   padding-top: 10px;
 }
 .signout {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs));
   font-weight: 600;
   color: var(--body);
   background: var(--paper);
