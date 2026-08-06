@@ -472,7 +472,7 @@ describe('demo sign-in gate', () => {
     render(createElement(App));
     let ok = false;
     act(() => {
-      ok = useApp.getState().signIn('exec@elfbeauty.com', 'elf2027');
+      ok = useApp.getState().signIn('superhero', 'ourself');
     });
     expect(ok).toBe(true);
     expect(useApp.getState().authed).toBe(true);
@@ -483,8 +483,8 @@ describe('demo sign-in gate', () => {
   });
 
   it('username is case-insensitive and trimmed; password is exact', () => {
-    expect(checkCredentials('  EXEC@ELFBEAUTY.COM ', 'elf2027')).toBe(true);
-    expect(checkCredentials('exec@elfbeauty.com', 'ELF2027')).toBe(false);
+    expect(checkCredentials('  SUPERHERO ', 'ourself')).toBe(true);
+    expect(checkCredentials('superhero', 'OURSELF')).toBe(false);
     expect(checkCredentials('', '')).toBe(false);
   });
 

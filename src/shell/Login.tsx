@@ -18,9 +18,9 @@ const OFFICES = PERSONAS.map((p) => {
 export function Login() {
   const signIn = useApp((s) => s.signIn);
   const authError = useApp((s) => s.authError);
-  // Demo build: credentials are pre-filled so the gate is a one-click formality.
-  const [username, setUsername] = useState(DEMO_USERNAME);
-  const [password, setPassword] = useState(DEMO_PASSWORD);
+  // Fields start empty; the demo credentials are shown as a hint below.
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [signingIn, setSigningIn] = useState(false);
 
   const onSubmit = (e: FormEvent) => {
@@ -118,7 +118,7 @@ export function Login() {
           </button>
 
           <p className="login-hint">
-            Demo access — pre-filled. <code>{DEMO_USERNAME}</code>
+            Demo access — sign in with <code>{DEMO_USERNAME}</code> / <code>{DEMO_PASSWORD}</code>
           </p>
         </form>
       </div>
