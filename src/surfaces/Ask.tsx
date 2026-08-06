@@ -11,7 +11,7 @@ import { SourceChip } from '@/components/SourceChip';
 import { InsightProofChart } from '@/components/InsightProofChart';
 import { CrossOfficeCards } from '@/components/CrossOfficeStrip';
 import { Pill, pillClass } from '@/components/Pill';
-import { ChevronLeft, ChevronRight, SendIcon } from '@/components/Icons';
+import { ChevronLeft, ChevronRight, SearchIcon, SendIcon } from '@/components/Icons';
 
 /** §7.3 Ask — natural language over the same governed facts as the rest of the
  *  app. A question resolves to an insight and the answer is assembled from it. */
@@ -42,10 +42,14 @@ function AskEmpty({ persona }: { persona: Persona }) {
       <ContextRow persona={persona} tab="ask" />
       <div className="askwrap">
         <div className="askhero">
+          <div className="ask-eyebrow">Cross-office intelligence</div>
           <h2>Ask across every office</h2>
           <p>Each question goes to the teams that own the data, and they are free to disagree.</p>
         </div>
         <div className="askbox">
+          <span className="askbox-ic" aria-hidden="true">
+            <SearchIcon size={18} />
+          </span>
           <textarea
             ref={taRef}
             rows={1}
@@ -68,15 +72,22 @@ function AskEmpty({ persona }: { persona: Persona }) {
             <SendIcon />
           </button>
         </div>
+        <div className="sugg-head">
+          <b>Suggested questions</b>
+          <span>Tap one to see how the offices answer</span>
+        </div>
         <div className="sugg">
           {persona.suggestedQuestions.map((s, i) => (
             <button key={i} type="button" className="sg" onClick={() => ask(s.question)}>
-              <span>{s.question}</span>
-              <span className="tg">{s.tag}</span>
+              <span className="sg-chip">{s.tag}</span>
+              <span className="sg-text">{s.question}</span>
+              <span className="sg-go" aria-hidden="true">
+                <ChevronRight size={16} />
+              </span>
             </button>
           ))}
         </div>
-        <div className="pagefoot" style={{ marginTop: 26 }}>
+        <div className="pagefoot" style={{ marginTop: 30 }}>
           Answers come from the teams that read the systems named on each finding. No team reports a number it did
           not pull from a source.
         </div>

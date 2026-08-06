@@ -1038,35 +1038,64 @@ button.pill {
 
 /* ask */
 .askwrap {
-  max-width: 800px;
+  max-width: 1160px;
   margin: 0 auto;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 32px;
 }
 .askhero {
   text-align: center;
-  padding: 16px 0 22px;
+  padding: 8px 0 26px;
+}
+.ask-eyebrow {
+  font-size: calc(11px * var(--fs));
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+  margin-bottom: 14px;
 }
 .askhero h2 {
-  font-size: calc(25px * var(--fs));
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: calc(31px * var(--fs));
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  line-height: 1.05;
 }
 .askhero p {
-  font-size: calc(13.5px * var(--fs));
+  font-size: calc(14.5px * var(--fs));
   color: var(--muted);
-  margin-top: 7px;
+  margin: 11px auto 0;
+  max-width: 54ch;
+  line-height: 1.55;
 }
+/* command-bar search */
 .askbox {
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
   border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 12px 12px 12px 16px;
+  border-radius: 16px;
+  padding: 15px 15px 15px 18px;
   background: var(--paper);
-  box-shadow: var(--shadow);
+  box-shadow: 0 1px 2px rgba(14, 14, 16, 0.04), 0 12px 36px -18px rgba(14, 14, 16, 0.3);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
 }
 .askbox:focus-within {
-  border-color: var(--ink);
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px var(--pink-soft), 0 12px 36px -18px rgba(14, 14, 16, 0.32);
+}
+.askbox-ic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: var(--faint);
 }
 .askbox textarea {
   flex: 1;
@@ -1074,7 +1103,7 @@ button.pill {
   outline: none;
   resize: none;
   font: inherit;
-  font-size: calc(14.5px * var(--fs));
+  font-size: calc(15px * var(--fs));
   line-height: 1.5;
   max-height: 150px;
   background: transparent;
@@ -1084,13 +1113,18 @@ button.pill {
   color: var(--faint);
 }
 .send {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: var(--ink);
   display: grid;
   place-items: center;
   flex: none;
+  transition: background 0.14s ease, transform 0.12s ease;
+}
+.send:not(:disabled):hover {
+  background: var(--pink-text);
+  transform: translateY(-1px);
 }
 .send:disabled {
   background: var(--mist-2);
@@ -1104,35 +1138,92 @@ button.pill {
 .send:disabled svg {
   stroke: var(--faint);
 }
+/* suggestions */
+.sugg-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 100%;
+  margin: 30px 2px 12px;
+}
+.sugg-head b {
+  font-size: calc(11.5px * var(--fs));
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sugg-head span {
+  font-size: calc(12.5px * var(--fs));
+  color: var(--muted);
+}
 .sugg {
   display: grid;
-  gap: 8px;
-  margin-top: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 .sg {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   text-align: left;
   width: 100%;
+  min-height: 116px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 11px 14px;
-  font-size: calc(13px * var(--fs));
-  transition: 0.14s;
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 16px 18px 18px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
 }
 .sg:hover {
-  border-color: #d2d2d9;
-  background: var(--mist);
+  transform: translateY(-2px);
+  border-color: #d6d6de;
+  box-shadow: 0 1px 2px rgba(14, 14, 16, 0.05), 0 16px 32px -18px rgba(14, 14, 16, 0.24);
 }
-.sg .tg {
-  font-size: calc(10px * var(--fs));
+.sg-chip {
+  font-size: calc(9.5px * var(--fs));
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
+  background: var(--mist-2);
+  border-radius: 99px;
+  padding: 4px 10px;
   white-space: nowrap;
+}
+.sg-text {
+  font-size: calc(15px * var(--fs));
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+  max-width: 42ch;
+  padding-right: 22px;
+}
+.sg-go {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  color: var(--faint);
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.sg:hover .sg-go {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (max-width: 820px) {
+  .askwrap {
+    min-height: 0;
+  }
+  .sugg {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* answer */
