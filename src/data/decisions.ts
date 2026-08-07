@@ -85,7 +85,7 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
       result: 'worked',
     },
     {
-      title: 'Commit to 24–26% marketing envelope publicly',
+      title: 'Commit to 24–26% marketing budget publicly',
       outcome: 'Now the constraint in three open decisions',
       when: 'At FY27 guide',
       result: 'mixed',
@@ -127,7 +127,7 @@ export const DECISIONS: Record<string, ClosedDecision[]> = {
       result: 'worked',
     },
     {
-      title: 'Combine the People and Legal functions under one office',
+      title: 'Combine the People and Legal functions under one team',
       outcome: 'Engagement 88%, 18 pts above benchmark',
       when: '2016',
       result: 'worked',

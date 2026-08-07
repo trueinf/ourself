@@ -30,7 +30,7 @@ export function GoalEditor({ persona }: { persona: Persona }) {
           if (e.key === 'Escape') closeGoalEditor();
         }}
         rows={2}
-        placeholder="What is this office trying to do right now?…"
+        placeholder="What are you trying to get done right now?…"
         aria-label="Objective function"
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus

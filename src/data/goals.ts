@@ -9,9 +9,9 @@ import type { GoalPreset } from '@/types';
 export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
   fields: [
     {
-      label: 'Protect the guide',
-      objective: 'Hold the FY2027 guide and the marketing envelope through the tariff.',
-      keywords: ['guide', 'envelope', 'marketing', 'tariff', 'ebitda', 'assumption', 'restatement'],
+      label: 'Protect guidance',
+      objective: 'Hold FY2027 guidance and the marketing budget through the tariff pressure.',
+      keywords: ['guidance', 'budget', 'marketing', 'tariff', 'ebitda', 'assumption', 'restatement'],
     },
     {
       label: 'Recover the top line',
@@ -34,8 +34,8 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
   savur: [
     {
       label: 'Defend the spend',
-      objective: 'Protect the marketing envelope until the awareness gain converts.',
-      keywords: ['marketing', 'envelope', 'awareness', 'spend', 'convert', 'budget'],
+      objective: 'Protect the marketing budget until the awareness gain converts.',
+      keywords: ['marketing', 'budget', 'awareness', 'spend', 'convert'],
     },
     {
       label: 'Win discovery',
@@ -78,7 +78,7 @@ export const GOAL_PRESETS: Record<string, GoalPreset[]> = {
     },
     {
       label: 'Make the call',
-      objective: 'Resolve the cross-office trades only I can settle.',
+      objective: 'Resolve the cross-team trades only I can settle.',
       keywords: ['offices', 'reserve', 'lip', 'tariff', 'refund', 'price', 'reversal'],
     },
   ],

@@ -56,7 +56,7 @@ export function CrossOfficeStrip({ views }: { views: CrossOfficeView[] }) {
   if (!views.length) return null;
   return (
     <div className="xo">
-      <div className="xo-h">How other offices read this</div>
+      <div className="xo-h">How the other teams see this</div>
       <CrossOfficeCards views={views} />
     </div>
   );

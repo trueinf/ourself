@@ -14,7 +14,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'fd1',
       title: 'Split the $22.4M refund between lip and the tariff cushion',
       agenda:
-        'Commercial wants tranche 2 on lip. Operations can only supply from August. The tariff cushion is 350 bps adrift. No single office can make this call, so we need all three in the room.',
+        'Commercial wants tranche 2 on lip. Operations can only supply from August. The tariff cushion is 350 bps adrift. No single team can make this call, so we need all three in the room.',
       participants: ['TA', 'JL', 'JF'],
       when: 'Thursday 2:00pm',
       whenUrgency: 'now',
@@ -24,23 +24,23 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
     },
     {
       id: 'fd2',
-      title: 'Accept the Q1 marketing envelope or hold the year at 26%',
+      title: 'Accept the Q1 marketing budget or hold the year at 26%',
       agenda:
-        'Savur wants the 27.3% run-rate for the year. That puts EBITDA below the guide unless we offset it. Align the conversion case before Tuesday.',
+        'Savur wants the 27.3% run-rate for the year. That puts EBITDA below guidance unless we offset it. Align the conversion case before Tuesday.',
       participants: ['OS', 'TA'],
       when: 'Monday 9:30am',
       whenUrgency: 'soon',
       status: 'queued',
       source: { kind: 'focus', id: 'q2' },
-      sourceLabel: 'the marketing-envelope decision',
+      sourceLabel: 'the marketing-budget decision',
     },
   ],
   franks: [
     {
       id: 'od1',
-      title: 'Air freight $2.1M to protect the tariff assumption before the Q2 print',
+      title: 'Air freight $2.1M to protect the tariff assumption before Q2 earnings',
       agenda:
-        'Closing the qualification gap needs freight that lands on gross margin. Decide the spend with Finance before the print.',
+        'Closing the qualification gap needs freight that lands on gross margin. Decide the spend with Finance before we report Q2.',
       participants: ['MF'],
       when: 'Wednesday',
       whenUrgency: 'now',
@@ -66,13 +66,13 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       id: 'sd1',
       title: 'Take the conversion case to the CFO before Tuesday',
       agenda:
-        'Concede the brand tranche and protect retail media and GEO. Get to Finance before the envelope decision.',
+        'Concede the brand tranche and protect retail media and GEO. Get to Finance before the budget decision.',
       participants: ['MF', 'TA'],
       when: 'Monday',
       whenUrgency: 'now',
       status: 'scheduled',
       source: { kind: 'focus', id: 'mq1' },
-      sourceLabel: 'the envelope defence',
+      sourceLabel: 'the budget defence',
     },
     {
       id: 'sd2',
@@ -116,7 +116,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
   amin: [
     {
       id: 'ad1',
-      title: 'Arbitrate the $22.4M across three offices',
+      title: 'Settle the $22.4M split across the three teams',
       agenda:
         'Finance holds a reserve and Commercial wants lip. Operations cannot supply. Settle the trade here.',
       participants: ['MF', 'JL', 'JF'],
@@ -124,7 +124,7 @@ export const SEEDED_DISCUSSIONS: Record<string, DiscussionItem[]> = {
       whenUrgency: 'now',
       status: 'scheduled',
       source: { kind: 'focus', id: 'cq1' },
-      sourceLabel: 'the $22.4M arbitration',
+      sourceLabel: 'the $22.4M call',
     },
     {
       id: 'ad2',
@@ -294,7 +294,7 @@ export function discussionFromScenario(
   return {
     id: `disc-scn-${model.id}`,
     title: `Walk the ${model.title.toLowerCase()} model`,
-    agenda: 'Take the modelled trade-offs to the table. The levers move the guide. Ask the specialists about feasibility.',
+    agenda: 'Take the modelled trade-offs to the table. The levers move guidance. Ask the specialists about feasibility.',
     participants: backedFocus?.waitingOn ?? [],
     when: 'Next week',
     whenUrgency: 'soon',

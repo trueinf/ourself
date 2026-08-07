@@ -46,7 +46,7 @@ export function FocusRow({ item, onOpen }: { item: FocusItem; onOpen: () => void
             ) : (
               <span>No one blocked</span>
             )}
-            {crossOffice ? <span className="pill p">Cross-office · {item.waitingOn.length + 1} offices</span> : null}
+            {crossOffice ? <span className="pill p">Cross-team · {item.waitingOn.length + 1} teams</span> : null}
             <span className="pill">
               {item.options.length ? `${item.options.length} options modelled` : 'Not yet modelled'}
             </span>

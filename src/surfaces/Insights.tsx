@@ -34,7 +34,7 @@ export function Insights({ persona }: { persona: Persona }) {
 
       {persona.synthesis ? (
         <div className="synth">
-          <div className="synth-eyebrow">The read</div>
+          <div className="synth-eyebrow">Bottom line</div>
           <p>{persona.synthesis}</p>
         </div>
       ) : null}
@@ -58,7 +58,7 @@ export function Insights({ persona }: { persona: Persona }) {
           <span className="sub">
             {goalActive
               ? `${persona.insights.length} items · re-ordered for your goal`
-              : `${persona.insights.length} items · across the offices, disagreements kept`}
+              : `${persona.insights.length} items · across the teams, disagreements kept`}
           </span>
         </div>
         <div className="grid">

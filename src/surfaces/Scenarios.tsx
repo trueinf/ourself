@@ -54,7 +54,7 @@ export function Scenarios({ persona }: { persona: Persona }) {
         </button>
       ) : (
         <div className="synth">
-          <div className="synth-eyebrow">The bench</div>
+          <div className="synth-eyebrow">What if</div>
           <p>{model.read}</p>
         </div>
       )}

@@ -32,11 +32,11 @@ function compute(values: LeverValues): ScenarioResult {
     judgements: [
       {
         agent: 'fin',
-        heading: 'Finance — envelope commitment',
+        heading: 'Finance — budget commitment',
         text:
           pct > 26
-            ? 'Above 26% breaks the range committed to the street. Holding it there means an EBITDA restatement or an offset somewhere else.'
-            : 'Spend stays inside the committed 24–26% envelope.',
+            ? 'Above 26% breaks the range committed to investors. Holding it there means an EBITDA restatement or an offset somewhere else.'
+            : 'Spend stays inside the committed 24–26% budget.',
       },
       {
         agent: 'tec',

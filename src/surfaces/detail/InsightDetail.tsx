@@ -95,11 +95,11 @@ export function InsightDetail({ persona, insight }: { persona: Persona; insight:
 
           {dissentCount ? (
             <div className="blk">
-              <h3>Where the offices stand</h3>
+              <h3>Where each team stands</h3>
               <div className="blk-sub">Their positions, kept as they are rather than merged into one house view</div>
               <CrossOfficeCards views={insight.crossOffice} />
               <p style={{ fontSize: 'calc(12.5px * var(--fs))', color: 'var(--muted)', marginTop: 12, maxWidth: '74ch' }}>
-                Each position is right for the metric that office answers for. We keep them side by side instead of
+                Each position is right for the metric that team answers for. We keep them side by side instead of
                 forcing them into one recommendation.
               </p>
             </div>

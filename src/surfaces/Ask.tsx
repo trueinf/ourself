@@ -42,8 +42,8 @@ function AskEmpty({ persona }: { persona: Persona }) {
       <ContextRow persona={persona} tab="ask" />
       <div className="askwrap">
         <div className="askhero">
-          <div className="ask-eyebrow">Cross-office intelligence</div>
-          <h2>Ask across every office</h2>
+          <div className="ask-eyebrow">Company intelligence</div>
+          <h2>Ask across the company</h2>
           <p>Each question goes to the teams that own the data, and they are free to disagree.</p>
         </div>
         <div className="askbox">
@@ -74,7 +74,7 @@ function AskEmpty({ persona }: { persona: Persona }) {
         </div>
         <div className="sugg-head">
           <b>Suggested questions</b>
-          <span>Tap one to see how the offices answer</span>
+          <span>Tap one to see how the teams answer</span>
         </div>
         <div className="sugg">
           {persona.suggestedQuestions.map((s, i) => (
@@ -102,15 +102,15 @@ const truncate = (s: string, n = 104) => (s.length > n ? s.slice(0, n - 1).trimE
 
 function officeList(insight: Insight): string {
   const labels = insight.agents.map((a) => AGENTS[a].label);
-  if (labels.length <= 1) return labels[0] ?? 'the specialists';
+  if (labels.length <= 1) return labels[0] ?? 'the teams';
   return labels.slice(0, -1).join(', ') + ' and ' + labels[labels.length - 1];
 }
 
 function buildSteps(insight: Insight | null): Array<{ title: string; detail: string }> {
   if (!insight) {
     return [
-      { title: 'Reading the question', detail: 'Working out which offices it touches.' },
-      { title: 'Searching the findings', detail: 'Matching it against what each office is seeing right now.' },
+      { title: 'Reading the question', detail: 'Working out which teams it touches.' },
+      { title: 'Searching the findings', detail: 'Matching it against what each team is seeing right now.' },
     ];
   }
   const findings = insight.findings ?? [];
@@ -118,8 +118,8 @@ function buildSteps(insight: Insight | null): Array<{ title: string; detail: str
   return [
     { title: 'Reading the question', detail: `Working out how it splits across ${officeList(insight)}.` },
     {
-      title: `Asked ${insight.agents.length} offices`,
-      detail: 'The same offices get asked for this kind of question every time, so the answer stays consistent.',
+      title: `Asked ${insight.agents.length} teams`,
+      detail: 'The same teams get asked for this kind of question every time, so the answer stays consistent.',
     },
     ...findings.map((f) => ({
       title: `${AGENTS[f.agent].label} · read ${f.source ?? 'the source systems'}`,
@@ -128,8 +128,8 @@ function buildSteps(insight: Insight | null): Array<{ title: string; detail: str
     {
       title: 'Pulled the findings together',
       detail: dissent
-        ? `One answer, with the ${dissent} office${dissent === 1 ? '' : 's'} that see it differently kept separate rather than blended in.`
-        : 'The offices agreed. One answer, with its sources.',
+        ? `One answer, with the ${dissent} team${dissent === 1 ? '' : 's'} that see it differently kept separate rather than blended in.`
+        : 'The teams agreed. One answer, with its sources.',
     },
   ];
 }
@@ -305,8 +305,8 @@ function Answer({
       <p>
         <b>Short answer.</b>{' '}
         {positions.length
-          ? 'The offices agree on what is happening but not on what to do about it. The disagreement is kept below rather than smoothed over.'
-          : 'The offices agree here. The finding and its sources are below.'}
+          ? 'The teams agree on what is happening but not on what to do about it. The disagreement is kept below rather than smoothed over.'
+          : 'The teams agree here. The finding and its sources are below.'}
       </p>
       <p>{insight.why}</p>
 
@@ -347,7 +347,7 @@ function Answer({
       {positions.length ? (
         <div style={{ marginTop: 16 }}>
           <div className="eyebrow" style={{ marginBottom: 8 }}>
-            Where the offices stand
+            Where each team stands
           </div>
           <CrossOfficeCards views={positions} />
         </div>

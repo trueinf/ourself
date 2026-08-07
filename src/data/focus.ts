@@ -6,15 +6,15 @@
  */
 export const FOCUS_READ: Record<string, string> = {
   fields:
-    'Two calls close this week, and both cross more than one office. The $22.4M refund split and the marketing budget are the ones only you can settle.',
+    'Two calls close this week, and both cross more than one team. The $22.4M refund split and the marketing budget are the ones only you can settle.',
   franks:
     'Two things land this week. The $2.1M air-freight call protects the tariff assumption. Separately, lip volume is already over-committed in the Q2 plan.',
   savur:
-    'The envelope decision goes to the CFO on Tuesday. Get the conversion case in front of Finance before then.',
+    'The budget decision goes to the CFO on Tuesday. Get the conversion case in front of Finance before then.',
   chopra:
     'Both open calls run through Finance. First, whether to build the semantic layer now. Second, how to get the $4.1M request past a return test when only four of twelve are measured.',
   amin:
-    'One call only you can make. Three offices each have a defensible answer on the same $22.4M, and someone has to choose between them. The Q2 guidance language also needs settling before the pre-close window.',
+    'One call only you can make. Three teams each have a defensible answer on the same $22.4M, and someone has to choose between them. The Q2 guidance language also needs settling before the pre-close window.',
   laar:
     'The lip plan is the live one. Retailer commitments are being made now against volume Operations cannot ship until August.',
   marchisotto:
@@ -34,7 +34,7 @@ export const STAKES: Record<string, string> = {
   oq2: '~1.4M lip units the plan cannot supply',
   oq3: 'The working-capital ceiling at 10.5 weeks',
   // Savur
-  mq1: 'The marketing envelope for the full year',
+  mq1: 'The full-year marketing budget',
   mq2: '$3.2M reallocated out of prospecting',
   mq3: '40% of creator spend on six creators',
   // Chopra
@@ -42,7 +42,7 @@ export const STAKES: Record<string, string> = {
   tq2: '$4.1M, four measured returns of twelve',
   tq3: 'Three deployed agents’ EU AI Act exposure',
   // Amin
-  cq1: '$22.4M · a quarter of lip share against the guide',
+  cq1: '$22.4M · a quarter of lip share against guidance',
   cq2: 'The Q2 organic-growth guidance language',
   // Laar
   lq1: 'The lip shelf you just won against unshippable supply',

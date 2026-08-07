@@ -49,8 +49,8 @@ export function Login() {
         </span>
         <h1 className="login-tag">One company. Many selves.</h1>
         <p className="login-lede">
-          A cross-functional executive intelligence surface for e.l.f. Beauty. Each office sees the same business
-          reality read against its own objective — and can see how the others read the same fact.
+          An executive intelligence hub for e.l.f. Beauty. Every leader sees the same business reality through their
+          own priorities, and can see how the other teams read the same fact.
         </p>
         <div className="login-offices">
           {OFFICES.map((office) => (
@@ -60,16 +60,16 @@ export function Login() {
           ))}
         </div>
         <div className="login-foot">
-          Demo build · FY2027 Q1 on verified FY2026 actuals. Nothing behind this gate acts — the effect buttons are
-          inert by design.
+          Demo build · FY2027 Q1 on verified FY2026 actuals. Nothing in the demo takes real action; the action
+          buttons are intentionally inert.
         </div>
       </aside>
 
       <div className="login-panel">
         <form className="login-card" onSubmit={onSubmit} noValidate>
-          <div className="login-eyebrow">Executive surface</div>
+          <div className="login-eyebrow">Executive hub</div>
           <h2 className="login-h">Sign in</h2>
-          <div className="login-sub">Pick up where your office left off.</div>
+          <div className="login-sub">Pick up where you left off.</div>
 
           <label className="login-field">
             <span>Username</span>
@@ -118,7 +118,7 @@ export function Login() {
           </button>
 
           <p className="login-hint">
-            Demo access — sign in with <code>{DEMO_USERNAME}</code> / <code>{DEMO_PASSWORD}</code>
+            Demo access · sign in with <code>{DEMO_USERNAME}</code> / <code>{DEMO_PASSWORD}</code>
           </p>
         </form>
       </div>

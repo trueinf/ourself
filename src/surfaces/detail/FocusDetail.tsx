@@ -40,7 +40,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
         <p className="lede">{item.summary}</p>
         <div className="meta">
           <Pill variant={DUE_PILL[item.dueUrgency]}>Due {item.due}</Pill>
-          {item.waitingOn.length >= 2 ? <Pill variant="pink">Cross-office · {item.waitingOn.length + 1} offices</Pill> : null}
+          {item.waitingOn.length >= 2 ? <Pill variant="pink">Cross-team · {item.waitingOn.length + 1} teams</Pill> : null}
           {item.waitingOn.map((w) => (
             <Pill key={w}>{nameOf(w)} waiting</Pill>
           ))}
@@ -114,7 +114,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
           <div className="blk">
             <h3>Why this reached you</h3>
             <p>
-              This decision crosses more than one office and cannot be settled inside any single one of them.{' '}
+              This decision crosses more than one team and cannot be settled inside any single one of them.{' '}
               {blockedSentence}
             </p>
           </div>
@@ -125,7 +125,7 @@ export function FocusDetail({ persona, item }: { persona: Persona; item: FocusIt
           rows={[
             ['Raised', '4 days ago'],
             ['Closes', item.due],
-            ['Offices involved', String(item.waitingOn.length + 1)],
+            ['Teams involved', String(item.waitingOn.length + 1)],
             ['Options modelled', String(item.options.length)],
             ['Reversible', item.severity === 'high' ? 'Partly' : 'Yes'],
           ]}

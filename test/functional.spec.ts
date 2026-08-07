@@ -185,9 +185,9 @@ describe('interaction rules (§11)', () => {
 
   it('openAsk jumps to the Ask surface already answering the question (PinBoard → Ask)', () => {
     useApp.setState({ personaIndex: 0, tab: 'pinboard', askedQuestion: null });
-    useApp.getState().openAsk('Will the 35% tariff assumption hold to the Q2 print?');
+    useApp.getState().openAsk('Will the 35% tariff assumption hold through Q2 earnings?');
     expect(useApp.getState().tab).toBe('ask');
-    expect(useApp.getState().askedQuestion).toBe('Will the 35% tariff assumption hold to the Q2 print?');
+    expect(useApp.getState().askedQuestion).toBe('Will the 35% tariff assumption hold through Q2 earnings?');
   });
 
   it('every seeded pin resolves to a governed finding, so its movement carries a source', () => {

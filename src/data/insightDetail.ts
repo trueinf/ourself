@@ -16,7 +16,7 @@ export const FINDINGS: Record<string, AgentFinding[]> = {
     { agent: 'com', text: 'Split the overage. The retail-media tranche shows measurable sell-through lift. The brand tranche shows none yet.', source: SYS.sfmc },
   ],
   f2: [
-    { agent: 'fin', text: 'Realised tariff is 38.5% against the 35% the guide assumes, roughly 63 bps of gross margin. It is restatable at the Q2 print if it holds.', source: SYS.cust },
+    { agent: 'fin', text: 'Realised tariff is 38.5% against the 35% guidance assumes, roughly 63 bps of gross margin. It is restatable at Q2 earnings if it holds.', source: SYS.cust },
     { agent: 'sup', text: 'Two contract manufacturers are about six weeks behind qualification, so more volume than modelled is still clearing at the China rate.', source: SYS.sap },
   ],
   f3: [
@@ -34,7 +34,7 @@ export const FINDINGS: Record<string, AgentFinding[]> = {
   ],
   o2: [
     { agent: 'sup', text: 'Plant A cleared line trials this week. Plant B slipped five days on documentation. Both are in qualification, not production.', source: SYS.sap },
-    { agent: 'fin', text: 'The gap is the direct cause of the 350 bps tariff overage. If it is not closed by the Q2 print, the 35% assumption is restated.', source: SYS.cust },
+    { agent: 'fin', text: 'The gap is the direct cause of the 350 bps tariff overage. If it is not closed by Q2 earnings, the 35% assumption is restated.', source: SYS.cust },
     { agent: 'reg', text: 'Neither site has a registration barrier. What is slowing things down is throughput in qualification, and nothing on the compliance side.', source: SYS.reg },
   ],
   o3: [
@@ -44,7 +44,7 @@ export const FINDINGS: Record<string, AgentFinding[]> = {
   // Savur — CMO
   m1: [
     { agent: 'mkt', text: 'Awareness is +2 pts in eight weeks. Cutting before the 11–14 week conversion window wastes the spend before it works.', source: SYS.sfmc },
-    { agent: 'fin', text: 'Spend is 130 bps over the committed range. The envelope is a public commitment, and breaching it in Q1 removes the lever for the year.', source: SYS.fpa },
+    { agent: 'fin', text: 'Spend is 130 bps over the committed range. The budget is a public commitment, and breaching it in Q1 removes the lever for the year.', source: SYS.fpa },
     { agent: 'com', text: 'Retail media is earning its place at 3.8× ROAS. The brand tranche has no measurable sell-through yet.', source: SYS.rl },
   ],
   m2: [
@@ -74,7 +74,7 @@ export const FINDINGS: Record<string, AgentFinding[]> = {
     { agent: 'sup', text: 'Lip lines are committed until August. Funding demand that cannot be served damages the retailer relationship.', source: SYS.sap },
   ],
   c2: [
-    { agent: 'fin', text: 'rhode enters the base in three weeks. Reported growth then converges on organic, which sits below the mid-teens guide.', source: SYS.fpa },
+    { agent: 'fin', text: 'rhode enters the base in three weeks. Reported growth then converges on organic, which sits below the mid-teens guidance.', source: SYS.fpa },
   ],
   c3: [
     { agent: 'fin', text: 'Units are +2.1 pts against a modelled 1.4. The value promise is out-performing its elasticity assumption.', source: SYS.circana },
@@ -152,7 +152,7 @@ export const PROOFS: Record<string, InsightProof> = {
     threshold: 35,
     thresholdLabel: '35% assumed',
     tone: 'warn',
-    caption: 'The realised rate has sat above the guide’s 35% assumption all quarter.',
+    caption: 'The realised rate has sat above the 35% guidance assumption all quarter.',
   },
   f3: {
     metricLabel: 'Units recovered since the reversal',
@@ -176,7 +176,7 @@ export const PROOFS: Record<string, InsightProof> = {
     band: [24, 26],
     bandLabel: '24–26% range',
     tone: 'warn',
-    caption: 'Spend is over the committed envelope. The question is whether it converts before the proposed cut.',
+    caption: 'Spend is over the committed budget. The question is whether it converts before the proposed cut.',
   },
   b1: {
     metricLabel: 'Innovation hit rate',

@@ -14,7 +14,7 @@ function compute(values: LeverValues): ScenarioResult {
   const marketing = asNumber(values.marketing, 26);
   const pace = asString(values.pace, 'slow');
 
-  const base = 1850; // FY27 guide midpoint, $M
+  const base = 1850; // FY27 guidance midpoint, $M
   const gmBase = 73.0;
   const unitLift = ({ none: 0, face: 1.4, facelip: 3.0, all: 4.1 } as Record<string, number>)[scope] ?? 0;
   const aspChange = ({ none: 0, face: -0.6, facelip: -1.3, all: -1.9 } as Record<string, number>)[scope] ?? 0;
@@ -30,7 +30,7 @@ function compute(values: LeverValues): ScenarioResult {
 
   return {
     derivationRows: [
-      ['Net sales base (FY27 guide, mid)', '$1,850.0M'],
+      ['Net sales base (FY27 guidance, mid)', '$1,850.0M'],
       ['Unit lift from reversal scope', '+' + unitLift.toFixed(1) + '%'],
       ['Average selling price effect', aspChange.toFixed(1) + '%'],
       ['Net sales', '$' + netSales.toFixed(1) + 'M'],
@@ -63,7 +63,7 @@ function compute(values: LeverValues): ScenarioResult {
         heading: 'Finance — guidance exposure',
         text:
           tariff > 36
-            ? 'A realised rate above 36% puts the published 35% assumption at risk of restatement at the Q2 print.'
+            ? 'A realised rate above 36% puts the published 35% assumption at risk of restatement when we report Q2.'
             : 'The realised rate stays within the published assumption. No restatement exposure.',
       },
       {
@@ -81,8 +81,8 @@ function compute(values: LeverValues): ScenarioResult {
 export const cfoModel: ScenarioModel = {
   id: 'cfo',
   title: 'Margin, price and the tariff assumption',
-  read: 'You’re modelling margin, price, and the tariff assumption against the FY2027 guide. Every move is a change from where the company sits today.',
-  baselineLabel: 'FY27 guide',
+  read: 'You’re modelling margin, price, and the tariff assumption against FY2027 guidance. Every move is a change from where the company sits today.',
+  baselineLabel: 'FY27 guidance',
   lede: 'Levers compute over FY2027 guidance and Q1 actuals. Specialists judge feasibility on their own. Every number here comes from a tool.',
   levers: [
     {
