@@ -1,14 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useApp } from '@/store/app';
-import { PERSONAS } from '@/data/personas';
 import { DEMO_USERNAME, DEMO_PASSWORD } from '@/data/auth';
-
-/** The offices behind the gate, read off the persona set — never a second list
- *  to keep in sync (§8.1). */
-const OFFICES = PERSONAS.map((p) => {
-  const parts = p.name.split(' ');
-  return `${p.role} · ${parts[parts.length - 1]}`;
-});
 
 /**
  * Demo sign-in gate. Renders instead of the shell until credentials match
@@ -44,25 +36,7 @@ export function Login() {
   return (
     <div className="login">
       <aside className="login-brand">
-        <span className="wm">
-          ours<i>e.l.f.</i>
-        </span>
-        <h1 className="login-tag">One company. Many selves.</h1>
-        <p className="login-lede">
-          An executive intelligence hub for e.l.f. Beauty. Every leader sees the same business reality through their
-          own priorities, and can see how the other teams read the same fact.
-        </p>
-        <div className="login-offices">
-          {OFFICES.map((office) => (
-            <span key={office} className="login-office">
-              {office}
-            </span>
-          ))}
-        </div>
-        <div className="login-foot">
-          Demo build · FY2027 Q1 on verified FY2026 actuals. Nothing in the demo takes real action; the action
-          buttons are intentionally inert.
-        </div>
+        <img className="login-brand-img" src="/elf-background.jpg" alt="e.l.f. Beauty lipsticks" />
       </aside>
 
       <div className="login-panel">

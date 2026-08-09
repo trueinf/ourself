@@ -9,7 +9,7 @@ export type TabId = 'insights' | 'focus' | 'discussions' | 'ask' | 'scenarios' |
 
 export const TABS: Array<[TabId, string]> = [
   ['insights', 'Insights'],
-  ['focus', 'Focus'],
+  ['focus', 'Actions'],
   ['discussions', 'Discussions'],
   ['ask', 'Ask'],
   ['scenarios', 'Scenarios'],

@@ -147,6 +147,7 @@ a {
   padding: 6px 10px 7px;
 }
 .nv {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 11px;
@@ -157,7 +158,7 @@ a {
   color: var(--rail-txt);
   width: 100%;
   text-align: left;
-  transition: background 0.12s;
+  transition: background 0.12s, color 0.12s;
 }
 .nv:hover {
   background: var(--rail-2);
@@ -167,6 +168,25 @@ a {
   background: var(--rail-2);
   color: var(--rail-on);
   font-weight: 600;
+}
+/* "You are here" — a pink accent bar on the active row's left edge. This is the
+ * persistent SELECTION signal, kept distinct from the transient focus ring. */
+.nv[aria-current='true']::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 18px;
+  border-radius: 0 3px 3px 0;
+  background: var(--pink);
+}
+/* Focus is a separate, keyboard-only state: a quiet inset hairline contained in
+ * the pill — never the loud offset pink box the global ring would draw here. */
+.nv:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1.5px var(--pink-on-dark);
 }
 .nv svg {
   stroke: var(--rail-txt-2);
@@ -661,19 +681,40 @@ button.pill {
   margin: 6px 0 2px;
   line-height: 1.05;
 }
+/* delta reads as a status chip, not loose text — same pill language as the
+ * rest of the app, colour-coded by direction. */
 .kpi .dlt {
-  font-size: calc(11.5px * var(--fs));
-  font-weight: 600;
+  display: inline-block;
+  font-size: calc(11px * var(--fs));
+  font-weight: 650;
+  line-height: 1.3;
+  border-radius: 6px;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  background: var(--mist);
+  color: var(--muted);
 }
 .kpi .dlt.up {
   color: var(--teal);
+  background: var(--teal-soft);
+  border-color: #cfe6e1;
 }
 .kpi .dlt.dn {
   color: var(--pink-text);
+  background: var(--pink-soft);
+  border-color: var(--pink-line);
 }
 .kpi .dlt.fl,
 .kpi .dlt.dn-quiet {
   color: var(--muted);
+  background: var(--mist);
+  border-color: var(--line);
+}
+/* Exception emphasis: the off-plan metrics (warn) carry a pink left accent and
+ * tinted border so the eye lands on them first; on-track cards stay calm. */
+.kpi.warn {
+  border-color: var(--pink-line);
+  box-shadow: inset 3px 0 0 0 var(--pink), var(--card-shadow);
 }
 .kpi .kpi-note {
   font-size: calc(11px * var(--fs));
@@ -2190,6 +2231,15 @@ input[type='range'] {
     background: transparent;
     color: var(--pink-on-dark);
   }
+  /* bottom-tab bar: a top indicator, not a left bar */
+  .nv[aria-current='true']::before {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+  }
   .nv[aria-current='true'] svg {
     stroke: var(--pink-on-dark);
   }
@@ -2314,23 +2364,18 @@ input[type='range'] {
   background: var(--ink);
   color: var(--rail-on);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 64px 64px 56px;
   position: relative;
   overflow: hidden;
 }
-/* a soft off-black wash so the black half is not a flat slab */
-.login-brand::after {
-  content: '';
+/* the campaign image fills the panel edge-to-edge */
+.login-brand-img {
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 90% at 12% 8%, var(--rail-2), transparent 62%);
-  pointer-events: none;
-}
-.login-brand > * {
-  position: relative;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .login-brand .wm {
   font-size: calc(30px * var(--fs));
@@ -2526,7 +2571,8 @@ input[type='range'] {
     grid-template-columns: 1fr;
   }
   .login-brand {
-    padding: 40px 32px 36px;
+    padding: 0;
+    min-height: 240px;
   }
   .login-tag {
     font-size: calc(30px * var(--fs));

@@ -17,7 +17,7 @@ function deltaClass(kpi: Kpi): string {
 
 export function KpiCard({ kpi, aligned = false }: { kpi: Kpi; aligned?: boolean }) {
   return (
-    <div className={`kpi${aligned ? ' aligned' : ''}`}>
+    <div className={`kpi${aligned ? ' aligned' : ''}${kpi.warn ? ' warn' : ''}`}>
       <div className="lab">{kpi.label}</div>
       <div className="val num">{kpi.value}</div>
       <div className={`dlt ${deltaClass(kpi)}`}>{kpi.delta}</div>
