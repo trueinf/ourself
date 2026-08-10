@@ -105,7 +105,7 @@ export const currentPersona = (personaIndex: number) => PERSONAS[personaIndex] ?
 /* Session-scoped so the gate reappears in a fresh tab — sessionStorage, not
    localStorage. Wrapped because it throws in privacy modes and under some
    test runners. */
-const AUTH_KEY = 'ourself.authed';
+const AUTH_KEY = 'yourself.authed';
 
 function readAuth(): boolean {
   try {
@@ -223,7 +223,7 @@ export const useApp = create<AppState>((set, get) => ({
     const newPin: Pin = {
       question: q,
       whatMoved:
-        'Just pinned. ourse.l.f. will re-answer this as the underlying data moves and show what changed.',
+        'Just pinned. yourse.l.f. will re-answer this as the underlying data moves and show what changed.',
       pinnedAt: 'Pinned just now',
       trend: 'flat',
       trendLabel: 'New',

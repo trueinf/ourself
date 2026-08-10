@@ -1,6 +1,6 @@
 /* =============================================================
    Component stylesheet — ported verbatim from the locked prototype
-   (ourself_prototype.html). Every colour here is a var() into
+   (yourself_prototype.html). Every colour here is a var() into
    tokens.css; there are NO hex literals. This CSS is already
    contrast-audited (harness C) and responsive-tested (harness B) at
    1440 / 1180 / 1040 / 834 / 390 / 360px. Change colour in tokens.css,

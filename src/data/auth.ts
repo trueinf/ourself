@@ -4,7 +4,7 @@
  * protected. Everything in this app is demo data (see README).
  */
 export const DEMO_USERNAME = 'superhero';
-export const DEMO_PASSWORD = 'ourself';
+export const DEMO_PASSWORD = 'yourself';
 
 /** Username is matched case-insensitively and trimmed; password is exact. */
 export function checkCredentials(username: string, password: string): boolean {

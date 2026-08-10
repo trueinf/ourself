@@ -1,9 +1,9 @@
 {
-  "name": "ourself",
+  "name": "yourself",
   "private": true,
   "version": "0.2.0",
   "type": "module",
-  "description": "ourse.l.f. — cross-functional executive intelligence surface for e.l.f. Beauty (demo build).",
+  "description": "yourse.l.f. — cross-functional executive intelligence surface for e.l.f. Beauty (demo build).",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

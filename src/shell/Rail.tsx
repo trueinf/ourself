@@ -27,7 +27,7 @@ export function Rail() {
     <aside className="rail">
       <div className="brand">
         <span className="wm">
-          ours<i>e.l.f.</i>
+          yours<i>e.l.f.</i>
         </span>
       </div>
 

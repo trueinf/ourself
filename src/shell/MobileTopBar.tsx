@@ -14,7 +14,7 @@ export function MobileTopBar() {
   return (
     <header className="mtop">
       <span className="wm">
-        ours<i>e.l.f.</i>
+        yours<i>e.l.f.</i>
       </span>
       <button type="button" className="mav" id="mavBtn" onClick={toggle} aria-label="Switch persona">
         <span className="av" title={persona.name}>

@@ -1,4 +1,4 @@
-# Netlify deploy config for the ourse.l.f. static SPA.
+# Netlify deploy config for the yourse.l.f. static SPA.
 [build]
   command = "npm run build"
   publish = "dist"
